@@ -8,7 +8,7 @@
 #include "Expression.h"
 #include "Type.h"
 
-class ExpressionBinaire {
+class ExpressionBinaire : public Expression{
 public:
     ExpressionBinaire(Expression* e1, Expression* e2, SymboleBinaire symb);
     ~ExpressionBinaire();
