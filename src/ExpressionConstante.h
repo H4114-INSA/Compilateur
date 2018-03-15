@@ -13,13 +13,13 @@ using namespace std;
 class ExpressionConstante : public Expression{
 
 public :
-    ExpressionConstante(TypeExpression atypeExpression, TypeValeur atypeValeur, int avaleur);
+    ExpressionConstante(TypeValeur atypeValeur, int avaleur);
     ~ExpressionConstante();
 
     string toString();
 
     TypeValeur getTypeValeur();
-    in getValeur();
+    int getValeur();
 
 private:
     TypeValeur typeValeur;

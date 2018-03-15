@@ -5,6 +5,7 @@
 #include "ExpressionBinaire.h"
 
 ExpressionBinaire::ExpressionBinaire(Expression *e1, Expression *e2, SymboleBinaire symb) {
+    this->setTypeExpression(TypeExpression::binaire);
     this->expression1=e1;
     this->expression2=e2;
     this->symbole = symb;

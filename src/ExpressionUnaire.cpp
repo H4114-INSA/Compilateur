@@ -6,6 +6,7 @@
 
 
 ExpressionUnaire::ExpressionUnaire(Expression *e,SymboleUnaire symb) {
+    this->setTypeExpression(TypeExpression::unaire);
     this->expression=e;
     this->symbole = symb;
 }

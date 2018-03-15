@@ -10,6 +10,7 @@
 
 class ExpressionBinaire : public Expression{
 public:
+    ExpressionBinaire();
     ExpressionBinaire(Expression* e1, Expression* e2, SymboleBinaire symb);
     ~ExpressionBinaire();
 

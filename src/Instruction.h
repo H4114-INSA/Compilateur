@@ -9,10 +9,14 @@
 #include <string>
 
 class Instruction {
+public:
     Instruction();
     ~Instruction();
 
-    std::string toString();
+    virtual std::string toString()=0;
+
+private:
+
 };
 
 

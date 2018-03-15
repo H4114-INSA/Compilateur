@@ -4,9 +4,9 @@
 
 #include "ExpressionConstante.h"
 
-ExpressionConstante::ExpressionConstante(TypeExpression atypeExpression, TypeValeur atypeValeur, int avaleur)
+ExpressionConstante::ExpressionConstante(TypeValeur atypeValeur, int avaleur)
 {
-    this->setTypeExpression(atypeExpression);
+    this->setTypeExpression(TypeExpression::constante);
     this->typeValeur = atypeValeur;
     this->valeur = avaleur;
 }

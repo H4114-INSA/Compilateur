@@ -6,20 +6,28 @@
 #define COMPILATEUR_DECLARATION_H
 
 #include <iostream>
+#include "Type.h"
+#include "Instruction.h"
+#include "ExpressionAffectation.h"
 
 using namespace std;
 
-class Declaration {
+class Declaration : public Instruction{
 public:
     Declaration();
+    Declaration(TypeVariable atype, string nom, int tabSize =-1 , Expression* expr = nullptr);
     ~Declaration();
 
-    int getType();
+    TypeVariable getType();
     string getNom();
 
+    string toString();
+
 private:
-    int type;
+    TypeVariable type;
+    int tabSize;
     string nom ;
+    Expression* valeur;
 };
 
 

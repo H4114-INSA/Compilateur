@@ -27,3 +27,4 @@ string ExpressionVariable::getNom() {
 TypeVariable ExpressionVariable::getType() {
     return this-> getType();
 }
+

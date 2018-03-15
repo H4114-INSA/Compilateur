@@ -15,8 +15,8 @@ public :
     Expression();
     ~Expression();
 
-    virtual void typage() =0;
-    virtual string SymboleToString(Symbole input_symbole) = 0;
+    virtual string SymboleUnaireToString(SymboleUnaire input_symbole);
+    virtual string SymboleBinaireToString(SymboleBinaire input_symbole);
     int getTypeExpression();
 
     void setTypeExpression(TypeExpression atype);

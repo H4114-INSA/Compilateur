@@ -18,6 +18,9 @@
 #include "Program.h"
 #include "Expression.h"
 #include "ExpressionConstante.h"
+#include "Fonction.h"
+#include "Instruction.h"
+#include "Declaration.h"
 
 using namespace std;
 
@@ -30,12 +33,13 @@ public:
     }
 
     virtual antlrcpp::Any visitIntVal(ExprParser::IntValContext *ctx) override {
-        ExpressionConstante a (TypeExpression::constante,TypeValeur ::type_int,stoi(ctx->IntVal()->getText()));
+        ExpressionConstante a (TypeValeur ::type_int,stoi(ctx->IntVal()->getText()));
         return a;
     }
 
     virtual antlrcpp::Any visitMod(ExprParser::ModContext *ctx) override {
-        return (Expression) (visitChildren(ctx->expr(0)) % visitChildren(ctx->expr(1)));
+        //return (Expression) (visitChildren(ctx->expr(0)) % visitChildren(ctx->expr(1)));
+        return visitChildren(ctx);
     }
 
     virtual antlrcpp::Any visitMult(ExprParser::MultContext *ctx) override {

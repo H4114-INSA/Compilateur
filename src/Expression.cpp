@@ -10,44 +10,56 @@ Expression::Expression() {
 
 Expression::~Expression() {}
 
-string Expression::SymboleToString(Symbole input_symbole) {
+string Expression::SymboleBinaireToString(SymboleBinaire input_symbole) {
     string string_symbole;
 
     switch(input_symbole)
     {
-        case Symbole ::egal       : string_symbole = "=";  break;
-        case Symbole ::plus       : string_symbole = "+";  break;
-        case Symbole ::div        : string_symbole = "/":  break;
-        case Symbole ::mult       : string_symbole = "*";  break;
-        case Symbole ::moins      : string_symbole = "-";  break;
-        case Symbole ::leftshift  : string_symbole = "<<"; break;
-        case Symbole ::rightshift : string_symbole = ">>"; break;
-        case Symbole ::et         : string_symbole = "&&"; break;
-        case Symbole ::ou         : string_symbole = "||"; break;
-        case Symbole ::infegal    : string_symbole = "<="; break;
-        case Symbole ::supegal    : string_symbole = ">="; break;
-        case Symbole ::strictsup  : string_symbole = ">";  break;
-        case Symbole ::strinctinf : string_symbole = "<";  break;
-        case Symbole ::diff       : string_symbole = "!="; break;
-        case Symbole ::non        : string_symbole = "!";  break;
-        case Symbole ::band       : string_symbole = "&";  break;
-        case Symbole ::bor        : string_symbole = "|";  break;
-        case Symbole ::bxor       : string_symbole = "^";  break;
-        case Symbole ::bnot       : string_symbole = "~";  break;
-        case Symbole ::comma      : string_symbole = ",";  break;
-        case Symbole ::noexpr     : string_symbole = "~";  break;
-        case Symbole ::incr       : string_symbole = "++"; break;
-        case Symbole ::decr       : string_symbole = "--"; break;
-        case Symbole ::pluseq     : string_symbole = "+="; break;
-        case Symbole ::moinseq    : string_symbole = "-="; break;
-        case Symbole ::multeq     : string_symbole = "*="; break;
-        case Symbole ::diveq      : string_symbole = "/="; break;
-        case Symbole ::modeq      : string_symbole = "%="; break;
-        case Symbole ::ampeq      : string_symbole = "&="; break;
-        case Symbole ::boreq      : string_symbole = "|="; break;
-        case Symbole ::bxoreq     : string_symbole = "^="; break;
+
+        case SymboleBinaire ::plus       : string_symbole = "+";  break;
+        case SymboleBinaire ::div        : string_symbole = "/";  break;
+        case SymboleBinaire ::mult       : string_symbole = "*";  break;
+        case SymboleBinaire ::moins      : string_symbole = "-";  break;
+        case SymboleBinaire ::leftshift  : string_symbole = "<<"; break;
+        case SymboleBinaire ::rightshift : string_symbole = ">>"; break;
+        case SymboleBinaire ::et         : string_symbole = "&&"; break;
+        case SymboleBinaire ::ou         : string_symbole = "||"; break;
+        case SymboleBinaire ::infegal    : string_symbole = "<="; break;
+        case SymboleBinaire ::supegal    : string_symbole = ">="; break;
+        case SymboleBinaire ::strictsup  : string_symbole = ">";  break;
+        case SymboleBinaire ::strinctinf : string_symbole = "<";  break;
+        case SymboleBinaire ::diff       : string_symbole = "!="; break;
+
+        case SymboleBinaire ::band       : string_symbole = "&";  break;
+        case SymboleBinaire ::bor        : string_symbole = "|";  break;
+        case SymboleBinaire ::bxor       : string_symbole = "^";  break;
+
+
+
+        case SymboleBinaire ::pluseq     : string_symbole = "+="; break;
+        case SymboleBinaire ::moinseq    : string_symbole = "-="; break;
+        case SymboleBinaire ::multeq     : string_symbole = "*="; break;
+        case SymboleBinaire ::diveq      : string_symbole = "/="; break;
+        case SymboleBinaire ::modeq      : string_symbole = "%="; break;
+        case SymboleBinaire ::ampeq      : string_symbole = "&="; break;
+        case SymboleBinaire ::boreq      : string_symbole = "|="; break;
+        case SymboleBinaire ::bxoreq     : string_symbole = "^="; break;
     }
 }
+
+string Expression::SymboleUnaireToString(SymboleUnaire input_symbole) {
+    string string_symbole;
+
+    switch(input_symbole){
+        case SymboleUnaire ::egal       : string_symbole = "=";  break;
+        case SymboleUnaire ::non        : string_symbole = "!";  break;
+        case SymboleUnaire ::bnot       : string_symbole = "~";  break;
+        case SymboleUnaire ::noexpr     : string_symbole = "~";  break;
+        case SymboleUnaire ::incr       : string_symbole = "++"; break;
+        case SymboleUnaire ::decr       : string_symbole = "--"; break;
+    }
+}
+
 
 void Expression::setTypeExpression(TypeExpression atype) {
     this->type =atype;
