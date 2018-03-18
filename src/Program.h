@@ -21,6 +21,7 @@ public:
     map<string, Declaration*> getVariables();
 
     void ajouterFonction(string nomFonction, Fonction * fonction);
+    void ajouterDeclaration(string nomDeclaration, Declaration* decl);
 private:
     vector<Fonction*> fonction;
 

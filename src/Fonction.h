@@ -13,10 +13,13 @@
 using namespace std;
 
 class Fonction {
+public:
+    Fonction(string nom, TypeVariable typeRetour, vector<Declaration*> arguments);
+    ~Fonction();
 
 private:
     std::string nom;
-    int typeRetour;
+    TypeVariable typeRetour;
     vector<Declaration*> args;
 };
 
