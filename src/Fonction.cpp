@@ -12,5 +12,5 @@ Fonction::Fonction(string nom, TypeVariable typeRetour, vector<Declaration *> ar
 }
 
 Fonction::~Fonction() {
-    delete (args);
+    delete (&args);
 }

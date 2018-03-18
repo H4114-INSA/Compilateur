@@ -9,8 +9,8 @@ Program::Program() {
 }
 
 Program::~Program() {
-    delete(mapFonction);
-    delete(mapVariable);
+    delete(&mapFonction);
+    delete(&mapVariable);
 }
 
 void Program::ajouterFonction(string nomFonction, Fonction *fonction) {
