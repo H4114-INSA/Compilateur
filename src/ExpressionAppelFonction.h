@@ -3,18 +3,22 @@
 
 #include <vector>
 #include "Expression.h"
+#include "Declaration.h"
 
 using namespace std;
 
 class ExpressionAppelFonction : public Expression {
 public:
-    ExpressionAppelFonction(vector<Expression*> liste);
+    ExpressionAppelFonction(string nomFonction, vector<Declaration*> liste);
     ~ExpressionAppelFonction();
 
-    vector<Expression*> getListeInstruction();
+    vector<Declaration*> getParametres();
+    string getNom();
+    void setNom(string nom);
 
 private:
-    vector<Expression*> parametres;
+    vector<Declaration*> parametres;
+    string nomFonction;
 };
 
 
