@@ -50,7 +50,9 @@ int main(int , const char ** argv) {
     ExprParser parser(&tokens);
     tree::ParseTree* tree = parser.prog();
 
-    std::cout << tree->toStringTree(&parser) << std::endl;
+    std::cout << tree->toStringTree(&parser) << std::endl << std::endl;
+
+    std::cout << tree -> toStringTree() <<std::endl;
 
     dotExportGeneration(parser, tree);
 

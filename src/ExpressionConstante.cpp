@@ -18,3 +18,7 @@ TypeValeur ExpressionConstante::getTypeValeur() {
 int ExpressionConstante::getValeur() {
     return valeur;
 }
+
+void ExpressionConstante::resolutionPorteeVariable(string idContexte, vector<string> *pileVar,
+                                                   vector<string> *pileFonct, map<string, Declaration *> *varMap) {
+}

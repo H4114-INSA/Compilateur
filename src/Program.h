@@ -1,6 +1,7 @@
 //
 // Created by thomas on 15/03/18.
 //
+#pragma once
 
 #ifndef COMPILATEUR_PROGRAM_H
 #define COMPILATEUR_PROGRAM_H
@@ -21,7 +22,8 @@ public:
     map<string, Declaration*> getVariables();
 
     void ajouterFonction(string nomFonction, Fonction * fonction);
-    void ajouterDeclaration(string nomDeclaration, Declaration* decl);
+
+    void resolutionPorteeVariable();
 private:
     vector<Fonction*> fonction;
 

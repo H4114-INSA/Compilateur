@@ -29,12 +29,14 @@ class  Visitor : public ExprVisitor {
 public:
 
     virtual antlrcpp::Any visitProg(ExprParser::ProgContext *ctx) override {
+        cout<< "Size children" << ctx->children.size() << endl;
         return (Program) visitChildren(ctx);
     }
 
     virtual antlrcpp::Any visitIntVal(ExprParser::IntValContext *ctx) override {
-        ExpressionConstante a (TypeValeur ::type_int,stoi(ctx->IntVal()->getText()));
-        return a;
+        /*ExpressionConstante a (TypeValeur ::type_int,stoi(ctx->IntVal()->getText()));
+        return a;*/
+        return visitChildren(ctx);
     }
 
     virtual antlrcpp::Any visitMod(ExprParser::ModContext *ctx) override {
