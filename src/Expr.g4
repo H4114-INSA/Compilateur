@@ -29,7 +29,7 @@ expr:
 |  Nom                # getVarVal
 |  IntVal             # intVal
 |  CharVal            # charVal
-|  appelFonct         # appelFonction
+|  Nom '(' (declaration (',' declaration)*) ')'    # appelFonction
 |  aff                # affectation
 ;
 
@@ -78,11 +78,9 @@ instr : declaration ';'    # instrDecl
 ;
 
 definitionFonction : type Nom '(' (declaration (',' declaration)*) ')' '{' (instr )* '}'  # defFonctionType
-| Void Nom '(' ((declaration ',')* declaration)? ')' '{' (instr )* '}'                    # defFonctionVoid
+| Void Nom '(' (declaration (',' declaration)*) ')' '{' (instr )* '}'                    # defFonctionVoid
 ;
 
-appelFonct : Nom '(' (expr)? ')'  # appelFonctionExpression
-;
 
 Include     : '#include' (' ')* ('<'[a-zA-Z]+('.h')?'>'|'"'[a-zA-Z]+('.h')?'"') -> skip;
 Char        : 'char' ;
