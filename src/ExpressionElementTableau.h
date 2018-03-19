@@ -1,6 +1,7 @@
 //
 // Created by thomas on 15/03/18.
 //
+#pragma once
 
 #ifndef COMPILATEUR_EXPRESSIONELEMENTTABLEAU_H
 #define COMPILATEUR_EXPRESSIONELEMENTTABLEAU_H

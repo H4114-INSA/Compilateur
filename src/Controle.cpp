@@ -12,3 +12,7 @@ Controle::~Controle() {}
 void Controle::setCondition(Expression *expr) {
     this->conditionExecution=expr;
 }
+
+Expression* Controle::getCondition() {
+    return this->conditionExecution;
+}

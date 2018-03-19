@@ -27,10 +27,16 @@ using namespace std;
 class  Visitor : public ExprVisitor {
 public:
 
+
     antlrcpp::Any visitProg(ExprParser::ProgContext *ctx) override {
         return (Program*) visitChildren(ctx);
     }
-
+  
+    virtual antlrcpp::Any visitIntVal(ExprParser::IntValContext *ctx) override {
+        /*ExpressionConstante a (TypeValeur ::type_int,stoi(ctx->IntVal()->getText()));
+        return a;*/
+        return visitChildren(ctx);
+    }
 
     //Expressions Binaires
     antlrcpp::Any visitMod(ExprParser::ModContext *ctx) override {
@@ -284,6 +290,7 @@ public:
 										   SymboleBinaire::bxoreq
 									   );
 	 }
+
 
     //Expressions unaires
      antlrcpp::Any visitNon(ExprParser::NonContext *ctx) override {

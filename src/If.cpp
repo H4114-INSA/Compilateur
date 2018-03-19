@@ -16,3 +16,9 @@ If::~If() {
 BlocControle* If::getBloc() {
     return this->bloc;
 }
+
+void If::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,
+                                  map<string, Declaration *> *varMap) {
+    this->getCondition()->resolutionPorteeVariable(idContexte,pileVar, pileFonct, varMap);
+    
+}

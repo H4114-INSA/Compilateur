@@ -1,6 +1,7 @@
 //
 // Created by thomas on 15/03/18.
 //
+#pragma once
 
 #ifndef COMPILATEUR_IF_H
 #define COMPILATEUR_IF_H
@@ -16,6 +17,8 @@ public:
     ~If();
 
     BlocControle* getBloc();
+
+    void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap);
 private:
     BlocControle* bloc;
 };

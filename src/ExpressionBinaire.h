@@ -1,6 +1,7 @@
 //
 // Created by thomas on 15/03/18.
 //
+#pragma once
 
 #ifndef COMPILATEUR_EXPRESSIONBINAIRE_H
 #define COMPILATEUR_EXPRESSIONBINAIRE_H
@@ -19,6 +20,8 @@ public:
     SymboleBinaire getSymbole();
 
     string toString();
+
+    void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap);
 
 private:
     Expression* expression1;
