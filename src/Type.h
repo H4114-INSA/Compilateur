@@ -12,8 +12,8 @@ enum class TypeExpression {unaire, binaire, constante, variable, elementTableau,
 
 enum class SymboleUnaire {egal,  non,  bnot, noexpr, incr, decr };
 
-enum class SymboleBinaire {plus, div, mult, moins, leftshift, rightshift, et, ou, infegal, supegal, band, bor, bxor,
-    strictsup, strinctinf, diff, pluseq, moinseq, multeq, diveq, modeq, ampeq, boreq, bxoreq };
+enum class SymboleBinaire {egal, plus, div, mult, moins, mod, ouex, leftshift, rightshift, et, ou, infegal, supegal, band, bor, bxor,
+    non,strictsup, strinctinf, diff, pluseq, moinseq, multeq, diveq, modeq, ampeq, boreq, bxoreq };
 
 enum class TypeValeur {type_int, type_char};
 
