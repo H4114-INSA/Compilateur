@@ -333,6 +333,17 @@ public:
                                             SymboleUnaire::decr
                                         );
     }
+<<<<<<< HEAD
+
+     antlrcpp::Any visitOppose(ExprParser::OpposeContext *ctx) override {
+     		 return (Expression*) new
+     									   ExpressionUnaire(
+     										   (Expression*) visit(ctx->expr()),
+     										   SymboleUnaire::moins
+     									   );
+     }
+
+=======
      
      antlrcpp::Any visitOppose(ExprParser::OpposeContext *ctx) override {
              return (Expression*) new
@@ -342,6 +353,7 @@ public:
                                            );
      }
  
+>>>>>>> branch 'master' of https://github.com/H4114-INSA/Compilateur.git
     //***
  
      antlrcpp::Any visitIntVal(ExprParser::IntValContext *ctx) override {
@@ -353,7 +365,11 @@ public:
              String nom = (ctx->Nom()->getText());
              return nom;
     }
+<<<<<<< HEAD
+
+=======
  
+>>>>>>> branch 'master' of https://github.com/H4114-INSA/Compilateur.git
      antlrcpp::Any visitAffectation(ExprParser::AffectationContext *ctx) override {
         return (Expression*)(visit(ctx->aff()));
     }
@@ -368,6 +384,24 @@ public:
          ExpressionConstante a (TypeValeur :: type_char, ctx->CharVal()->getText());
          return a;
     }
+<<<<<<< HEAD
+
+     antlrcpp::Any visitGetTabVal(ExprParser::GetTabValContext *ctx) override {
+        	     Stirng nom = visit(ctx->Nom());
+        	     int indice =(int)(visit(ctx->expr()));
+             	 return ;
+      }
+
+     antlrcpp::Any visitAffExpr(ExprParser::AffExprContext *ctx) override {
+    		 return (Expression*) new
+    									   ExpressionBinaire(
+    										   (Expression*) visit(ctx->expr(0)),
+    										   (Expression*) visit(ctx->expr(1)),
+    										   SymboleBinaire::egal
+    									   );
+      }
+
+=======
  
      antlrcpp::Any visitGetTabVal(ExprParser::GetTabValContext *ctx) override {
                  Stirng nom = visit(ctx->Nom());
@@ -384,7 +418,9 @@ public:
                                            );
       }
  
+>>>>>>> branch 'master' of https://github.com/H4114-INSA/Compilateur.git
      antlrcpp::Any visitAppelFonction(ExprParser::AppelFonctionContext *ctx) override {
+    	return (Expression*) new ExpressionAppelFonction();
         return visitChildren(ctx);
     }
      //appelFonct : Nom '(' (expr)? ')'  # appelFonctionExpression
@@ -402,18 +438,32 @@ public:
      antlrcpp::Any visitInt64_t(ExprParser::Int64_tContext *ctx) override {
         return ctx;
     }
+<<<<<<< HEAD
+
+
+
+=======
  
    
  
+>>>>>>> branch 'master' of https://github.com/H4114-INSA/Compilateur.git
      antlrcpp::Any visitAffExprTableau(ExprParser::AffExprTableauContext *ctx) override {
         return visitChildren(ctx);
         //**************
     }
+<<<<<<< HEAD
+
+
+
+
+
+=======
  
  
      
  
  
+>>>>>>> branch 'master' of https://github.com/H4114-INSA/Compilateur.git
      antlrcpp::Any visitIf(ExprParser::IfContext *ctx) override {
          return ctx;
     }
