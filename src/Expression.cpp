@@ -11,8 +11,8 @@ Expression::Expression() {
 Expression::~Expression() {}
 
 string Expression::SymboleBinaireToString(SymboleBinaire input_symbole) {
-    string string_symbole;
-
+    string string_symbole ="";
+/*
     switch(input_symbole)
     {
 
@@ -44,12 +44,13 @@ string Expression::SymboleBinaireToString(SymboleBinaire input_symbole) {
         case SymboleBinaire ::ampeq      : string_symbole = "&="; break;
         case SymboleBinaire ::boreq      : string_symbole = "|="; break;
         case SymboleBinaire ::bxoreq     : string_symbole = "^="; break;
-    }
+    }*/
+    return string_symbole;
 }
 
 string Expression::SymboleUnaireToString(SymboleUnaire input_symbole) {
-    string string_symbole;
-
+    string string_symbole ="";
+/*
     switch(input_symbole){
         case SymboleUnaire ::egal       : string_symbole = "=";  break;
         case SymboleUnaire ::non        : string_symbole = "!";  break;
@@ -57,7 +58,8 @@ string Expression::SymboleUnaireToString(SymboleUnaire input_symbole) {
         case SymboleUnaire ::noexpr     : string_symbole = "~";  break;
         case SymboleUnaire ::incr       : string_symbole = "++"; break;
         case SymboleUnaire ::decr       : string_symbole = "--"; break;
-    }
+    }*/
+    return string_symbole;
 }
 
 
