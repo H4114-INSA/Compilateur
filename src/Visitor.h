@@ -36,8 +36,8 @@ public:
         return a;
     }
 
+    //Expressions Binaires
     virtual antlrcpp::Any visitMod(ExprParser::ModContext *ctx) override {
-        //return (Expression) (visitChildren(ctx->expr(0)) % visitChildren(ctx->expr(1)));
     	return (Expression*) new
     	    	    	               ExpressionBinaire(
     	    	    	                   (Expression*) visit(ctx->expr(0)),
@@ -55,6 +55,159 @@ public:
     	    	    	               );
     }
 
+    virtual antlrcpp::Any visitDiv(ExprParser::DivContext *ctx) override {
+        	return (Expression*) new
+        	    	    	               ExpressionBinaire(
+        	    	    	                   (Expression*) visit(ctx->expr(0)),
+        	    	    	                   (Expression*) visit(ctx->expr(1)),
+    										   SymboleBinaire::div
+        	    	    	               );
+	}
+
+	virtual antlrcpp::Any visitNot(ExprParser::NotContext *ctx) override {
+		return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::non
+									   );
+	}
+
+	virtual antlrcpp::Any visitAnd(ExprParser::AndContext *ctx) override {
+		return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::et
+									   );
+	}
+
+	virtual antlrcpp::Any visitXor(ExprParser::XorContext *ctx) override {
+		return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::ouex
+									   );
+	}
+
+	virtual antlrcpp::Any visitRightShift(ExprParser::RightShiftContext *ctx) override {
+		return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::rightshift
+									   );
+	}
+
+	virtual antlrcpp::Any visitLeftShift(ExprParser::LeftShiftContext *ctx) override {
+		return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::leftshift
+									   );
+	}
+
+	virtual antlrcpp::Any visitAdd(ExprParser::AddContext *ctx) override {
+			return (Expression*) new
+						   ExpressionBinaire(
+							   (Expression*) visit(ctx->expr(0)),
+							   (Expression*) visit(ctx->expr(1)),
+							   SymboleBinaire::plus
+						   );
+	}
+
+	virtual antlrcpp::Any visitEgal(ExprParser::EgalContext *ctx) override {
+		return (Expression*) new
+							   ExpressionBinaire(
+								   (Expression*) visit(ctx->expr(0)),
+								   (Expression*) visit(ctx->expr(1)),
+								   SymboleBinaire::egal
+							   );
+	}
+
+	virtual antlrcpp::Any visitOr(ExprParser::OrContext *ctx) override {
+		return (Expression*) new
+							   ExpressionBinaire(
+								   (Expression*) visit(ctx->expr(0)),
+								   (Expression*) visit(ctx->expr(1)),
+								   SymboleBinaire::ou
+							   );
+	}
+
+	virtual antlrcpp::Any visitSupEgal(ExprParser::SupEgalContext *ctx) override {
+		return (Expression*) new
+							   ExpressionBinaire(
+								   (Expression*) visit(ctx->expr(0)),
+								   (Expression*) visit(ctx->expr(1)),
+								   SymboleBinaire::supegal
+							   );
+	}
+
+	virtual antlrcpp::Any visitOu(ExprParser::OuContext *ctx) override {
+		return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::bor
+									   );
+	}
+
+	virtual antlrcpp::Any visitStrictSup(ExprParser::StrictSupContext *ctx) override {
+			return (Expression*) new
+										   ExpressionBinaire(
+											   (Expression*) visit(ctx->expr(0)),
+											   (Expression*) visit(ctx->expr(1)),
+											   SymboleBinaire::strictup
+										   );
+		}
+
+virtual antlrcpp::Any visitDiff(ExprParser::DiffContext *ctx) override {
+	return (Expression*) new
+								   ExpressionBinaire(
+									   (Expression*) visit(ctx->expr(0)),
+									   (Expression*) visit(ctx->expr(1)),
+									   SymboleBinaire::diff
+								   );
+}
+
+virtual antlrcpp::Any visitEt(ExprParser::EtContext *ctx) override {
+	return (Expression*) new
+								   ExpressionBinaire(
+									   (Expression*) visit(ctx->expr(0)),
+									   (Expression*) visit(ctx->expr(1)),
+									   SymboleBinaire::band
+								   );
+}
+
+virtual antlrcpp::Any visitInfEgal(ExprParser::InfEgalContext *ctx) override {
+	return (Expression*) new
+								   ExpressionBinaire(
+									   (Expression*) visit(ctx->expr(0)),
+									   (Expression*) visit(ctx->expr(1)),
+									   SymboleBinaire::infegal
+								   );
+}
+
+virtual antlrcpp::Any visitMoins(ExprParser::MoinsContext *ctx) override {
+		return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::moins
+									   );
+	}
+
+	virtual antlrcpp::Any visitStrictInf(ExprParser::StrictInfContext *ctx) override {
+		return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::strictinf
+									   );
+	}
+
     virtual antlrcpp::Any visitNon(ExprParser::NonContext *ctx) override {
         return visitChildren(ctx);
     }
@@ -71,121 +224,19 @@ public:
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitDiv(ExprParser::DivContext *ctx) override {
-    	return (Expression*) new
-    	    	    	               ExpressionBinaire(
-    	    	    	                   (Expression*) visit(ctx->expr(0)),
-    	    	    	                   (Expression*) visit(ctx->expr(1)),
-										   SymboleBinaire::div
-    	    	    	               );
-    }
 
-    virtual antlrcpp::Any visitNot(ExprParser::NotContext *ctx) override {
-    	return (Expression*) new
-    	    	    	               ExpressionBinaire(
-    	    	    	                   (Expression*) visit(ctx->expr(0)),
-    	    	    	                   (Expression*) visit(ctx->expr(1)),
-										   SymboleBinaire::non
-    	    	    	               );
-    }
-
-    virtual antlrcpp::Any visitAnd(ExprParser::AndContext *ctx) override {
-    	return (Expression*) new
-    	    	    	               ExpressionBinaire(
-    	    	    	                   (Expression*) visit(ctx->expr(0)),
-    	    	    	                   (Expression*) visit(ctx->expr(1)),
-										   SymboleBinaire::et
-    	    	    	               );
-    }
-
-    virtual antlrcpp::Any visitXor(ExprParser::XorContext *ctx) override {
-    	return (Expression*) new
-    	    	    	               ExpressionBinaire(
-    	    	    	                   (Expression*) visit(ctx->expr(0)),
-    	    	    	                   (Expression*) visit(ctx->expr(1)),
-										   SymboleBinaire::ouex
-    	    	    	               );
-    }
-
-    virtual antlrcpp::Any visitRightShift(ExprParser::RightShiftContext *ctx) override {
-    	return (Expression*) new
-    	    	    	               ExpressionBinaire(
-    	    	    	                   (Expression*) visit(ctx->expr(0)),
-    	    	    	                   (Expression*) visit(ctx->expr(1))
-    	    	    	               );
-    }
-
-    virtual antlrcpp::Any visitLeftShift(ExprParser::LeftShiftContext *ctx) override {
-    	return (Expression*) new
-    	    	    	               ExpressionBinaire(
-    	    	    	                   (Expression*) visit(ctx->expr(0)),
-    	    	    	                   (Expression*) visit(ctx->expr(1))
-    	    	    	               );
-    }
 
     virtual antlrcpp::Any visitPar(ExprParser::ParContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitAdd(ExprParser::AddContext *ctx) override {
-    	return (Expression*) new
-    	               ExpressionBinaire(
-    	                   (Expression*) visit(ctx->expr(0)),
-    	                   (Expression*) visit(ctx->expr(1))
-    	               );
-    }
 
-    virtual antlrcpp::Any visitEgal(ExprParser::EgalContext *ctx) override {
-    	return (Expression*) new
-    	    	               ExpressionBinaire(
-    	    	                   (Expression*) visit(ctx->expr(0)),
-    	    	                   (Expression*) visit(ctx->expr(1))
-    	    	               );
-    }
-
-    virtual antlrcpp::Any visitOr(ExprParser::OrContext *ctx) override {
-    	return (Expression*) new
-    	    	               ExpressionBinaire(
-    	    	                   (Expression*) visit(ctx->expr(0)),
-    	    	                   (Expression*) visit(ctx->expr(1))
-    	    	               );
-    }
-
-    virtual antlrcpp::Any visitSupEgal(ExprParser::SupEgalContext *ctx) override {
-    	return (Expression*) new
-    	    	               ExpressionBinaire(
-    	    	                   (Expression*) visit(ctx->expr(0)),
-    	    	                   (Expression*) visit(ctx->expr(1))
-    	    	               );
-    }
-
-    virtual antlrcpp::Any visitOu(ExprParser::OuContext *ctx) override {
-    	return (Expression*) new
-    	    	    	               ExpressionBinaire(
-    	    	    	                   (Expression*) visit(ctx->expr(0)),
-    	    	    	                   (Expression*) visit(ctx->expr(1))
-    	    	    	               );
-    }
 
     virtual antlrcpp::Any visitCharVal(ExprParser::CharValContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitStrictSup(ExprParser::StrictSupContext *ctx) override {
-        return visitChildren(ctx);
-    }
 
-    virtual antlrcpp::Any visitDiff(ExprParser::DiffContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitEt(ExprParser::EtContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitInfEgal(ExprParser::InfEgalContext *ctx) override {
-        return visitChildren(ctx);
-    }
 
     virtual antlrcpp::Any visitAppelFonction(ExprParser::AppelFonctionContext *ctx) override {
         return visitChildren(ctx);
@@ -199,13 +250,7 @@ public:
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitMoins(ExprParser::MoinsContext *ctx) override {
-        return visitChildren(ctx);
-    }
 
-    virtual antlrcpp::Any visitStrictInf(ExprParser::StrictInfContext *ctx) override {
-        return visitChildren(ctx);
-    }
 
     virtual antlrcpp::Any visitChar(ExprParser::CharContext *ctx) override {
         return visitChildren(ctx);
