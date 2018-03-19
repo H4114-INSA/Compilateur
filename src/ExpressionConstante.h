@@ -1,6 +1,7 @@
 //
 // Created by thomas on 15/03/18.
 //
+#pragma once
 
 #ifndef COMPILATEUR_EXPRESSIONCONSTANTE_H
 #define COMPILATEUR_EXPRESSIONCONSTANTE_H
@@ -20,6 +21,8 @@ public :
 
     TypeValeur getTypeValeur();
     int getValeur();
+
+    void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap);
 
 private:
     TypeValeur typeValeur;

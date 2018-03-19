@@ -16,3 +16,8 @@ vector<Instruction*> BlocControle::getListeInstruction() {
 BlocControle::~BlocControle() {
     delete (&listeInstructions);
 }
+
+void BlocControle::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,
+                                            map<string, Declaration *> *varMap) {
+
+}

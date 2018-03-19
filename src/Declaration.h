@@ -2,13 +2,19 @@
 // Created by thomas on 15/03/18.
 //
 
+#pragma once
+
 #ifndef COMPILATEUR_DECLARATION_H
 #define COMPILATEUR_DECLARATION_H
+
+//#ifndef EXPRESSION_H
+//#define EXPRESSION_H
 
 #include <iostream>
 #include "Type.h"
 #include "Instruction.h"
-#include "ExpressionAffectation.h"
+#include "Expression.h"
+
 
 using namespace std;
 
@@ -23,6 +29,8 @@ public:
 
     string toString();
 
+    void setNom(string nom);
+
 private:
     TypeVariable type;
     int tabSize;
@@ -32,3 +40,4 @@ private:
 
 
 #endif //COMPILATEUR_DECLARATION_H
+//#endif //EXPRESSION_H

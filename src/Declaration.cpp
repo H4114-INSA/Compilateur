@@ -22,3 +22,7 @@ TypeVariable Declaration::getType() {
 string Declaration::getNom() {
     return this-> nom;
 }
+
+void Declaration::setNom(string nom) {
+    this->nom=nom;
+}

@@ -31,3 +31,9 @@ SymboleBinaire ExpressionBinaire::getSymbole() {
 string ExpressionBinaire::toString() {
     return "to implement";
 }
+
+void ExpressionBinaire::resolutionPorteeVariable(string idContexte, vector<string> *pileVar,
+                                                 vector<string> *pileFonct, map<string, Declaration *> *varMap) {
+    expression1->resolutionPorteeVariable(idContexte, pileVar, pileFonct,varMap);
+    expression2->resolutionPorteeVariable(idContexte, pileVar, pileFonct, varMap);
+}

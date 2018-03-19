@@ -26,3 +26,8 @@ SymboleUnaire ExpressionUnaire::getSymbole() {
 string ExpressionUnaire::toString() {
     return "to implement";
 }
+
+void ExpressionUnaire::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,
+                                                map<string, Declaration *> *varMap) {
+    expression->resolutionPorteeVariable(idContexte, pileVar, pileFonct, varMap);
+}
