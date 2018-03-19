@@ -27,17 +27,17 @@ using namespace std;
 class  Visitor : public ExprVisitor {
 public:
 
-    virtual antlrcpp::Any visitProg(ExprParser::ProgContext *ctx) override {
+    antlrcpp::Any visitProg(ExprParser::ProgContext *ctx) override {
         return (Program*) visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitIntVal(ExprParser::IntValContext *ctx) override {
+    antlrcpp::Any visitIntVal(ExprParser::IntValContext *ctx) override {
         ExpressionConstante a (TypeValeur ::type_int,stoi(ctx->IntVal()->getText()));
         return a;
     }
 
     //Expressions Binaires
-    virtual antlrcpp::Any visitMod(ExprParser::ModContext *ctx) override {
+    antlrcpp::Any visitMod(ExprParser::ModContext *ctx) override {
     	return (Expression*) new
     	    	    	               ExpressionBinaire(
     	    	    	                   (Expression*) visit(ctx->expr(0)),
@@ -46,7 +46,7 @@ public:
     	    	    	               );
     }
 
-    virtual antlrcpp::Any visitMult(ExprParser::MultContext *ctx) override {
+     antlrcpp::Any visitMult(ExprParser::MultContext *ctx) override {
     	return (Expression*) new
     	    	    	               ExpressionBinaire(
     	    	    	                   (Expression*) visit(ctx->expr(0)),
@@ -55,7 +55,7 @@ public:
     	    	    	               );
     }
 
-    virtual antlrcpp::Any visitDiv(ExprParser::DivContext *ctx) override {
+     antlrcpp::Any visitDiv(ExprParser::DivContext *ctx) override {
         	return (Expression*) new
         	    	    	               ExpressionBinaire(
         	    	    	                   (Expression*) visit(ctx->expr(0)),
@@ -64,7 +64,7 @@ public:
         	    	    	               );
 	}
 
-	virtual antlrcpp::Any visitNot(ExprParser::NotContext *ctx) override {
+	 antlrcpp::Any visitNot(ExprParser::NotContext *ctx) override {
 		return (Expression*) new
 									   ExpressionBinaire(
 										   (Expression*) visit(ctx->expr(0)),
@@ -73,7 +73,7 @@ public:
 									   );
 	}
 
-	virtual antlrcpp::Any visitAnd(ExprParser::AndContext *ctx) override {
+	 antlrcpp::Any visitAnd(ExprParser::AndContext *ctx) override {
 		return (Expression*) new
 									   ExpressionBinaire(
 										   (Expression*) visit(ctx->expr(0)),
@@ -82,7 +82,7 @@ public:
 									   );
 	}
 
-	virtual antlrcpp::Any visitXor(ExprParser::XorContext *ctx) override {
+	 antlrcpp::Any visitXor(ExprParser::XorContext *ctx) override {
 		return (Expression*) new
 									   ExpressionBinaire(
 										   (Expression*) visit(ctx->expr(0)),
@@ -91,7 +91,7 @@ public:
 									   );
 	}
 
-	virtual antlrcpp::Any visitRightShift(ExprParser::RightShiftContext *ctx) override {
+	 antlrcpp::Any visitRightShift(ExprParser::RightShiftContext *ctx) override {
 		return (Expression*) new
 									   ExpressionBinaire(
 										   (Expression*) visit(ctx->expr(0)),
@@ -100,7 +100,7 @@ public:
 									   );
 	}
 
-	virtual antlrcpp::Any visitLeftShift(ExprParser::LeftShiftContext *ctx) override {
+	 antlrcpp::Any visitLeftShift(ExprParser::LeftShiftContext *ctx) override {
 		return (Expression*) new
 									   ExpressionBinaire(
 										   (Expression*) visit(ctx->expr(0)),
@@ -109,7 +109,7 @@ public:
 									   );
 	}
 
-	virtual antlrcpp::Any visitAdd(ExprParser::AddContext *ctx) override {
+	 antlrcpp::Any visitAdd(ExprParser::AddContext *ctx) override {
 			return (Expression*) new
 						   ExpressionBinaire(
 							   (Expression*) visit(ctx->expr(0)),
@@ -118,7 +118,7 @@ public:
 						   );
 	}
 
-	virtual antlrcpp::Any visitEgal(ExprParser::EgalContext *ctx) override {
+	 antlrcpp::Any visitEgal(ExprParser::EgalContext *ctx) override {
 		return (Expression*) new
 							   ExpressionBinaire(
 								   (Expression*) visit(ctx->expr(0)),
@@ -127,7 +127,7 @@ public:
 							   );
 	}
 
-	virtual antlrcpp::Any visitOr(ExprParser::OrContext *ctx) override {
+	 antlrcpp::Any visitOr(ExprParser::OrContext *ctx) override {
 		return (Expression*) new
 							   ExpressionBinaire(
 								   (Expression*) visit(ctx->expr(0)),
@@ -136,7 +136,7 @@ public:
 							   );
 	}
 
-	virtual antlrcpp::Any visitSupEgal(ExprParser::SupEgalContext *ctx) override {
+	 antlrcpp::Any visitSupEgal(ExprParser::SupEgalContext *ctx) override {
 		return (Expression*) new
 							   ExpressionBinaire(
 								   (Expression*) visit(ctx->expr(0)),
@@ -145,7 +145,7 @@ public:
 							   );
 	}
 
-	virtual antlrcpp::Any visitOu(ExprParser::OuContext *ctx) override {
+	 antlrcpp::Any visitOu(ExprParser::OuContext *ctx) override {
 		return (Expression*) new
 									   ExpressionBinaire(
 										   (Expression*) visit(ctx->expr(0)),
@@ -154,7 +154,7 @@ public:
 									   );
 	}
 
-	virtual antlrcpp::Any visitStrictSup(ExprParser::StrictSupContext *ctx) override {
+	 antlrcpp::Any visitStrictSup(ExprParser::StrictSupContext *ctx) override {
 			return (Expression*) new
 										   ExpressionBinaire(
 											   (Expression*) visit(ctx->expr(0)),
@@ -163,7 +163,7 @@ public:
 										   );
 		}
 
-virtual antlrcpp::Any visitDiff(ExprParser::DiffContext *ctx) override {
+ antlrcpp::Any visitDiff(ExprParser::DiffContext *ctx) override {
 	return (Expression*) new
 								   ExpressionBinaire(
 									   (Expression*) visit(ctx->expr(0)),
@@ -172,7 +172,7 @@ virtual antlrcpp::Any visitDiff(ExprParser::DiffContext *ctx) override {
 								   );
 }
 
-virtual antlrcpp::Any visitEt(ExprParser::EtContext *ctx) override {
+ antlrcpp::Any visitEt(ExprParser::EtContext *ctx) override {
 	return (Expression*) new
 								   ExpressionBinaire(
 									   (Expression*) visit(ctx->expr(0)),
@@ -181,7 +181,7 @@ virtual antlrcpp::Any visitEt(ExprParser::EtContext *ctx) override {
 								   );
 }
 
-virtual antlrcpp::Any visitInfEgal(ExprParser::InfEgalContext *ctx) override {
+ antlrcpp::Any visitInfEgal(ExprParser::InfEgalContext *ctx) override {
 	return (Expression*) new
 								   ExpressionBinaire(
 									   (Expression*) visit(ctx->expr(0)),
@@ -190,7 +190,7 @@ virtual antlrcpp::Any visitInfEgal(ExprParser::InfEgalContext *ctx) override {
 								   );
 }
 
-virtual antlrcpp::Any visitMoins(ExprParser::MoinsContext *ctx) override {
+ antlrcpp::Any visitMoins(ExprParser::MoinsContext *ctx) override {
 		return (Expression*) new
 									   ExpressionBinaire(
 										   (Expression*) visit(ctx->expr(0)),
@@ -199,7 +199,7 @@ virtual antlrcpp::Any visitMoins(ExprParser::MoinsContext *ctx) override {
 									   );
 	}
 
-	virtual antlrcpp::Any visitStrictInf(ExprParser::StrictInfContext *ctx) override {
+	 antlrcpp::Any visitStrictInf(ExprParser::StrictInfContext *ctx) override {
 		return (Expression*) new
 									   ExpressionBinaire(
 										   (Expression*) visit(ctx->expr(0)),
@@ -208,187 +208,267 @@ virtual antlrcpp::Any visitMoins(ExprParser::MoinsContext *ctx) override {
 									   );
 	}
 
-    virtual antlrcpp::Any visitNon(ExprParser::NonContext *ctx) override {
+     antlrcpp::Any visitComma(ExprParser::CommaContext *ctx) override {
+    	return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::virgule
+									   );
+    }
+
+     antlrcpp::Any visitPlusEgal(ExprParser::PlusEgalContext *ctx) override {
+    	 return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::pluseq
+									   );
+        }
+
+	 antlrcpp::Any visitMoinsEgal(ExprParser::MoinsEgalContext *ctx) override {
+		 return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::moinseq
+									   );
+	}
+
+	 antlrcpp::Any visitMultEgal(ExprParser::MultEgalContext *ctx) override {
+		 return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::multeq
+									   );
+	}
+
+	 antlrcpp::Any visitDivEgal(ExprParser::DivEgalContext *ctx) override {
+		 return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::divseq
+									   );
+	}
+
+	 antlrcpp::Any visitModEgal(ExprParser::ModEgalContext *ctx) override {
+		 return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::modeq
+									   );
+	}
+
+	 antlrcpp::Any visitAndEgal(ExprParser::AndEgalContext *ctx) override {
+		 return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::ampeq
+									   );
+	     }
+
+	  antlrcpp::Any visitOrEgal(ExprParser::OrEgalContext *ctx) override {
+		  return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::boreq
+									   );
+	 }
+
+	  antlrcpp::Any visitXorEgal(ExprParser::XorEgalContext *ctx) override {
+		  return (Expression*) new
+									   ExpressionBinaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   (Expression*) visit(ctx->expr(1)),
+										   SymboleBinaire::bxoreq
+									   );
+	 }
+
+    //Expressions unaires
+     antlrcpp::Any visitNon(ExprParser::NonContext *ctx) override {
+    	return (Expression*) new
+								   ExpressionUnaire(
+									   (Expression*) visit(ctx->expr(0)),
+									   SymboleUnaire::non
+								   );
+    }
+
+     antlrcpp::Any visitNotExpr(ExprParser::NotExprContext *ctx) override {
+    	return (Expression*) new
+									   ExpressionUnaire(
+										   (Expression*) visit(ctx->expr(0)),
+										   SymboleUnaire::bnot
+									   );
+    }
+
+     antlrcpp::Any visitPostIncrement(ExprParser::PostIncrementContext *ctx) override {
+    	return (Expression*) new
+									ExpressionUnaire(
+											(Expression*) visit(ctx->expr(0)),
+											SymboleUnaire::incr
+										);
+    }
+
+     antlrcpp::Any visitPreIncrement(ExprParser::PreIncrementContext *ctx) override {
+    	 return (Expression*) new
+									ExpressionUnaire(
+											(Expression*) visit(ctx->expr(0)),
+											SymboleUnaire::incr
+										);
+    }
+
+     antlrcpp::Any visitPostDecrement(ExprParser::PostDecrementContext *ctx) override {
+    	 return (Expression*) new
+									ExpressionUnaire(
+											(Expression*) visit(ctx->expr(0)),
+											SymboleUnaire::decr
+										);
+    }
+
+     antlrcpp::Any visitPreDecrement(ExprParser::PreDecrementContext *ctx) override {
+    	 return (Expression*) new
+									ExpressionUnaire(
+											(Expression*) visit(ctx->expr(0)),
+											SymboleUnaire::decr
+										);
+    }
+
+
+
+    //***
+     antlrcpp::Any visitGetVarVal(ExprParser::GetVarValContext *ctx) override {
+            return visitChildren(ctx);
+    }
+
+     antlrcpp::Any visitGetTabVal(ExprParser::GetTabValContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitGetTabVal(ExprParser::GetTabValContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitAffectation(ExprParser::AffectationContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitGetVarVal(ExprParser::GetVarValContext *ctx) override {
+     antlrcpp::Any visitAffectation(ExprParser::AffectationContext *ctx) override {
         return visitChildren(ctx);
     }
 
 
 
-    virtual antlrcpp::Any visitPar(ExprParser::ParContext *ctx) override {
+
+     antlrcpp::Any visitPar(ExprParser::ParContext *ctx) override {
         return visitChildren(ctx);
     }
 
 
 
-    virtual antlrcpp::Any visitCharVal(ExprParser::CharValContext *ctx) override {
+     antlrcpp::Any visitCharVal(ExprParser::CharValContext *ctx) override {
         return visitChildren(ctx);
     }
 
 
 
-    virtual antlrcpp::Any visitAppelFonction(ExprParser::AppelFonctionContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitComma(ExprParser::CommaContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitNotExpr(ExprParser::NotExprContext *ctx) override {
+     antlrcpp::Any visitAppelFonction(ExprParser::AppelFonctionContext *ctx) override {
         return visitChildren(ctx);
     }
 
 
 
-    virtual antlrcpp::Any visitChar(ExprParser::CharContext *ctx) override {
+
+
+
+
+     antlrcpp::Any visitChar(ExprParser::CharContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitInt32_t(ExprParser::Int32_tContext *ctx) override {
+     antlrcpp::Any visitInt32_t(ExprParser::Int32_tContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitInt64_t(ExprParser::Int64_tContext *ctx) override {
+     antlrcpp::Any visitInt64_t(ExprParser::Int64_tContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitAffExpr(ExprParser::AffExprContext *ctx) override {
+     antlrcpp::Any visitAffExpr(ExprParser::AffExprContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitAffExprTableau(ExprParser::AffExprTableauContext *ctx) override {
+     antlrcpp::Any visitAffExprTableau(ExprParser::AffExprTableauContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitPostIncrement(ExprParser::PostIncrementContext *ctx) override {
+
+     antlrcpp::Any visitOppose(ExprParser::OpposeContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitPreIncrement(ExprParser::PreIncrementContext *ctx) override {
+
+     antlrcpp::Any visitIf(ExprParser::IfContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitPostDecrement(ExprParser::PostDecrementContext *ctx) override {
+     antlrcpp::Any visitWhile(ExprParser::WhileContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitPreDecrement(ExprParser::PreDecrementContext *ctx) override {
+     antlrcpp::Any visitBloc(ExprParser::BlocContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitOppose(ExprParser::OpposeContext *ctx) override {
+     antlrcpp::Any visitInstruction(ExprParser::InstructionContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitPlusEgal(ExprParser::PlusEgalContext *ctx) override {
+     antlrcpp::Any visitDecTableau(ExprParser::DecTableauContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitMoinsEgal(ExprParser::MoinsEgalContext *ctx) override {
+     antlrcpp::Any visitDecVariable(ExprParser::DecVariableContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitMultEgal(ExprParser::MultEgalContext *ctx) override {
+     antlrcpp::Any visitDecVariableMultiple(ExprParser::DecVariableMultipleContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitDivEgal(ExprParser::DivEgalContext *ctx) override {
+     antlrcpp::Any visitInstrDecl(ExprParser::InstrDeclContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitModEgal(ExprParser::ModEgalContext *ctx) override {
+     antlrcpp::Any visitInstrPutchar(ExprParser::InstrPutcharContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitAndEgal(ExprParser::AndEgalContext *ctx) override {
+     antlrcpp::Any visitInstrGetchar(ExprParser::InstrGetcharContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitOrEgal(ExprParser::OrEgalContext *ctx) override {
+     antlrcpp::Any visitBreak(ExprParser::BreakContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitXorEgal(ExprParser::XorEgalContext *ctx) override {
+     antlrcpp::Any visitReturn(ExprParser::ReturnContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitIf(ExprParser::IfContext *ctx) override {
+     antlrcpp::Any visitInstrExpr(ExprParser::InstrExprContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitWhile(ExprParser::WhileContext *ctx) override {
+     antlrcpp::Any visitControle(ExprParser::ControleContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitBloc(ExprParser::BlocContext *ctx) override {
+     antlrcpp::Any visitDefFonctionType(ExprParser::DefFonctionTypeContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitInstruction(ExprParser::InstructionContext *ctx) override {
+     antlrcpp::Any visitDefFonctionVoid(ExprParser::DefFonctionVoidContext *ctx) override {
         return visitChildren(ctx);
     }
 
-    virtual antlrcpp::Any visitDecTableau(ExprParser::DecTableauContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitDecVariable(ExprParser::DecVariableContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitDecVariableMultiple(ExprParser::DecVariableMultipleContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitInstrDecl(ExprParser::InstrDeclContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitInstrPutchar(ExprParser::InstrPutcharContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitInstrGetchar(ExprParser::InstrGetcharContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitBreak(ExprParser::BreakContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitReturn(ExprParser::ReturnContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitInstrExpr(ExprParser::InstrExprContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitControle(ExprParser::ControleContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitDefFonctionType(ExprParser::DefFonctionTypeContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitDefFonctionVoid(ExprParser::DefFonctionVoidContext *ctx) override {
-        return visitChildren(ctx);
-    }
-
-    virtual antlrcpp::Any visitAppelFonctionExpression(ExprParser::AppelFonctionExpressionContext *ctx) override {
+     antlrcpp::Any visitAppelFonctionExpression(ExprParser::AppelFonctionExpressionContext *ctx) override {
         return visitChildren(ctx);
     }
 

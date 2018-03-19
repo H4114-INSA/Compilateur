@@ -10,10 +10,10 @@
 
 enum class TypeExpression {unaire, binaire, constante, variable, elementTableau, affectation} ;
 
-enum class SymboleUnaire {egal,  non,  bnot, noexpr, incr, decr };
+enum class SymboleUnaire {non,  bnot, noexpr,incr, decr };
 
 enum class SymboleBinaire {egal, plus, div, mult, moins, mod, ouex, leftshift, rightshift, et, ou, infegal, supegal, band, bor, bxor,
-    non,strictsup, strictinf, diff, pluseq, moinseq, multeq, diveq, modeq, ampeq, boreq, bxoreq };
+    non,strictsup, strictinf, diff, pluseq, moinseq, multeq, diveq, modeq, ampeq, boreq, bxoreq,  virgule};
 
 enum class TypeValeur {type_int, type_char};
 
