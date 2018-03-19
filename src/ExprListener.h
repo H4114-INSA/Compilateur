@@ -206,9 +206,6 @@ public:
   virtual void enterDefFonctionVoid(ExprParser::DefFonctionVoidContext *ctx) = 0;
   virtual void exitDefFonctionVoid(ExprParser::DefFonctionVoidContext *ctx) = 0;
 
-  virtual void enterAppelFonctionExpression(ExprParser::AppelFonctionExpressionContext *ctx) = 0;
-  virtual void exitAppelFonctionExpression(ExprParser::AppelFonctionExpressionContext *ctx) = 0;
-
 
 };
 

@@ -208,9 +208,6 @@ public:
   virtual void enterDefFonctionVoid(ExprParser::DefFonctionVoidContext * /*ctx*/) override { }
   virtual void exitDefFonctionVoid(ExprParser::DefFonctionVoidContext * /*ctx*/) override { }
 
-  virtual void enterAppelFonctionExpression(ExprParser::AppelFonctionExpressionContext * /*ctx*/) override { }
-  virtual void exitAppelFonctionExpression(ExprParser::AppelFonctionExpressionContext * /*ctx*/) override { }
-
 
   virtual void enterEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }
   virtual void exitEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }

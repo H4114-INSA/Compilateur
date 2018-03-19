@@ -25,8 +25,7 @@ public:
 
   enum {
     RuleProg = 0, RuleExpr = 1, RuleType = 2, RuleAff = 3, RuleControl = 4, 
-    RuleBlocControl = 5, RuleDeclaration = 6, RuleInstr = 7, RuleDefinitionFonction = 8, 
-    RuleAppelFonct = 9
+    RuleBlocControl = 5, RuleDeclaration = 6, RuleInstr = 7, RuleDefinitionFonction = 8
   };
 
   ExprParser(antlr4::TokenStream *input);
@@ -47,8 +46,7 @@ public:
   class BlocControlContext;
   class DeclarationContext;
   class InstrContext;
-  class DefinitionFonctionContext;
-  class AppelFonctContext; 
+  class DefinitionFonctionContext; 
 
   class  ProgContext : public antlr4::ParserRuleContext {
   public:
@@ -365,7 +363,9 @@ public:
   public:
     AppelFonctionContext(ExprContext *ctx);
 
-    AppelFonctContext *appelFonct();
+    antlr4::tree::TerminalNode *Nom();
+    std::vector<DeclarationContext *> declaration();
+    DeclarationContext* declaration(size_t i);
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
 
@@ -939,33 +939,6 @@ public:
   };
 
   DefinitionFonctionContext* definitionFonction();
-
-  class  AppelFonctContext : public antlr4::ParserRuleContext {
-  public:
-    AppelFonctContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-   
-    AppelFonctContext() : antlr4::ParserRuleContext() { }
-    void copyFrom(AppelFonctContext *context);
-    using antlr4::ParserRuleContext::copyFrom;
-
-    virtual size_t getRuleIndex() const override;
-
-   
-  };
-
-  class  AppelFonctionExpressionContext : public AppelFonctContext {
-  public:
-    AppelFonctionExpressionContext(AppelFonctContext *ctx);
-
-    antlr4::tree::TerminalNode *Nom();
-    ExprContext *expr();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  AppelFonctContext* appelFonct();
 
 
   virtual bool sempred(antlr4::RuleContext *_localctx, size_t ruleIndex, size_t predicateIndex) override;

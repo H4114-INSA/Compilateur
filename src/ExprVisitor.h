@@ -147,8 +147,6 @@ public:
 
     virtual antlrcpp::Any visitDefFonctionVoid(ExprParser::DefFonctionVoidContext *context) = 0;
 
-    virtual antlrcpp::Any visitAppelFonctionExpression(ExprParser::AppelFonctionExpressionContext *context) = 0;
-
 
 };
 

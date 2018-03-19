@@ -16,10 +16,12 @@
 #include "Program.h"
 #include "Expression.h"
 #include "ExpressionConstante.h"
+#include "ExpressionBinaire.h"
 #include "Fonction.h"
 #include "Instruction.h"
 #include "Declaration.h"
 #include "Type.h"
+#include "ExpressionAppelFonction.h"
  
 using namespace std;
  
@@ -155,7 +157,7 @@ public:
                                            ExpressionBinaire(
                                                (Expression*) visit(ctx->expr(0)),
                                                (Expression*) visit(ctx->expr(1)),
-                                               SymboleBinaire::strictup
+                                               SymboleBinaire::strictsup
                                            );
         }
  
@@ -216,44 +218,44 @@ public:
      antlrcpp::Any visitPlusEgal(ExprParser::PlusEgalContext *ctx) override {
          return (Expression*) new
                                        ExpressionBinaire(
-                                           (Expression*) visit(ctx->expr(0)),
-                                           (Expression*) visit(ctx->expr(1)),
+                                           (Expression*) visit(ctx->Nom()),
+                                           (Expression*) visit(ctx->expr()),
                                            SymboleBinaire::pluseq
                                        );
-        }
+     }
  
      antlrcpp::Any visitMoinsEgal(ExprParser::MoinsEgalContext *ctx) override {
          return (Expression*) new
                                        ExpressionBinaire(
-                                           (Expression*) visit(ctx->expr(0)),
-                                           (Expression*) visit(ctx->expr(1)),
+                                           (Expression*) visit(ctx->Nom()),
+                                           (Expression*) visit(ctx->expr()),
                                            SymboleBinaire::moinseq
                                        );
-    }
+     }
  
      antlrcpp::Any visitMultEgal(ExprParser::MultEgalContext *ctx) override {
          return (Expression*) new
                                        ExpressionBinaire(
-                                           (Expression*) visit(ctx->expr(0)),
-                                           (Expression*) visit(ctx->expr(1)),
+                                           (Expression*) visit(ctx->Nom()),
+                                           (Expression*) visit(ctx->expr()),
                                            SymboleBinaire::multeq
                                        );
-    }
+     }
  
      antlrcpp::Any visitDivEgal(ExprParser::DivEgalContext *ctx) override {
          return (Expression*) new
                                        ExpressionBinaire(
-                                           (Expression*) visit(ctx->expr(0)),
-                                           (Expression*) visit(ctx->expr(1)),
-                                           SymboleBinaire::divseq
+                                           (Expression*) visit(ctx->Nom()),
+                                           (Expression*) visit(ctx->expr()),
+                                           SymboleBinaire::diveq
                                        );
     }
  
      antlrcpp::Any visitModEgal(ExprParser::ModEgalContext *ctx) override {
          return (Expression*) new
                                        ExpressionBinaire(
-                                           (Expression*) visit(ctx->expr(0)),
-                                           (Expression*) visit(ctx->expr(1)),
+                                           (Expression*) visit(ctx->Nom()),
+                                           (Expression*) visit(ctx->expr()),
                                            SymboleBinaire::modeq
                                        );
     }
@@ -261,8 +263,8 @@ public:
      antlrcpp::Any visitAndEgal(ExprParser::AndEgalContext *ctx) override {
          return (Expression*) new
                                        ExpressionBinaire(
-                                           (Expression*) visit(ctx->expr(0)),
-                                           (Expression*) visit(ctx->expr(1)),
+                                           (Expression*) visit(ctx->Nom()),
+                                           (Expression*) visit(ctx->expr()),
                                            SymboleBinaire::ampeq
                                        );
          }
@@ -270,8 +272,8 @@ public:
       antlrcpp::Any visitOrEgal(ExprParser::OrEgalContext *ctx) override {
           return (Expression*) new
                                        ExpressionBinaire(
-                                           (Expression*) visit(ctx->expr(0)),
-                                           (Expression*) visit(ctx->expr(1)),
+                                           (Expression*) visit(ctx->Nom()),
+                                           (Expression*) visit(ctx->expr()),
                                            SymboleBinaire::boreq
                                        );
      }
@@ -279,8 +281,8 @@ public:
       antlrcpp::Any visitXorEgal(ExprParser::XorEgalContext *ctx) override {
           return (Expression*) new
                                        ExpressionBinaire(
-                                           (Expression*) visit(ctx->expr(0)),
-                                           (Expression*) visit(ctx->expr(1)),
+                                           (Expression*) visit(ctx->Nom()),
+                                           (Expression*) visit(ctx->expr()),
                                            SymboleBinaire::bxoreq
                                        );
      }
@@ -305,7 +307,7 @@ public:
      antlrcpp::Any visitPostIncrement(ExprParser::PostIncrementContext *ctx) override {
         return (Expression*) new
                                 ExpressionUnaire(
-                                        (Expression*) visit(ctx->expr()),
+                                        (Expression*) visit(ctx->Nom()),
                                         SymboleUnaire::incr
                                     );
     }
@@ -313,7 +315,7 @@ public:
      antlrcpp::Any visitPreIncrement(ExprParser::PreIncrementContext *ctx) override {
          return (Expression*) new
                                 ExpressionUnaire(
-                                        (Expression*) visit(ctx->expr()),
+                                        (Expression*) visit(ctx->Nom()),
                                         SymboleUnaire::incr
                                     );
     }
@@ -321,7 +323,7 @@ public:
      antlrcpp::Any visitPostDecrement(ExprParser::PostDecrementContext *ctx) override {
          return (Expression*) new
                                 ExpressionUnaire(
-                                        (Expression*) visit(ctx->expr()),
+                                        (Expression*) visit(ctx->Nom()),
                                         SymboleUnaire::decr
                                     );
     }
@@ -329,32 +331,18 @@ public:
      antlrcpp::Any visitPreDecrement(ExprParser::PreDecrementContext *ctx) override {
          return (Expression*) new
                                     ExpressionUnaire(
-                                            (Expression*) visit(ctx->expr()),
+                                            (Expression*) visit(ctx->Nom()),
                                             SymboleUnaire::decr
                                         );
     }
-<<<<<<< HEAD
-
-     antlrcpp::Any visitOppose(ExprParser::OpposeContext *ctx) override {
-     		 return (Expression*) new
-     									   ExpressionUnaire(
-     										   (Expression*) visit(ctx->expr()),
-     										   SymboleUnaire::moins
-     									   );
-     }
-
-=======
      
      antlrcpp::Any visitOppose(ExprParser::OpposeContext *ctx) override {
              return (Expression*) new
                                            ExpressionUnaire(
-                                               (Expression*) visit(ctx->expr()),
+                                               (Expression*) visit(ctx->Nom()),
                                                SymboleUnaire::moins
                                            );
      }
- 
->>>>>>> branch 'master' of https://github.com/H4114-INSA/Compilateur.git
-    //***
  
      antlrcpp::Any visitIntVal(ExprParser::IntValContext *ctx) override {
              ExpressionConstante a (TypeValeur::type_int,stoi(ctx->IntVal()->getText()));
@@ -362,14 +350,10 @@ public:
     }
  
      antlrcpp::Any visitGetVarVal(ExprParser::GetVarValContext *ctx) override {
-             String nom = (ctx->Nom()->getText());
+             string nom = (ctx->Nom()->getText());
              return nom;
     }
-<<<<<<< HEAD
 
-=======
- 
->>>>>>> branch 'master' of https://github.com/H4114-INSA/Compilateur.git
      antlrcpp::Any visitAffectation(ExprParser::AffectationContext *ctx) override {
         return (Expression*)(visit(ctx->aff()));
     }
@@ -381,50 +365,32 @@ public:
  
  
      antlrcpp::Any visitCharVal(ExprParser::CharValContext *ctx) override {
-         ExpressionConstante a (TypeValeur :: type_char, ctx->CharVal()->getText());
+         ExpressionConstante a (TypeValeur :: type_char, stoi(ctx->CharVal()->getText()));
          return a;
     }
-<<<<<<< HEAD
 
      antlrcpp::Any visitGetTabVal(ExprParser::GetTabValContext *ctx) override {
-        	     Stirng nom = visit(ctx->Nom());
+        	     /*string nom = visit(ctx->Nom());
         	     int indice =(int)(visit(ctx->expr()));
-             	 return ;
+             	 return ;*/
+        	     return nullptr;
       }
 
      antlrcpp::Any visitAffExpr(ExprParser::AffExprContext *ctx) override {
     		 return (Expression*) new
     									   ExpressionBinaire(
-    										   (Expression*) visit(ctx->expr(0)),
-    										   (Expression*) visit(ctx->expr(1)),
+    										   (Expression*) visit(ctx->Nom()),
+    										   (Expression*) visit(ctx->expr()),
     										   SymboleBinaire::egal
     									   );
       }
 
-=======
- 
-     antlrcpp::Any visitGetTabVal(ExprParser::GetTabValContext *ctx) override {
-                 Stirng nom = visit(ctx->Nom());
-                 int indice =(int)(visit(ctx->expr()));
-                 return ;
-      }
-     
-     antlrcpp::Any visitAffExpr(ExprParser::AffExprContext *ctx) override {
-             return (Expression*) new
-                                           ExpressionBinaire(
-                                               (Expression*) visit(ctx->expr(0)),
-                                               (Expression*) visit(ctx->expr(1)),
-                                               SymboleBinaire::egal
-                                           );
-      }
- 
->>>>>>> branch 'master' of https://github.com/H4114-INSA/Compilateur.git
      antlrcpp::Any visitAppelFonction(ExprParser::AppelFonctionContext *ctx) override {
-    	return (Expression*) new ExpressionAppelFonction();
-        return visitChildren(ctx);
+    	/*return (Expression*) new ExpressionAppelFonction(
+    	                            ctx->Nom(),
+                                    );*/
+        return ctx;
     }
-     //appelFonct : Nom '(' (expr)? ')'  # appelFonctionExpression
- 
  
  
      antlrcpp::Any visitChar(ExprParser::CharContext *ctx) override {
@@ -438,32 +404,12 @@ public:
      antlrcpp::Any visitInt64_t(ExprParser::Int64_tContext *ctx) override {
         return ctx;
     }
-<<<<<<< HEAD
 
-
-
-=======
- 
-   
- 
->>>>>>> branch 'master' of https://github.com/H4114-INSA/Compilateur.git
      antlrcpp::Any visitAffExprTableau(ExprParser::AffExprTableauContext *ctx) override {
         return visitChildren(ctx);
-        //**************
+
     }
-<<<<<<< HEAD
 
-
-
-
-
-=======
- 
- 
-     
- 
- 
->>>>>>> branch 'master' of https://github.com/H4114-INSA/Compilateur.git
      antlrcpp::Any visitIf(ExprParser::IfContext *ctx) override {
          return ctx;
     }
@@ -528,10 +474,7 @@ public:
      antlrcpp::Any visitDefFonctionVoid(ExprParser::DefFonctionVoidContext *ctx) override {
         return visitChildren(ctx);
     }
- 
-     antlrcpp::Any visitAppelFonctionExpression(ExprParser::AppelFonctionExpressionContext *ctx) override {
-        return visitChildren(ctx);
-    }
+
  
  
 };
