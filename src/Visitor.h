@@ -22,7 +22,14 @@
 #include "Declaration.h"
 #include "Type.h"
 #include "ExpressionAppelFonction.h"
- 
+#include "ExpressionVariable.h"
+#include "Return.h"
+#include "Controle.h"
+#include "Break.h"
+#include "If.h"
+#include "IfElseifElse.h"
+#include "While.h"
+
 using namespace std;
  
  
@@ -394,15 +401,15 @@ public:
  
  
      antlrcpp::Any visitChar(ExprParser::CharContext *ctx) override {
-        return ctx;
+        return (char*) ctx->Char()->getText().c_str();
     }
  
      antlrcpp::Any visitInt32_t(ExprParser::Int32_tContext *ctx) override {
-        return ctx;
+        return (int32_t) stoi(ctx->Int32_t()->getText());
     }
  
      antlrcpp::Any visitInt64_t(ExprParser::Int64_tContext *ctx) override {
-        return ctx;
+        return (int64_t)stoi(ctx->Int64_t()->getText()) ;
     }
 
      antlrcpp::Any visitAffExprTableau(ExprParser::AffExprTableauContext *ctx) override {
@@ -411,20 +418,40 @@ public:
     }
 
      antlrcpp::Any visitIf(ExprParser::IfContext *ctx) override {
-         return ctx;
-    }
+        IfElseifElse* structureIf;
+        vector<If*> successionIf;
+        for(size_t i=0; i<ctx->expr().size();i++){
+            vector<Instruction*> bloc = visit(ctx->blocControl(i));
+            successionIf.push_back((If*)new If(
+                    (Expression*)visit(ctx->expr(i)),
+                    new BlocControle(bloc)
+            ));
+        }
+        structureIf->setSuccession(successionIf);
+        return (Controle*)structureIf;
+     }
  
      antlrcpp::Any visitWhile(ExprParser::WhileContext *ctx) override {
-         return ctx;
+         vector<Instruction*> bloc = visit(ctx->blocControl());
+         return (Controle*) new While(
+                 (Expression*)visit(ctx->expr()),
+                 new BlocControle(bloc)
+         );
     }
  
      antlrcpp::Any visitBloc(ExprParser::BlocContext *ctx) override {
-        return visitChildren(ctx);
-        /////////////////::
+        //return (vector<Instruction*>)visitChildren(ctx);
+         vector<Instruction*> instructions;
+         for (size_t i = 0; i < ctx->instr().size(); ++i) {
+             instructions.push_back((Instruction*)visit(ctx->instr(i)));
+         }
+         return instructions;
     }
  
      antlrcpp::Any visitInstruction(ExprParser::InstructionContext *ctx) override {
-        return visitChildren(ctx);
+         vector<Instruction*> instructions;
+         instructions.push_back((Instruction*)visit(ctx->instr()));
+         return instructions;
     }
  
      antlrcpp::Any visitDecTableau(ExprParser::DecTableauContext *ctx) override {
@@ -448,23 +475,24 @@ public:
     }
  
      antlrcpp::Any visitInstrGetchar(ExprParser::InstrGetcharContext *ctx) override {
-        return visitChildren(ctx);
+        //return ctx->Getchar()->getText();
+        return ctx;
     }
  
      antlrcpp::Any visitBreak(ExprParser::BreakContext *ctx) override {
-        return visitChildren(ctx);
+        return ctx->Break()->getText();
     }
  
      antlrcpp::Any visitReturn(ExprParser::ReturnContext *ctx) override {
-        return visitChildren(ctx);
+        return (Return*) new Return((Expression*)visit(ctx->expr()));
     }
  
      antlrcpp::Any visitInstrExpr(ExprParser::InstrExprContext *ctx) override {
-        return visitChildren(ctx);
+        return (Instruction*)visit(ctx->expr());
     }
  
      antlrcpp::Any visitControle(ExprParser::ControleContext *ctx) override {
-        return visitChildren(ctx);
+        return (Controle*)visit(ctx->control());
     }
  
      antlrcpp::Any visitDefFonctionType(ExprParser::DefFonctionTypeContext *ctx) override {
