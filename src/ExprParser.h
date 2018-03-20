@@ -691,7 +691,8 @@ public:
     IfContext(ControlContext *ctx);
 
     antlr4::tree::TerminalNode *If();
-    ExprContext *expr();
+    std::vector<ExprContext *> expr();
+    ExprContext* expr(size_t i);
     std::vector<BlocControlContext *> blocControl();
     BlocControlContext* blocControl(size_t i);
     std::vector<antlr4::tree::TerminalNode *> Elseif();
@@ -838,7 +839,7 @@ public:
     InstrPutcharContext(InstrContext *ctx);
 
     antlr4::tree::TerminalNode *Putchar();
-    ExprContext *expr();
+    antlr4::tree::TerminalNode *CharVal();
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
 
@@ -850,7 +851,7 @@ public:
     InstrGetcharContext(InstrContext *ctx);
 
     antlr4::tree::TerminalNode *Getchar();
-    ExprContext *expr();
+    antlr4::tree::TerminalNode *CharVal();
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
 

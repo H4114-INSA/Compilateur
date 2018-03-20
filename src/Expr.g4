@@ -55,8 +55,8 @@ aff : Nom '=' expr           # affExpr
 | Nom '^=' expr              # xorEgal
 ;
 
-control : If '(' expr ')' blocControl (Elseif blocControl)* (Else blocControl)? # if
-| While '(' expr ')' blocControl                                                # while
+control : If '(' expr ')' blocControl (Elseif '(' expr ')' blocControl)* (Else blocControl)? # if
+| While '(' expr ')' blocControl                                                             # while
 ;
 
 blocControl : '{' (instr)* '}'     # bloc
@@ -68,13 +68,13 @@ declaration : type Nom '[' (expr)? ']' ('=' '{' expr (',' expr )*  '}' )?  # dec
 | type Nom ( ',' Nom)*                                                     # decVariableMultiple
 ;
 
-instr : declaration ';'    # instrDecl
-| Putchar '(' expr ')' ';' # instrPutchar
-| Getchar '(' expr ')' ';' # instrGetchar
-| Break ';'                # break
-| Return expr ';'          # return
-| expr  ';'                # instrExpr
-| control                  # controle
+instr : declaration ';'       # instrDecl
+| Putchar '(' CharVal ')' ';' # instrPutchar
+| Getchar '(' CharVal ')' ';' # instrGetchar
+| Break ';'                   # break
+| Return expr ';'             # return
+| expr  ';'                   # instrExpr
+| control                     # controle
 ;
 
 definitionFonction : type Nom '(' (declaration (',' declaration)*) ')' '{' (instr )* '}'  # defFonctionType
