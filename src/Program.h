@@ -18,14 +18,22 @@ public:
     Program();
     ~Program();
 
-    map<string, Fonction*> getFonctions();
+    void setFonction(vector<Fonction*> fonct);
+    void setDeclaration(vector<Declaration*> decl);
+
+    map<string, Fonction*> getMapFonctions();
+    map<string, Declaration*> getMapDeclarations();
+
     map<string, Declaration*> getVariables();
 
     void ajouterFonction(string nomFonction, Fonction * fonction);
+    void ajouterFonction(Fonction* fonction);
+    void ajouterDeclaration(Declaration* declaration);
 
     void resolutionPorteeVariable();
 private:
     vector<Fonction*> fonction;
+    vector<Declaration*> declaration;
 
     map<string,Declaration*> mapVariable;
     map<string, Fonction*> mapFonction;
