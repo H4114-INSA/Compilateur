@@ -4,14 +4,14 @@
 
 #include "ExpressionConstante.h"
 
-ExpressionConstante::ExpressionConstante(TypeValeur atypeValeur, int avaleur)
+ExpressionConstante::ExpressionConstante(string atypeValeur, int avaleur)
 {
     this->setTypeExpression(TypeExpression::constante);
     this->typeValeur = atypeValeur;
     this->valeur = avaleur;
 }
 
-TypeValeur ExpressionConstante::getTypeValeur() {
+string ExpressionConstante::getTypeValeur() {
     return typeValeur;
 }
 
@@ -21,4 +21,8 @@ int ExpressionConstante::getValeur() {
 
 void ExpressionConstante::resolutionPorteeVariable(string idContexte, vector<string> *pileVar,
                                                    vector<string> *pileFonct, map<string, Declaration *> *varMap) {
+}
+
+string ExpressionConstante::toString() {
+    return "Expression Constante";
 }

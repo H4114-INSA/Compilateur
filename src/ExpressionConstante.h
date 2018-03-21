@@ -14,18 +14,18 @@ using namespace std;
 class ExpressionConstante : public Expression{
 
 public :
-    ExpressionConstante(TypeValeur atypeValeur, int avaleur);
+    ExpressionConstante(string atypeValeur, int avaleur);
     ~ExpressionConstante();
 
     string toString();
 
-    TypeValeur getTypeValeur();
+    string getTypeValeur();
     int getValeur();
 
     void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap);
 
 private:
-    TypeValeur typeValeur;
+    string typeValeur;
     int valeur;
 
 };
