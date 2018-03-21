@@ -52,6 +52,8 @@ public:
   public:
     ProgContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
+    std::vector<DeclarationContext *> declaration();
+    DeclarationContext* declaration(size_t i);
     std::vector<DefinitionFonctionContext *> definitionFonction();
     DefinitionFonctionContext* definitionFonction(size_t i);
 

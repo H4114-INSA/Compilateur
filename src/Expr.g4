@@ -1,5 +1,5 @@
 grammar Expr;
-prog: definitionFonction+ ;
+prog: ( declaration* | definitionFonction+);
 
 expr:
       '(' expr ')'    # par
@@ -77,8 +77,8 @@ instr : declaration ';'       # instrDecl
 | control                     # controle
 ;
 
-definitionFonction : type Nom '(' (declaration (',' declaration)*) ')' '{' (instr )* '}'  # defFonctionType
-| Void Nom '(' (declaration (',' declaration)*) ')' '{' (instr )* '}'                    # defFonctionVoid
+definitionFonction : type Nom '(' (declaration (',' declaration)*)? ')' '{' (instr )* '}'  # defFonctionType
+| Void Nom '(' (declaration (',' declaration)*)? ')' '{' (instr )* '}'                     # defFonctionVoid
 ;
 
 
