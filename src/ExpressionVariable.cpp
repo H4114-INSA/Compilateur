@@ -5,28 +5,19 @@
 #include "ExpressionVariable.h"
 
 
-ExpressionVariable::ExpressionVariable(string anom, TypeVariable atype, Variable* valeur) {
+ExpressionVariable::ExpressionVariable(string anom) {
     this->setTypeExpression(TypeExpression::variable);
     this->nom=anom;
-    this->type = atype;
-    this->variable = valeur;
 }
 
 ExpressionVariable::~ExpressionVariable() {
 
 }
 
-Variable* ExpressionVariable::getValeur() {
-    return this->variable;
-}
-
 string ExpressionVariable::getNom() {
     return this->getNom();
 }
 
-TypeVariable ExpressionVariable::getType() {
-    return this-> getType();
-}
 
 void ExpressionVariable::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,
                                                   map<string, Declaration *> *varMap) {
@@ -44,10 +35,10 @@ void ExpressionVariable::resolutionPorteeVariable(string idContexte, vector<stri
 
         if(elementPile == nom){
             trouve=1;
-            this->variable->setNom(*it);
+            this->nom=(*it);
             map<string, Declaration *>::iterator varDec = varMap->find(*it);
             if(varDec != varMap->end()) {
-                this->type = (varDec->second)->getType();
+                //this->type = (varDec->second)->getType();
             }
         }
         it++;
@@ -57,4 +48,12 @@ void ExpressionVariable::resolutionPorteeVariable(string idContexte, vector<stri
         cerr << "Aucune variable de nom n'a été déclarée : " << this->nom <<endl;
         exit(2);
     }
+}
+
+void ExpressionVariable::setNom(string nom) {
+    this->nom=nom;
+}
+
+string ExpressionVariable::toString() {
+    return "ExpressionVariable | Nom : " + nom;
 }

@@ -17,19 +17,18 @@ using namespace std;
 
 class ExpressionVariable : public Expression{
 public:
-    ExpressionVariable(string anom, TypeVariable atype, Variable* valeur);
+    ExpressionVariable(string anom);
     ~ExpressionVariable();
 
-    Variable* getValeur();
     string getNom();
-    TypeVariable getType();
+    void setNom(string nom);
+
+    string toString();
 
     void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap);
 
 private:
     string nom;
-    TypeVariable type;
-    Variable * variable;
 };
 
 
