@@ -21,18 +21,23 @@ using namespace std;
 class Declaration : public Instruction{
 public:
     Declaration();
-    Declaration(TypeVariable atype, string nom, int tabSize =-1 , Expression* expr = nullptr);
+    //Declaration(TypeVariable atype, string nom, int tabSize =-1 , Expression* expr = nullptr);
+    Declaration(string type, string nom, int tabSize =-1 , Expression* expr = nullptr);
     ~Declaration();
 
-    TypeVariable getType();
+    //TypeVariable getType();
     string getNom();
 
     string toString();
 
     void setNom(string nom);
 
+    string getType();
+    void setType(string type);
+
 private:
-    TypeVariable type;
+    //TypeVariable type;
+    string type;
     int tabSize;
     string nom ;
     Expression* valeur;

@@ -4,7 +4,7 @@
 
 #include "Declaration.h"
 
-Declaration::Declaration(TypeVariable atype, string nom, int tabSize , Expression* expr ) {
+Declaration::Declaration(string atype, string nom, int tabSize , Expression* expr ) {
     this-> type = atype;
     this-> nom = nom;
     this-> tabSize = tabSize;
@@ -12,11 +12,15 @@ Declaration::Declaration(TypeVariable atype, string nom, int tabSize , Expressio
 }
 
 std::string Declaration::toString() {
-    return "Declaration - toString()";
+    return "Declaration - Type " + type + " - Nom " + nom;
 }
 
-TypeVariable Declaration::getType() {
+string Declaration::getType() {
     return this->type;
+}
+
+void Declaration::setType(string type){
+    this->type=type;
 }
 
 string Declaration::getNom() {
