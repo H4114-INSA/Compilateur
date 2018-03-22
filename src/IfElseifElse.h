@@ -21,6 +21,8 @@ public:
 
     void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap);
 
+    string toString();
+
 private:
     // on modélise un if else if else par une succession de if
     // pour le else on aura une expression nulle

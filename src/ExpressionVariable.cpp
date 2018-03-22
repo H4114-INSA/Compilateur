@@ -55,5 +55,5 @@ void ExpressionVariable::setNom(string nom) {
 }
 
 string ExpressionVariable::toString() {
-    return "ExpressionVariable | Nom : " + nom;
+    return "ExpressionVariable ( Nom : " + nom +" )";
 }

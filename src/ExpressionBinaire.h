@@ -17,6 +17,10 @@ public:
 
     Expression* getLeftExpression();
     Expression* getRightExpression();
+
+    void setLeftExpression(Expression* ex);
+    void setRightExpression(Expression* ex);
+
     SymboleBinaire getSymbole();
 
     string toString();

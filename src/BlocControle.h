@@ -20,6 +20,9 @@ public:
     vector<Instruction*> getListeInstruction();
 
     void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap);
+
+    string toString();
+
 private:
     vector<Instruction*> listeInstructions;
 };

@@ -21,3 +21,10 @@ void While::resolutionPorteeVariable(string idContexte, vector<string> *pileVar,
                                      map<string, Declaration *> *varMap) {
     this->getCondition()->resolutionPorteeVariable(idContexte,pileVar, pileFonct, varMap);
 }
+
+string While::toString() {
+    string res = "While |";
+    res +=" condition (" + this->getCondition()->toString() + ") ";
+    res += bloc->toString();
+    return res;
+}

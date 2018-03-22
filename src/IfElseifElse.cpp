@@ -28,3 +28,12 @@ void IfElseifElse::resolutionPorteeVariable(string idContexte, vector<string> *p
                                             map<string, Declaration *> *varMap) {
 
 }
+
+string IfElseifElse::toString() {
+    string res =  "IfElseifElse | " + to_string(successionIf.size());
+    for (int i=0; i<successionIf.size();i++) {
+        res += " "  +successionIf.at(i)->toString();
+
+    }
+    return res;
+}

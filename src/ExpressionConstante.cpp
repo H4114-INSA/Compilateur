@@ -24,5 +24,6 @@ void ExpressionConstante::resolutionPorteeVariable(string idContexte, vector<str
 }
 
 string ExpressionConstante::toString() {
-    return "Expression Constante";
+    //return "Expression Constante";
+    return "ExpressionConstante  ( " + to_string(valeur) + " ) ";
 }

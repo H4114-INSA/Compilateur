@@ -22,3 +22,10 @@ void If::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, ve
     this->getCondition()->resolutionPorteeVariable(idContexte,pileVar, pileFonct, varMap);
     
 }
+
+string If::toString() {
+    string res = "If |";
+    res +=" condition (" + this->getCondition()->toString() + ") ";
+    res += bloc->toString();
+    return res;
+}

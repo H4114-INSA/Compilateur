@@ -21,3 +21,11 @@ void BlocControle::resolutionPorteeVariable(string idContexte, vector<string> *p
                                             map<string, Declaration *> *varMap) {
 
 }
+
+string BlocControle::toString() {
+    string res ="BlocControle |";
+    for(Instruction* i : listeInstructions){
+        res += " " + i->toString();
+    }
+    return res;
+}

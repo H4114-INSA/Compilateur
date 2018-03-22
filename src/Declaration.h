@@ -35,6 +35,8 @@ public:
     string getType();
     void setType(string type);
 
+    int getSize();
+
 private:
     //TypeVariable type;
     string type;

@@ -24,7 +24,10 @@ SymboleUnaire ExpressionUnaire::getSymbole() {
 }
 
 string ExpressionUnaire::toString() {
-    return "to implement";
+    string res = " ExpressionUnaire " +SymboleUnaireToString(symbole) +" (";
+    res += " " + expression->toString();
+    res += ") ";
+    return res;
 }
 
 void ExpressionUnaire::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,

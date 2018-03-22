@@ -30,3 +30,7 @@ string Declaration::getNom() {
 void Declaration::setNom(string nom) {
     this->nom=nom;
 }
+
+int Declaration::getSize() {
+    return this->tabSize;
+}
