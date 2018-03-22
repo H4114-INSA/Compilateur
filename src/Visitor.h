@@ -204,13 +204,13 @@ public:
                                    );
 }
  
- antlrcpp::Any visitEt(ExprParser::EtContext *ctx) override {
+ antlrcpp::Any visitEt(ExprParser::EtContext *ctx) override { //&&
         cout << "Passage dans visitEt" <<endl;
     return (Expression*) new
                                    ExpressionBinaire(
                                        (Expression*) visit(ctx->expr(0)),
                                        (Expression*) visit(ctx->expr(1)),
-                                       SymboleBinaire::band
+                                       SymboleBinaire::et
                                    );
 }
  
@@ -400,12 +400,14 @@ public:
  
      antlrcpp::Any visitIntVal(ExprParser::IntValContext *ctx) override {
         cout << "Passage dans visitIntVal" << endl;
+         cout << "valeur intval"<< ctx->IntVal()->getText() <<endl;
         return (Expression*) new ExpressionConstante("int32_t",stoi(ctx->IntVal()->getText()));
     }
  
      antlrcpp::Any visitGetVarVal(ExprParser::GetVarValContext *ctx) override {
-             string nom = (ctx->Nom()->getText());
-             return nom;
+        cout <<"Passage GetVarVal" <<endl;
+        string nom = (ctx->Nom()->getText());
+        return (Expression*) new ExpressionVariable(ctx->Nom()->getText());
     }
 
      antlrcpp::Any visitAffectation(ExprParser::AffectationContext *ctx) override {
@@ -471,23 +473,56 @@ public:
         cout << "Passage dans visitIf" <<endl;
         IfElseifElse* structureIf = new IfElseifElse();
         vector<If*> successionIf;
+
+        Expression* elseExpression;
+
         for(size_t i=0; i<ctx->expr().size();i++){
+            Expression* expr = visit(ctx->expr(i));
+
+            // partie 2 de la condition permet de savoir si on a un else
+            // si le nombre de bloc est plus grand que le nombre de condition c'est qu'on a un else
+            cout << "nombre de condition : " << ctx->expr().size() <<endl;
+            cout << "nombre de blocs : " << ctx->blocControl().size() <<endl;
+            if(i ==0 && (ctx->blocControl().size() > ctx->expr().size())){
+                elseExpression = new ExpressionUnaire(expr,SymboleUnaire::non);
+            }
+            //Cette partie sert possiblement à le if (elseif)* else mais n'est pas fonctionnelle en l'état
+            /*else if (i!=0 && (ctx->blocControl().size() > ctx->expr().size())){
+                Expression* tmp = elseExpression;
+                ExpressionUnaire* nonexprcourante = new ExpressionUnaire(expr,SymboleUnaire::non);
+                elseExpression = new ExpressionBinaire(tmp, nonexprcourante, SymboleBinaire::et);
+            }*/
+
+
             vector<Instruction*> bloc = visit(ctx->blocControl(i));
             successionIf.push_back((If*)new If(
-                    (Expression*)visit(ctx->expr(i)),
+                    expr,
                     new BlocControle(bloc)
             ));
         }
+
+        //création du dernier bloc else
+        if(ctx->blocControl().size() > ctx->expr().size()){
+            vector<Instruction*> elseBloc = visit(ctx->blocControl(ctx->blocControl().size()-1));
+            If* elseStatement = new If(elseExpression, new BlocControle(elseBloc));
+            successionIf.push_back(elseStatement);
+        }
+
         structureIf->setSuccession(successionIf);
+
+        cout << structureIf->toString() << endl;
+
         return (Controle*)structureIf;
      }
  
      antlrcpp::Any visitWhile(ExprParser::WhileContext *ctx) override {
+        cout << "Passage dans visitWhile" << endl;
          vector<Instruction*> bloc = visit(ctx->blocControl());
-         return (Controle*) new While(
+         While* resVisitWhile = new While(
                  (Expression*)visit(ctx->expr()),
                  new BlocControle(bloc)
          );
+         return (Controle*)resVisitWhile;
     }
  
      antlrcpp::Any visitBloc(ExprParser::BlocContext *ctx) override {
@@ -508,7 +543,13 @@ public:
     }
  
      antlrcpp::Any visitDecTableau(ExprParser::DecTableauContext *ctx) override {
-        return visitChildren(ctx);
+        Declaration* d =
+            new Declaration(
+                 visit(ctx->type()),
+                 ctx->Nom()->getText(),
+                 stoi(ctx->IntVal()->getText())
+            );
+        return d;
     }
  
      antlrcpp::Any visitDecVariable(ExprParser::DecVariableContext *ctx) override {
@@ -569,7 +610,7 @@ public:
  
      antlrcpp::Any visitControle(ExprParser::ControleContext *ctx) override {
         cout << "Passage dans visitControle" <<endl;
-        return (Controle*)visit(ctx->control());
+        return dynamic_cast<Instruction*>((Controle*)visit(ctx->control()));
      }
  
      antlrcpp::Any visitDefFonctionType(ExprParser::DefFonctionTypeContext *ctx) override {
