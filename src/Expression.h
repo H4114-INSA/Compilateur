@@ -13,12 +13,13 @@
 #include <vector>
 #include <map>
 #include "Type.h"
+#include "Instruction.h"
 
 class Declaration;
 
 using namespace std;
 
-class Expression {
+class Expression : public Instruction{
 public :
     Expression();
     ~Expression();

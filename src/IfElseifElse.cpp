@@ -4,6 +4,10 @@
 
 #include "IfElseifElse.h"
 
+IfElseifElse::IfElseifElse() {
+
+}
+
 IfElseifElse::IfElseifElse(vector<If *> successionIf) {
     this->successionIf = successionIf;
 }
@@ -18,4 +22,9 @@ vector<If *> IfElseifElse::getSuccession() {
 
 void IfElseifElse::setSuccession(vector<If*> successionIf) {
     this->successionIf = successionIf;
+}
+
+void IfElseifElse::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,
+                                            map<string, Declaration *> *varMap) {
+
 }

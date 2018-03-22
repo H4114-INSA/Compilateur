@@ -52,11 +52,12 @@ int main(int , const char ** argv) {
 
     std::cout << tree->toStringTree(&parser) << std::endl << std::endl;
 
-    // Code à utiliser une fois que notre visiteur sera implémenté
-    //Visitor a ;
-    //Program* program = a.visit(tree);
-
     dotExportGeneration(parser, tree);
+
+    // Code à utiliser une fois que notre visiteur sera implémenté
+    Visitor a ;
+    Program* program = a.visit(tree);
+
 
     return code;
 }

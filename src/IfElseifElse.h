@@ -12,11 +12,14 @@ using namespace std;
 
 class IfElseifElse : public Controle{
 public:
+    IfElseifElse();
     IfElseifElse(vector<If*> successionIf);
     ~IfElseifElse();
 
     vector<If*> getSuccession();
     void setSuccession(vector<If*> successionIf);
+
+    void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap);
 
 private:
     // on modélise un if else if else par une succession de if
