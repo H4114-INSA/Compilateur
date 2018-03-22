@@ -63,9 +63,9 @@ blocControl : '{' (instr)* '}'     # bloc
 | instr                            # instruction
 ;
 
-declaration : type Nom '[' (expr)? ']' ('=' '{' expr (',' expr )*  '}' )?  # decTableau
-| type Nom ('=' expr)?                                                     # decVariable
-| type Nom ( ',' Nom)*                                                     # decVariableMultiple
+declaration : type Nom '[' IntVal ']'    # decTableau
+| type Nom ('=' expr)?                   # decVariable
+| type Nom ( ',' Nom)*                   # decVariableMultiple
 ;
 
 instr : declaration ';'       # instrDecl
@@ -91,7 +91,7 @@ Return      : 'return' ;
 While       : 'while' ;
 If          : 'if' ;
 Else        : 'else' ;
-Elseif      : 'elseif' ;
+Elseif      : 'else if' ;
 Void        : 'void' ;
 Putchar     : 'putchar' ;
 Getchar     : 'getchar' ;

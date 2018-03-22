@@ -791,8 +791,7 @@ public:
 
     TypeContext *type();
     antlr4::tree::TerminalNode *Nom();
-    std::vector<ExprContext *> expr();
-    ExprContext* expr(size_t i);
+    antlr4::tree::TerminalNode *IntVal();
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
 
