@@ -12,8 +12,10 @@
 #include "While.h"
 #include "Return.h"
 
+Fonction::Fonction() {
 
-Fonction::Fonction(string nom, TypeVariable typeRetour, vector<Declaration *> arguments, vector<Instruction*> instructions) {
+}
+Fonction::Fonction(string nom, string typeRetour, vector<Declaration *> arguments, vector<Instruction*> instructions) {
     this->nom = nom;
     this-> typeRetour=typeRetour;
     this->args = arguments;
@@ -71,4 +73,36 @@ void Fonction::resolutionPorteeVariable(vector<string> *pileVar, vector<string> 
         itInstr++;
     }
 
+}
+
+string Fonction::getTypeRetour() {
+    return this->typeRetour;
+}
+
+void Fonction::setTypeRetour(string type) {
+    this->typeRetour=type;
+}
+
+void Fonction::setNom(string nom) {
+    this->nom=nom;
+}
+
+void Fonction::setArguments(vector<Declaration *> arguments) {
+    this->args=arguments;
+}
+
+void Fonction::setInstructions(vector<Instruction *> instr) {
+    this->instructions=instr;
+}
+
+vector<Instruction*> Fonction::getInstructions() {
+    return this->instructions;
+}
+
+vector<Declaration*> Fonction::getArguments() {
+    return this->args;
+}
+
+string Fonction::toString() {
+    return "Fonction | Type Retour : "+ typeRetour+ " - nom : " + nom +" - Nb args : "+ to_string(args.size()) + " - Nb instructions : " + to_string(instructions.size()) ;
 }

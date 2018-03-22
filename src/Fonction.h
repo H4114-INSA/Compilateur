@@ -17,18 +17,29 @@ using namespace std;
 
 class Fonction {
 public:
-    Fonction(string nom, TypeVariable typeRetour, vector<Declaration*> arguments, vector<Instruction*> instructions);
+    Fonction();
+    Fonction(string nom, string typeRetour, vector<Declaration*> arguments, vector<Instruction*> instructions);
     ~Fonction();
 
+    string toString();
+
     string getNom();
+    void setNom(string nom);
+
     vector<Declaration*> getArguments();
-    TypeVariable getTypeRetour();
+    void setArguments(vector<Declaration*> arguments);
+
+    string getTypeRetour();
+    void setTypeRetour(string type);
+
+    vector<Instruction*> getInstructions();
+    void setInstructions(vector<Instruction*> instr);
 
     void resolutionPorteeVariable(vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap);
 
 private:
     std::string nom;
-    TypeVariable typeRetour;
+    string typeRetour;
     vector<Declaration*> args;
 
     vector<Instruction*> instructions;
