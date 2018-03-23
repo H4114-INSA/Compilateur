@@ -14,7 +14,7 @@ using namespace std;
 class ExpressionConstante : public Expression{
 
 public :
-    ExpressionConstante(string atypeValeur, int avaleur);
+    ExpressionConstante(string atypeValeur, int avaleur, bool isSpecial = false);
     ~ExpressionConstante();
 
     string toString();
@@ -27,6 +27,7 @@ public :
 private:
     string typeValeur;
     int valeur;
+    bool isSpecial;
 
 };
 
