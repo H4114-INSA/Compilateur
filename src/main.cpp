@@ -10,6 +10,7 @@
 #include "ExprParser.h"
 #include "dotexport.h"
 #include "Visitor.h"
+#include "MyParserErrorListener.h"
 
 using namespace std;
 
@@ -28,13 +29,15 @@ int main(int , const char ** argv) {
     int nbLigne =0;
     int code =0;
 
+    cout << "Début de l'analyse" <<endl << endl;
+    cout << "Contenu du fichier à analyser :" << endl;
     contenu = lectureFichier(argv[1]);
 
     ANTLRInputStream input(contenu);
     ExprLexer lexer(&input);
     CommonTokenStream tokens(&lexer);
 
-    tokens.fill();
+    /*tokens.fill();
     string tokenString;
     for (auto token : tokens.getTokens()) {
         std::cout << token->toString() << std::endl;
@@ -44,22 +47,34 @@ int main(int , const char ** argv) {
         nbLigne++;
     }
 
-    code = test(tokenString,nbLigne);
-    //cout << "code : " <<code << endl;
+    code = test(tokenString,nbLigne);*/
+
 
     ExprParser parser(&tokens);
-    tree::ParseTree* tree = parser.prog();
 
-    std::cout << tree->toStringTree(&parser) << std::endl << std::endl;
+    //Add error listener ------------------------
+    parser.removeErrorListeners();
+    MyParserErrorListener errorListener;
+    parser.addErrorListener(&errorListener);
+    // ------------------------------------------
 
-    dotExportGeneration(parser, tree);
+    try {
+        tree::ParseTree* tree = parser.prog();
+        std::cout << tree->toStringTree(&parser) << std::endl << std::endl;
 
-    // Code à utiliser une fois que notre visiteur sera implémenté
-    Visitor a ;
-    Program* program = a.visit(tree);
+        dotExportGeneration(parser, tree);
 
+        // Code à utiliser une fois que notre visiteur sera implémenté
+        Visitor a ;
+        Program* program = a.visit(tree);
+    }catch (invalid_argument e)
+    {
+        cout <<"Erreur pendant l'analyse du fichier"<<endl;
+        cout << e.what() <<endl <<endl;
+        return -2;
+    }
 
-    return code;
+    return 0;
 }
 
 int test (string &s, int nbLigne) {
@@ -100,7 +115,7 @@ string lectureFichier(const char * nomFichier)
         {
             contenuFichier += ligne;
         }
-        cout << contenuFichier << endl;
+        cout << contenuFichier << endl <<endl;
         fichier.close();
     }
     else {
