@@ -29,6 +29,7 @@
 #include "If.h"
 #include "IfElseifElse.h"
 #include "While.h"
+#include "ExpressionElementTableau.h"
 
 using namespace std;
  
@@ -423,15 +424,18 @@ public:
  
  
      antlrcpp::Any visitCharVal(ExprParser::CharValContext *ctx) override {
-         return new ExpressionConstante("char", stoi(ctx->CharVal()->getText()));
+        cout<< "Passage dans visitCharVal" <<endl;
+        if((int)ctx->CharVal()->getText()[1] == 92){ // 92 ascii de \ alors on créé un caractère spécial
+            return (Expression *) new ExpressionConstante("char", (int) ctx->CharVal()->getText()[2],true);
+        } else {
+            return (Expression *) new ExpressionConstante("char", (int) ctx->CharVal()->getText()[1]);
+        }
     }
 
      antlrcpp::Any visitGetTabVal(ExprParser::GetTabValContext *ctx) override {
-        	     /*string nom = visit(ctx->Nom());
-        	     int indice =(int)(visit(ctx->expr()));
-             	 return ;*/
-        	     return nullptr;
-      }
+        cout << "Passage dans GetTabVal" << endl;
+        return (Expression*) new ExpressionElementTableau(stoi(ctx->IntVal()->getText()),ctx->Nom()->getText());
+     }
 
      antlrcpp::Any visitAffExpr(ExprParser::AffExprContext *ctx) override {
         cout << "Passage dans AffExpr" <<endl;
@@ -443,10 +447,15 @@ public:
       }
 
      antlrcpp::Any visitAppelFonction(ExprParser::AppelFonctionContext *ctx) override {
-    	/*return (Expression*) new ExpressionAppelFonction(
-    	                            ctx->Nom(),
-                                    );*/
-        return ctx;
+    	cout<<"Passage dans visitAppelFonction" <<endl;
+    	vector<Expression*> arguments;
+    	for(size_t i=0; i<ctx->expr().size(); i++){
+    	    arguments.push_back((Expression*)visit(ctx->expr(i)));
+    	}
+
+
+    	Expression* res;
+    	return (Expression*) new ExpressionAppelFonction(ctx->Nom()->getText(), arguments);
     }
  
  
@@ -465,8 +474,15 @@ public:
     }
 
      antlrcpp::Any visitAffExprTableau(ExprParser::AffExprTableauContext *ctx) override {
-        return visitChildren(ctx);
-
+        cout << "Passage dans visitAffExprTableau" <<endl;
+        Expression* e =
+                new ExpressionBinaire(
+                        (Expression*) new ExpressionElementTableau(stoi(ctx->IntVal()->getText()),ctx->Nom()->getText()),
+                        (Expression*)visit(ctx->expr()),
+                        SymboleBinaire::egal
+                );
+        cout<< e->toString() <<endl;
+        return e;
     }
 
      antlrcpp::Any visitIf(ExprParser::IfContext *ctx) override {
@@ -543,12 +559,24 @@ public:
     }
  
      antlrcpp::Any visitDecTableau(ExprParser::DecTableauContext *ctx) override {
+        cout << "Passage dans visitDecTableau" << endl;
         Declaration* d =
             new Declaration(
                  visit(ctx->type()),
                  ctx->Nom()->getText(),
                  stoi(ctx->IntVal()->getText())
             );
+        return d;
+    }
+
+    antlrcpp::Any visitDecTableauParametre(ExprParser::DecTableauParametreContext *ctx) override {
+        cout << "Passage dans visitDecTableauParametre" << endl;
+        Declaration* d =
+                new Declaration(
+                        visit(ctx->type()),
+                        ctx->Nom()->getText(),
+                        true
+                );
         return d;
     }
  
@@ -577,9 +605,17 @@ public:
         return d;
     }
  
-     antlrcpp::Any visitDecVariableMultiple(ExprParser::DecVariableMultipleContext *ctx) override {
+     /*antlrcpp::Any visitDecVariableMultiple(ExprParser::DecVariableMultipleContext *ctx) override {
+        cout << "Passage dans visitDecVariableMultiple" << endl;
+        string type = visit(ctx->type());
+        cout << "Type Variable : " << type << endl;
+        vector<Declaration*> declarations;
+        for(int i=0; i<ctx->Nom().size(); i++){
+            declarations.push_back(new Declaration(type, ctx->Nom(i)->getText(),-1));
+            cout << declarations.at(i)->toString() << endl;
+        }
         return visitChildren(ctx);
-    }
+    }*/
  
      antlrcpp::Any visitInstrDecl(ExprParser::InstrDeclContext *ctx) override {
         cout << "Passage dans visitInstrDecl"<<endl;
@@ -587,12 +623,31 @@ public:
     }
  
      antlrcpp::Any visitInstrPutchar(ExprParser::InstrPutcharContext *ctx) override {
-        return visitChildren(ctx);
+        cout << "Passage dans visitInstrPutchar" << endl;
+        Instruction* putchar;
+        vector<Expression*> arguments;
+
+        if(ctx->CharVal() != nullptr){
+            if((int)ctx->CharVal()->getText()[1] == 92){ // caractère spécial
+                arguments.push_back(new ExpressionConstante("char",(int)ctx->CharVal()->getText()[2],true));
+            }else {
+                arguments.push_back(new ExpressionConstante("char",(int)ctx->CharVal()->getText()[1]));
+            }
+
+            putchar = (Expression*) new ExpressionAppelFonction(ctx->Putchar()->getText(),arguments);
+
+        }else if(ctx->Nom() != nullptr){ //Si l'argument est une variable
+            arguments.push_back(new ExpressionVariable(ctx->Nom()->getText()));
+            putchar = (Expression*) new ExpressionAppelFonction(ctx->Putchar()->getText(),arguments);
+        }
+        return (Instruction*)putchar;
+
     }
  
      antlrcpp::Any visitInstrGetchar(ExprParser::InstrGetcharContext *ctx) override {
         //return ctx->Getchar()->getText();
-        return ctx;
+         vector<Expression*> a;
+        return (Instruction*) new ExpressionAppelFonction(ctx->Getchar()->getText(), a);
      }
  
      antlrcpp::Any visitBreak(ExprParser::BreakContext *ctx) override {
@@ -600,7 +655,8 @@ public:
      }
  
      antlrcpp::Any visitReturn(ExprParser::ReturnContext *ctx) override {
-        return (Return*) new Return((Expression*)visit(ctx->expr()));
+        cout << "Passage dans visitReturn" <<endl;
+        return (Instruction*) new Return((Expression*)visit(ctx->expr()));
     }
  
      antlrcpp::Any visitInstrExpr(ExprParser::InstrExprContext *ctx) override {
@@ -655,6 +711,7 @@ public:
          fonction->setTypeRetour("void");
 
          fonction->setNom(ctx->Nom()->getText());
+         cout<<fonction->getNom() << endl;
 
          cout << "gestion des arguments" <<endl;
          // gestion des argments
