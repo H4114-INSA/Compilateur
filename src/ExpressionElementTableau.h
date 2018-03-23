@@ -14,15 +14,18 @@
 class ExpressionElementTableau : public Expression{
 
 public:
-    ExpressionElementTableau(TypeVariable atype, int indice, string nom);
+    ExpressionElementTableau();
+    ExpressionElementTableau(int indice, string nom);
     ~ExpressionElementTableau();
 
     int getIndice();
-    TypeVariable getType();
     string getNom();
 
+    string toString();
+
+    void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap);
+
 private:
-    TypeVariable type;
     int indice;
     string nom;
 };
