@@ -11,3 +11,7 @@ Return::Return(Expression* e) {
 Expression* Return::getExpression() {
     return this->expression;
 }
+
+string Return::toString() {
+    return "Return ( " + expression->toString() + " )";
+}

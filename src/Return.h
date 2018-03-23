@@ -15,6 +15,8 @@ public:
 
     Expression* getExpression();
 
+    string toString();
+
 private:
     Expression* expression;
 };
