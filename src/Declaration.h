@@ -23,6 +23,7 @@ public:
     Declaration();
     //Declaration(TypeVariable atype, string nom, int tabSize =-1 , Expression* expr = nullptr);
     Declaration(string type, string nom, int tabSize =-1 , Expression* expr = nullptr);
+    Declaration(string type, string nom, bool isPtr);
     ~Declaration();
 
     //TypeVariable getType();
@@ -42,6 +43,7 @@ private:
     string type;
     int tabSize;
     string nom ;
+    bool isPtr;
     Expression* valeur;
 };
 

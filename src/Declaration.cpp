@@ -9,6 +9,14 @@ Declaration::Declaration(string atype, string nom, int tabSize , Expression* exp
     this-> nom = nom;
     this-> tabSize = tabSize;
     this->valeur = expr;
+    this->isPtr=false;
+}
+Declaration::Declaration(string type, string nom, bool isPtr) {
+    this->isPtr = true;
+    this->type=type;
+    this->nom = nom;
+    this->tabSize=-1;
+    this-> valeur = nullptr;
 }
 
 std::string Declaration::toString() {
