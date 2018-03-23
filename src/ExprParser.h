@@ -130,7 +130,7 @@ public:
     GetTabValContext(ExprContext *ctx);
 
     antlr4::tree::TerminalNode *Nom();
-    ExprContext *expr();
+    antlr4::tree::TerminalNode *IntVal();
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
 
@@ -366,8 +366,8 @@ public:
     AppelFonctionContext(ExprContext *ctx);
 
     antlr4::tree::TerminalNode *Nom();
-    std::vector<DeclarationContext *> declaration();
-    DeclarationContext* declaration(size_t i);
+    std::vector<ExprContext *> expr();
+    ExprContext* expr(size_t i);
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
 
@@ -606,8 +606,8 @@ public:
     AffExprTableauContext(AffContext *ctx);
 
     antlr4::tree::TerminalNode *Nom();
-    std::vector<ExprContext *> expr();
-    ExprContext* expr(size_t i);
+    antlr4::tree::TerminalNode *IntVal();
+    ExprContext *expr();
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
 
@@ -759,13 +759,12 @@ public:
    
   };
 
-  class  DecVariableMultipleContext : public DeclarationContext {
+  class  DecTableauParametreContext : public DeclarationContext {
   public:
-    DecVariableMultipleContext(DeclarationContext *ctx);
+    DecTableauParametreContext(DeclarationContext *ctx);
 
     TypeContext *type();
-    std::vector<antlr4::tree::TerminalNode *> Nom();
-    antlr4::tree::TerminalNode* Nom(size_t i);
+    antlr4::tree::TerminalNode *Nom();
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
 
@@ -841,6 +840,7 @@ public:
 
     antlr4::tree::TerminalNode *Putchar();
     antlr4::tree::TerminalNode *CharVal();
+    antlr4::tree::TerminalNode *Nom();
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
 
@@ -852,7 +852,6 @@ public:
     InstrGetcharContext(InstrContext *ctx);
 
     antlr4::tree::TerminalNode *Getchar();
-    antlr4::tree::TerminalNode *CharVal();
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
 

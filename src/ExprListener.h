@@ -173,11 +173,11 @@ public:
   virtual void enterDecTableau(ExprParser::DecTableauContext *ctx) = 0;
   virtual void exitDecTableau(ExprParser::DecTableauContext *ctx) = 0;
 
+  virtual void enterDecTableauParametre(ExprParser::DecTableauParametreContext *ctx) = 0;
+  virtual void exitDecTableauParametre(ExprParser::DecTableauParametreContext *ctx) = 0;
+
   virtual void enterDecVariable(ExprParser::DecVariableContext *ctx) = 0;
   virtual void exitDecVariable(ExprParser::DecVariableContext *ctx) = 0;
-
-  virtual void enterDecVariableMultiple(ExprParser::DecVariableMultipleContext *ctx) = 0;
-  virtual void exitDecVariableMultiple(ExprParser::DecVariableMultipleContext *ctx) = 0;
 
   virtual void enterInstrDecl(ExprParser::InstrDeclContext *ctx) = 0;
   virtual void exitInstrDecl(ExprParser::InstrDeclContext *ctx) = 0;

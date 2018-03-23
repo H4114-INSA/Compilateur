@@ -25,11 +25,11 @@ expr:
 |  expr '~' expr      # not
 |  expr ',' expr      # comma
 |  '~' expr           # notExpr
-|  Nom '[' expr ']'   # getTabVal
+|  Nom '[' IntVal ']' # getTabVal
 |  Nom                # getVarVal
 |  IntVal             # intVal
 |  CharVal            # charVal
-|  Nom '(' (declaration (',' declaration)*) ')'    # appelFonction
+|  Nom '(' (expr (',' expr)*)? ')'    # appelFonction
 |  aff                # affectation
 ;
 
@@ -39,7 +39,7 @@ type : Char           # char
 ;
 
 aff : Nom '=' expr           # affExpr
-| Nom '[' expr ']' '=' expr  # affExprTableau
+| Nom '[' IntVal ']' '=' expr  # affExprTableau
 | Nom '++'                   # postIncrement
 | '++' Nom                   # preIncrement
 | Nom '--'                   # postDecrement
@@ -64,13 +64,13 @@ blocControl : '{' (instr)* '}'     # bloc
 ;
 
 declaration : type Nom '[' IntVal ']'    # decTableau
+| type Nom '[' ']'                       # decTableauParametre
 | type Nom ('=' expr)?                   # decVariable
-| type Nom ( ',' Nom)*                   # decVariableMultiple
 ;
 
 instr : declaration ';'       # instrDecl
-| Putchar '(' CharVal ')' ';' # instrPutchar
-| Getchar '(' CharVal ')' ';' # instrGetchar
+| Putchar '(' (CharVal | Nom) ')' ';' # instrPutchar
+| Getchar '('  ')' ';'        # instrGetchar
 | Break ';'                   # break
 | Return expr ';'             # return
 | expr  ';'                   # instrExpr
@@ -79,6 +79,7 @@ instr : declaration ';'       # instrDecl
 
 definitionFonction : type Nom '(' (declaration (',' declaration)*)? ')' '{' (instr )* '}'  # defFonctionType
 | Void Nom '(' (declaration (',' declaration)*)? ')' '{' (instr )* '}'                     # defFonctionVoid
+
 ;
 
 

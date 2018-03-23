@@ -175,11 +175,11 @@ public:
   virtual void enterDecTableau(ExprParser::DecTableauContext * /*ctx*/) override { }
   virtual void exitDecTableau(ExprParser::DecTableauContext * /*ctx*/) override { }
 
+  virtual void enterDecTableauParametre(ExprParser::DecTableauParametreContext * /*ctx*/) override { }
+  virtual void exitDecTableauParametre(ExprParser::DecTableauParametreContext * /*ctx*/) override { }
+
   virtual void enterDecVariable(ExprParser::DecVariableContext * /*ctx*/) override { }
   virtual void exitDecVariable(ExprParser::DecVariableContext * /*ctx*/) override { }
-
-  virtual void enterDecVariableMultiple(ExprParser::DecVariableMultipleContext * /*ctx*/) override { }
-  virtual void exitDecVariableMultiple(ExprParser::DecVariableMultipleContext * /*ctx*/) override { }
 
   virtual void enterInstrDecl(ExprParser::InstrDeclContext * /*ctx*/) override { }
   virtual void exitInstrDecl(ExprParser::InstrDeclContext * /*ctx*/) override { }

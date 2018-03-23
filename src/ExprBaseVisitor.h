@@ -227,11 +227,11 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitDecVariable(ExprParser::DecVariableContext *ctx) override {
+  virtual antlrcpp::Any visitDecTableauParametre(ExprParser::DecTableauParametreContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitDecVariableMultiple(ExprParser::DecVariableMultipleContext *ctx) override {
+  virtual antlrcpp::Any visitDecVariable(ExprParser::DecVariableContext *ctx) override {
     return visitChildren(ctx);
   }
 

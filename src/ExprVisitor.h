@@ -125,9 +125,9 @@ public:
 
     virtual antlrcpp::Any visitDecTableau(ExprParser::DecTableauContext *context) = 0;
 
-    virtual antlrcpp::Any visitDecVariable(ExprParser::DecVariableContext *context) = 0;
+    virtual antlrcpp::Any visitDecTableauParametre(ExprParser::DecTableauParametreContext *context) = 0;
 
-    virtual antlrcpp::Any visitDecVariableMultiple(ExprParser::DecVariableMultipleContext *context) = 0;
+    virtual antlrcpp::Any visitDecVariable(ExprParser::DecVariableContext *context) = 0;
 
     virtual antlrcpp::Any visitInstrDecl(ExprParser::InstrDeclContext *context) = 0;
 
