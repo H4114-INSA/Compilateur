@@ -9,15 +9,20 @@ using namespace std;
 
 class ExpressionAppelFonction : public Expression {
 public:
-    ExpressionAppelFonction(string nomFonction, vector<Declaration*> liste);
+    ExpressionAppelFonction();
+    ExpressionAppelFonction(string nomFonction, vector<Expression*> liste );
     ~ExpressionAppelFonction();
 
-    vector<Declaration*> getParametres();
+    vector<Expression*> getParametres();
     string getNom();
     void setNom(string nom);
 
+    void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration *> *varMap);
+
+    string toString();
+
 private:
-    vector<Declaration*> parametres;
+    vector<Expression*> parametres;
     string nomFonction;
 };
 
