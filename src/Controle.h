@@ -9,7 +9,7 @@
 #include "Instruction.h"
 #include "Expression.h"
 
-class Controle {
+class Controle : public Instruction{
 public:
     Controle();
     ~Controle();

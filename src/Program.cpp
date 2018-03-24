@@ -25,6 +25,16 @@ void Program::resolutionPorteeVariable() {
     vector<string> pileVariable;
     vector<string> pileFonction;
 
+    //résolution des déclaration globales
+    vector<Declaration*>::iterator itDec;
+    for (itDec = declaration.begin(); itDec !=  declaration.end(); itDec++) {
+        string nomVariableGlobale = "global_" +(*itDec)->getNom();
+        //(*itDec)->setNom(globalPrefixe+(*itDec)->getNom());
+        mapVariable.insert(pair<string, Declaration*>(nomVariableGlobale,(*itDec)));
+        pileVariable.push_back(nomVariableGlobale);
+    }
+
+    //resolution des fonctions
     vector<Fonction*>::iterator it;
     for(it = fonction.begin(); it != fonction.end(); it++){
         mapFonction.insert ( std::pair<string, Fonction*>((*it)->getNom(),(*it)));

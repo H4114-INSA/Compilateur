@@ -7,7 +7,9 @@
 #define COMPILATEUR_BREAK_H
 
 
-class Break {
+#include "Instruction.h"
+
+class Break : public Instruction {
 public:
     Break();
     ~Break();

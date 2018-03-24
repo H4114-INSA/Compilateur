@@ -13,6 +13,7 @@
 
 class If : public Controle {
 public:
+    If();
     If(Expression* conditionExec, BlocControle* bloc);
     ~If();
 

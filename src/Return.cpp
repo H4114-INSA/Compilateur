@@ -4,6 +4,10 @@
 
 #include "Return.h"
 
+Return::Return() {
+
+}
+
 Return::Return(Expression* e) {
     this->expression=e;
 }

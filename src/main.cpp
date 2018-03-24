@@ -60,13 +60,26 @@ int main(int , const char ** argv) {
 
     try {
         tree::ParseTree* tree = parser.prog();
-        std::cout << tree->toStringTree(&parser) << std::endl << std::endl;
+        //std::cout << tree->toStringTree(&parser) << std::endl << std::endl;
 
         dotExportGeneration(parser, tree);
 
         // Code à utiliser une fois que notre visiteur sera implémenté
         Visitor a ;
         Program* program = a.visit(tree);
+
+        cout<< endl << "Résolution de portée des variables" <<endl << endl;
+        cout << "Compte rendu d'exécution :" <<endl;
+        program->resolutionPorteeVariable();
+        cout << "Aucune erreur n'a été détectée" <<endl << endl;
+        map<string,Declaration*> mapVariables = program->getVariables();
+        cout << "Nombre de variables : " << program->getVariables().size() << endl;
+        map<string,Declaration*>::iterator it;
+        for(it = mapVariables.begin(); it != mapVariables.end(); it++){
+            cout << it->second->toString() << endl;
+        }
+        cout <<endl;
+
     }catch (invalid_argument e)
     {
         cout <<"Erreur pendant l'analyse du fichier"<<endl;

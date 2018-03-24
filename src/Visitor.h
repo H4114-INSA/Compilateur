@@ -493,7 +493,7 @@ public:
         Expression* elseExpression;
 
         for(size_t i=0; i<ctx->expr().size();i++){
-            Expression* expr = visit(ctx->expr(i));
+            Expression* expr = (Expression*)visit(ctx->expr(i));
 
             // partie 2 de la condition permet de savoir si on a un else
             // si le nombre de bloc est plus grand que le nombre de condition c'est qu'on a un else

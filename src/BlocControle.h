@@ -14,6 +14,7 @@ using namespace std;
 
 class BlocControle {
 public:
+    BlocControle();
     BlocControle(vector<Instruction*> aliste);
     ~BlocControle();
 

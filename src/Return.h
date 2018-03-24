@@ -8,8 +8,9 @@
 
 #include "Expression.h"
 
-class Return {
+class Return : public Instruction{
 public:
+    Return();
     Return(Expression* e);
     ~Return();
 

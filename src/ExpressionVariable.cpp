@@ -15,13 +15,13 @@ ExpressionVariable::~ExpressionVariable() {
 }
 
 string ExpressionVariable::getNom() {
-    return this->getNom();
+    return this->nom;
 }
 
 
 void ExpressionVariable::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,
                                                   map<string, Declaration *> *varMap) {
-    string nom = idContexte+ this->nom;
+    string nomVariableContexte = idContexte+ this->nom;
     int trouve =0;
 
 
@@ -29,13 +29,18 @@ void ExpressionVariable::resolutionPorteeVariable(string idContexte, vector<stri
     while(it != pileVar->rend() && trouve==0){
 
         // on récupère le nom de le variable
-        string elementPile = (*it);
-        int underscorePos = elementPile.find_first_of('_');
-        elementPile = elementPile.substr (underscorePos+1);
+        string nomVariablePile = (*it);
+        //int underscorePos = nomVariablePile.find_first_of('_');
+        //nomVariablePile = nomVariablePile.substr (underscorePos+1);
 
-        if(elementPile == nom){
-            trouve=1;
-            this->nom=(*it);
+
+        //if(nomVariablePile == this->nom){
+        if(nomVariablePile == nomVariableContexte || nomVariablePile == ("global_" +this->nom)){
+            trouve++;
+            if(nomVariablePile == ("global_" +this->nom)){
+                cout << "Warning : la variable '" + this->nom + "' utilisée lors de l'appel à la fonction " + idContexte +
+                        " est une variable globale." <<endl;
+            }
             map<string, Declaration *>::iterator varDec = varMap->find(*it);
             if(varDec != varMap->end()) {
                 //this->type = (varDec->second)->getType();
@@ -45,7 +50,8 @@ void ExpressionVariable::resolutionPorteeVariable(string idContexte, vector<stri
     }
 
     if(trouve == 0){
-        cerr << "Aucune variable de nom n'a été déclarée : " << this->nom <<endl;
+        cerr << "Une variable est utilisée dans le contexte de la fonction " + idContexte + " mais n'a jamais été déclaré : " << this->nom <<endl;
+        cerr << "Arrêt de l'exécution." <<endl;
         exit(2);
     }
 }
