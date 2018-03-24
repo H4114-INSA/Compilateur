@@ -20,7 +20,8 @@ public:
     T__32 = 33, T__33 = 34, T__34 = 35, T__35 = 36, T__36 = 37, T__37 = 38, 
     T__38 = 39, Include = 40, Char = 41, Int32_t = 42, Int64_t = 43, Break = 44, 
     Return = 45, While = 46, If = 47, Else = 48, Elseif = 49, Void = 50, 
-    Putchar = 51, Getchar = 52, Nom = 53, IntVal = 54, CharVal = 55, WS = 56
+    Putchar = 51, Getchar = 52, Nom = 53, IntVal = 54, CharVal = 55, WS = 56, 
+    ErrorChar = 57
   };
 
   enum {
