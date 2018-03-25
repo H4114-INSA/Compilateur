@@ -30,7 +30,7 @@ string ExpressionElementTableau::toString() {
 
 void ExpressionElementTableau::resolutionPorteeVariable(string idContexte, vector<string> *pileVar,
                                                         vector<string> *pileFonct,
-                                                        map<string, Declaration *> *varMap) {
+                                                        map<string, Declaration *> *varMap, map<string,Fonction*>* fonctMap) {
     string nomVariableContexte = idContexte+ this->nom;
     int trouve =0;
 
@@ -64,4 +64,16 @@ void ExpressionElementTableau::resolutionPorteeVariable(string idContexte, vecto
         cerr << "Arrêt de l'exécution." <<endl;
         exit(2);
     }
+}
+
+string ExpressionElementTableau::typageExpression(string idContexte, map<string, Declaration *> *varMap,
+                                                  map<string, Fonction *> *fonctMap) {
+    map<string,Declaration*>::iterator variable =  varMap->find(idContexte+this->nom);
+    if( variable != varMap->end())
+    {
+        cout << "if - expressionelementtableau - typageExpression" <<endl;
+        this->setTypeRetourExpression((*variable).second->getType());
+        return (*variable).second->getType();
+    }
+    return "erreur";
 }

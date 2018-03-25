@@ -4,6 +4,7 @@
 #include <vector>
 #include "Expression.h"
 #include "Declaration.h"
+#include "Fonction.h"
 
 using namespace std;
 
@@ -17,10 +18,11 @@ public:
     string getNom();
     void setNom(string nom);
 
-    void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration *> *varMap);
+    void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration *> *varMap, map<string,Fonction*>* fonctMap);
 
     string toString();
 
+    string typageExpression(string idContexte, map<string, Declaration *> *varMap, map<string, Fonction *> *fonctMap);
 private:
     vector<Expression*> parametres;
     string nomFonction;

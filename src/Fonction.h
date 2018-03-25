@@ -15,6 +15,7 @@
 
 using namespace std;
 
+
 class Fonction {
 public:
     Fonction();
@@ -35,7 +36,8 @@ public:
     vector<Instruction*> getInstructions();
     void setInstructions(vector<Instruction*> instr);
 
-    void resolutionPorteeVariable(vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap);
+    void resolutionPorteeVariable(vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration *> *varMap,
+                                      map<string, Fonction *> *fonctMap);
 
 private:
     std::string nom;

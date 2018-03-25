@@ -38,9 +38,9 @@ string ExpressionBinaire::toString() {
 }
 
 void ExpressionBinaire::resolutionPorteeVariable(string idContexte, vector<string> *pileVar,
-                                                 vector<string> *pileFonct, map<string, Declaration *> *varMap) {
-    expression1->resolutionPorteeVariable(idContexte, pileVar, pileFonct,varMap);
-    expression2->resolutionPorteeVariable(idContexte, pileVar, pileFonct, varMap);
+                                                 vector<string> *pileFonct, map<string, Declaration *> *varMap, map<string,Fonction*>* fonctMap) {
+    expression1->resolutionPorteeVariable(idContexte, pileVar, pileFonct,varMap, fonctMap);
+    expression2->resolutionPorteeVariable(idContexte, pileVar, pileFonct, varMap,fonctMap);
 }
 
 void ExpressionBinaire::setLeftExpression(Expression *ex) {
@@ -49,4 +49,35 @@ void ExpressionBinaire::setLeftExpression(Expression *ex) {
 
 void ExpressionBinaire::setRightExpression(Expression *ex) {
     this->expression2=ex;
+}
+
+string ExpressionBinaire::typageExpression(string idContexte, map<string, Declaration *> *varMap,
+                                           map<string, Fonction *> *fonctMap) {
+    cout << "typage exprr1 -------" <<endl;
+    string typeRetourExpression1 = expression1->typageExpression(idContexte, varMap, fonctMap);
+    cout << "typage expr2 --------" <<endl;
+    string typeRetourExpression2 = expression2->typageExpression(idContexte, varMap, fonctMap);
+
+    if(typeRetourExpression1 == typeRetourExpression2){
+        this->setTypeRetourExpression(typeRetourExpression1);
+        return typeRetourExpression1;
+    }
+    else if ((typeRetourExpression1 == "int32_t" && typeRetourExpression2 == "int64_t") ||
+            (typeRetourExpression1=="int64_t" && typeRetourExpression2 =="int32_t") ) {
+        cout << "Warning : Possibilité d'une perte de précision car les types des opérandes d'une expression ne sont pas identiques dans la fonction "
+            << idContexte << "(type 1 : " << typeRetourExpression1 << ", type 2 : "<< typeRetourExpression2 << ")"<<endl;
+        this->setTypeRetourExpression("int32_t");
+        return "int32_t";
+    }
+    else if((typeRetourExpression1 == "char" && (typeRetourExpression2 =="int32_t" ||typeRetourExpression2 == "int64_t" ))
+                || ((typeRetourExpression1=="int32_t" || typeRetourExpression1 == "int64_t") && typeRetourExpression2 == "char")
+                || (typeRetourExpression1 == "void" && (typeRetourExpression2 =="int32_t" ||typeRetourExpression2 == "int64_t" || typeRetourExpression2 =="char"))
+                || (typeRetourExpression2 == "void" && (typeRetourExpression1 =="int32_t" ||typeRetourExpression1 == "int64_t" || typeRetourExpression1 == "char"))){
+
+        cerr<< "Une erreur est survenue dans la fonction " << idContexte <<" : incompatibilité de type entre deux expressions (type 1 : "
+           << typeRetourExpression1 << ", type 2 : "<< typeRetourExpression2 << ")"<<endl;
+        cerr << "Arrêt de l'exécution." <<endl;
+        exit(6);
+    }
+    return "erreur";
 }

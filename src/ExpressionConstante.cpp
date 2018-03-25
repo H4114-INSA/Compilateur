@@ -21,10 +21,17 @@ int ExpressionConstante::getValeur() {
 }
 
 void ExpressionConstante::resolutionPorteeVariable(string idContexte, vector<string> *pileVar,
-                                                   vector<string> *pileFonct, map<string, Declaration *> *varMap) {
+                                                   vector<string> *pileFonct, map<string, Declaration *> *varMap, map<string,Fonction*>* fonctMap) {
 }
 
 string ExpressionConstante::toString() {
     //return "Expression Constante";
     return "ExpressionConstante  ( Type : "+ typeValeur+ ", " + to_string(valeur) + " ) ";
+}
+
+string ExpressionConstante::typageExpression(string idContexte, map<string, Declaration *> *varMap,
+                                             map<string, Fonction *> *fonctMap) {
+    this->setTypeRetourExpression(typeValeur);
+    cout << "Type valeur "<< typeValeur<<endl;
+    return typeValeur;
 }

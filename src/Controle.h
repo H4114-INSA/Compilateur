@@ -16,7 +16,7 @@ public:
 
     Expression* getCondition();
     void setCondition(Expression* expr);
-    virtual void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap) =0;
+    virtual void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap, map<string, Fonction*>* fonctMap) =0;
 
 private:
     Expression* conditionExecution;

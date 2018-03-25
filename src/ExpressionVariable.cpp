@@ -20,7 +20,7 @@ string ExpressionVariable::getNom() {
 
 
 void ExpressionVariable::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,
-                                                  map<string, Declaration *> *varMap) {
+                                                  map<string, Declaration *> *varMap,map<string,Fonction*>* fonctMap) {
     string nomVariableContexte = idContexte+ this->nom;
     int trouve =0;
 
@@ -62,4 +62,16 @@ void ExpressionVariable::setNom(string nom) {
 
 string ExpressionVariable::toString() {
     return "ExpressionVariable ( Nom : " + nom +" )";
+}
+
+string ExpressionVariable::typageExpression(string idContexte, map<string, Declaration *> *varMap,
+                                            map<string, Fonction *> *fonctMap) {
+    map<string,Declaration*>::iterator variable =  varMap->find(idContexte+this->nom);
+    if( variable != varMap->end())
+    {
+        this->setTypeRetourExpression((*variable).second->getType());
+        cout << "if - expressionVariable - typageExpression" <<endl;
+        return (*variable).second->getType();
+    }
+    return "erreur";
 }

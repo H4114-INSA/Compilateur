@@ -39,7 +39,7 @@ string BlocControle::toString() {
 }
 
 void BlocControle::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,
-                                            map<string, Declaration *> *varMap)
+                                            map<string, Declaration *> *varMap, map<string, Fonction*>* fonctMap)
 {
     cout<< "reso portee bloc" <<endl;
     // resolution portée pour les instructions
@@ -56,21 +56,21 @@ void BlocControle::resolutionPorteeVariable(string idContexte, vector<string> *p
                   || dynamic_cast<ExpressionConstante*>(*itInstr) || dynamic_cast<ExpressionVariable*>(*itInstr) || dynamic_cast<ExpressionAppelFonction*>(*itInstr)){
             cout <<"Expression" <<endl;
             Expression *e = (Expression*)*itInstr;
-            e->resolutionPorteeVariable(idContexte,pileVar,pileFonct,varMap);
+            e->resolutionPorteeVariable(idContexte,pileVar,pileFonct,varMap,fonctMap);
         }else if(dynamic_cast<IfElseifElse*>(*itInstr)){
             cout <<"IFELSEIFELSE" << endl;
             IfElseifElse* structureIf = (IfElseifElse*)(*itInstr);
             cout << structureIf->toString() <<endl;
-            structureIf->resolutionPorteeVariable(idContexte,pileVar,pileFonct,varMap);
+            structureIf->resolutionPorteeVariable(idContexte,pileVar,pileFonct,varMap,fonctMap);
         }
         else if(dynamic_cast<Controle*>(*itInstr)){
             Controle* controle = (Controle*)*itInstr;
-            controle->resolutionPorteeVariable(idContexte,pileVar, pileFonct,varMap);
+            controle->resolutionPorteeVariable(idContexte,pileVar, pileFonct,varMap, fonctMap);
         }
         else if(dynamic_cast<Return*>(*itInstr)){
             cout <<"Return" <<endl;
             Return* ret = (Return*)*itInstr;
-            ret->getExpression()->resolutionPorteeVariable(idContexte,pileVar,pileFonct, varMap);
+            ret->getExpression()->resolutionPorteeVariable(idContexte,pileVar,pileFonct, varMap,fonctMap);
         }
         itInstr++;
     }

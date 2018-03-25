@@ -5,7 +5,7 @@
 #include "Expression.h"
 
 Expression::Expression() {
-    this->type =(TypeExpression)-1;
+    this->typeExpression =TypeExpression ::no_type_expression;
 }
 
 Expression::~Expression() {}
@@ -66,9 +66,17 @@ string Expression::SymboleUnaireToString(SymboleUnaire input_symbole) {
 
 
 void Expression::setTypeExpression(TypeExpression atype) {
-    this->type =atype;
+    this->typeExpression =atype;
 }
 
 int Expression::getTypeExpression() {
-    return (int)type;
+    return (int)typeExpression;
+}
+
+string Expression::getTypeRetour() {
+    return this->typeRetour;
+}
+
+void Expression::setTypeRetourExpression(string typeRetour) {
+    this->typeRetour = typeRetour;
 }

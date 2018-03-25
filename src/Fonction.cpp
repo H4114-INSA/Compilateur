@@ -32,8 +32,8 @@ string Fonction::getNom() {
     return this->nom;
 }
 
-void Fonction::resolutionPorteeVariable(vector<string> *pileVar, vector<string> *pileFonct,
-                                        map<string, Declaration *> *varMap) {
+void Fonction::resolutionPorteeVariable(vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration *> *varMap,
+                                        map<string, Fonction *> *fonctMap) {
     //resolution portée pour les arguments
     vector<Declaration*>::iterator itArg;
     for (itArg = args.begin(); itArg != args.end() ; itArg++) {
@@ -71,16 +71,22 @@ void Fonction::resolutionPorteeVariable(vector<string> *pileVar, vector<string> 
                 || dynamic_cast<ExpressionConstante*>(*itInstr) || dynamic_cast<ExpressionVariable*>(*itInstr) || dynamic_cast<ExpressionAppelFonction*>(*itInstr)){
             cout <<"Expression" <<endl;
             Expression *e = (Expression*)*itInstr;
-            e->resolutionPorteeVariable(idContexte,pileVar,pileFonct,varMap);
+            e->resolutionPorteeVariable(idContexte,pileVar,pileFonct,varMap,fonctMap);
+
+            cout << "Test typage expression------------------------" <<endl;
+            e->typageExpression(idContexte, varMap,fonctMap);
+            cout << e->getTypeRetour() << endl;
+            cout << "Fin test typage expression--------------------" <<endl;
+
         }
         else if(dynamic_cast<Controle*>(*itInstr)){
             Controle* controle = (Controle*)*itInstr;
-            controle->resolutionPorteeVariable(idContexte,pileVar, pileFonct,varMap);
+            controle->resolutionPorteeVariable(idContexte,pileVar, pileFonct,varMap,fonctMap);
         }
         else if(dynamic_cast<Return*>(*itInstr)){
             cout <<"Return" <<endl;
             Return* ret = (Return*)*itInstr;
-            ret->getExpression()->resolutionPorteeVariable(idContexte,pileVar,pileFonct, varMap);
+            ret->getExpression()->resolutionPorteeVariable(idContexte,pileVar,pileFonct, varMap,fonctMap);
         }
         itInstr++;
     }

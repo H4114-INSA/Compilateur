@@ -39,7 +39,7 @@ void Program::resolutionPorteeVariable() {
     for(it = fonction.begin(); it != fonction.end(); it++){
         mapFonction.insert ( std::pair<string, Fonction*>((*it)->getNom(),(*it)));
         pileFonction.push_back((*it)->getNom());
-        (*it)->resolutionPorteeVariable(&pileVariable, &pileFonction, &mapVariable);
+        (*it)->resolutionPorteeVariable(&pileVariable, &pileFonction, &mapVariable, &mapFonction);
     }
 }
 

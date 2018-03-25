@@ -25,12 +25,12 @@ void IfElseifElse::setSuccession(vector<If*> successionIf) {
 }
 
 void IfElseifElse::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,
-                                            map<string, Declaration *> *varMap) {
+                                            map<string, Declaration *> *varMap, map<string,Fonction*>* FonctMap) {
     vector<If*>::iterator it = successionIf.begin();
     vector<If*>::iterator end = successionIf.end();
     int i = 0;
     while(it != end){
-        (*it)->resolutionPorteeVariable(idContexte, pileVar, pileFonct,varMap);
+        (*it)->resolutionPorteeVariable(idContexte, pileVar, pileFonct,varMap,FonctMap);
         it++;
     }
 

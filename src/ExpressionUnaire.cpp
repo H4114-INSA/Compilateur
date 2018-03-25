@@ -31,6 +31,13 @@ string ExpressionUnaire::toString() {
 }
 
 void ExpressionUnaire::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,
-                                                map<string, Declaration *> *varMap) {
-    expression->resolutionPorteeVariable(idContexte, pileVar, pileFonct, varMap);
+                                                map<string, Declaration *> *varMap,map<string,Fonction*>* fonctMap) {
+    expression->resolutionPorteeVariable(idContexte, pileVar, pileFonct, varMap, fonctMap);
+}
+
+string ExpressionUnaire::typageExpression(string idContexte, map<string, Declaration *> *varMap,
+                                          map<string, Fonction *> *fonctMap) {
+    string typeRetour = expression->typageExpression(idContexte, varMap, fonctMap);
+    this->setTypeRetourExpression(typeRetour);
+    return typeRetour;
 }

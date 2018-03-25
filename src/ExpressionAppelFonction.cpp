@@ -24,7 +24,7 @@ void ExpressionAppelFonction::setNom(string nom) {
 }
 
 void ExpressionAppelFonction::resolutionPorteeVariable(string idContexte, vector<string> *pileVar,
-												   vector<string> *pileFonct, map<string, Declaration *> *varMap) {
+												   vector<string> *pileFonct, map<string, Declaration *> *varMap, map<string,Fonction*>* fonctMap) {
 	int trouveFonction=0;
 
 	// on cherche la fonction dans la pile fonction
@@ -45,7 +45,7 @@ void ExpressionAppelFonction::resolutionPorteeVariable(string idContexte, vector
         vector<Expression*>::iterator itArgs = parametres.begin();
         while(itArgs != parametres.end())
         {
-            (*itArgs)->resolutionPorteeVariable(idContexte,pileVar,pileFonct,varMap);
+            (*itArgs)->resolutionPorteeVariable(idContexte,pileVar,pileFonct,varMap, fonctMap);
             itArgs++;
         }
 	}
@@ -58,4 +58,17 @@ string ExpressionAppelFonction::toString() {
 	}
 	res += " ) ";
 	return res;
+}
+
+string ExpressionAppelFonction::typageExpression(string idContexte,map<string, Declaration *> *varMap, map<string, Fonction *> *fonctMap) {
+	map<string,Fonction*>::iterator fonction = fonctMap->find(nomFonction);
+
+	if( fonction != fonctMap->end())
+	{
+	    cout << "if - expressionAppelFonction - typageExpression" <<endl;
+		this->setTypeRetourExpression((*fonction).second->getTypeRetour());
+		cout << this->getTypeRetour() <<endl;
+		return (*fonction).second->getTypeRetour();
+	}
+	return "erreur";
 }

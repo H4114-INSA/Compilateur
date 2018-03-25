@@ -8,7 +8,7 @@
 
 #endif //COMPILATEUR_TYPEEXPRESSION_H
 
-enum class TypeExpression {unaire, binaire, constante, variable, elementTableau, affectation} ;
+enum class TypeExpression {no_type_expression , unaire, binaire, constante, variable, elementTableau, affectation} ;
 
 enum class SymboleUnaire {non,  bnot, noexpr,preincr, postincr, predecr, postdecr,moins };
 

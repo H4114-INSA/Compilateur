@@ -402,7 +402,7 @@ public:
      antlrcpp::Any visitIntVal(ExprParser::IntValContext *ctx) override {
         cout << "Passage dans visitIntVal" << endl;
          cout << "valeur intval"<< ctx->IntVal()->getText() <<endl;
-        return (Expression*) new ExpressionConstante("int32_t",stoi(ctx->IntVal()->getText()));
+        return (Expression*) new ExpressionConstante("int64_t",stoi(ctx->IntVal()->getText()));
     }
  
      antlrcpp::Any visitGetVarVal(ExprParser::GetVarValContext *ctx) override {
