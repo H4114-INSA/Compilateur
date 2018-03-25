@@ -53,9 +53,7 @@ void ExpressionBinaire::setRightExpression(Expression *ex) {
 
 string ExpressionBinaire::typageExpression(string idContexte, map<string, Declaration *> *varMap,
                                            map<string, Fonction *> *fonctMap) {
-    cout << "typage exprr1 -------" <<endl;
     string typeRetourExpression1 = expression1->typageExpression(idContexte, varMap, fonctMap);
-    cout << "typage expr2 --------" <<endl;
     string typeRetourExpression2 = expression2->typageExpression(idContexte, varMap, fonctMap);
 
     if(typeRetourExpression1 == typeRetourExpression2){

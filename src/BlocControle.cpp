@@ -41,7 +41,6 @@ string BlocControle::toString() {
 void BlocControle::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,
                                             map<string, Declaration *> *varMap, map<string, Fonction*>* fonctMap)
 {
-    cout<< "reso portee bloc" <<endl;
     // resolution portée pour les instructions
 
     vector<Instruction*>::iterator itInstr = listeInstructions.begin();
@@ -51,24 +50,18 @@ void BlocControle::resolutionPorteeVariable(string idContexte, vector<string> *p
             cerr << "La déclaration de variable n'est autorisée qu'en début de fonction avant toute autres intructions"<<endl;
             cerr << "Arrêt de l'exécution" <<endl;
             exit(5);
-
-        } else if(dynamic_cast<Expression*>(*itInstr) || dynamic_cast<ExpressionUnaire*>(*itInstr) || dynamic_cast<ExpressionBinaire*>(*itInstr)
-                  || dynamic_cast<ExpressionConstante*>(*itInstr) || dynamic_cast<ExpressionVariable*>(*itInstr) || dynamic_cast<ExpressionAppelFonction*>(*itInstr)){
-            cout <<"Expression" <<endl;
+        }
+        else if(dynamic_cast<Expression*>(*itInstr) || dynamic_cast<ExpressionUnaire*>(*itInstr) || dynamic_cast<ExpressionBinaire*>(*itInstr)
+                || dynamic_cast<ExpressionConstante*>(*itInstr) || dynamic_cast<ExpressionVariable*>(*itInstr) || dynamic_cast<ExpressionAppelFonction*>(*itInstr)){
             Expression *e = (Expression*)*itInstr;
             e->resolutionPorteeVariable(idContexte,pileVar,pileFonct,varMap,fonctMap);
-        }else if(dynamic_cast<IfElseifElse*>(*itInstr)){
-            cout <<"IFELSEIFELSE" << endl;
-            IfElseifElse* structureIf = (IfElseifElse*)(*itInstr);
-            cout << structureIf->toString() <<endl;
-            structureIf->resolutionPorteeVariable(idContexte,pileVar,pileFonct,varMap,fonctMap);
+            e->typageExpression(idContexte, varMap,fonctMap);
         }
         else if(dynamic_cast<Controle*>(*itInstr)){
             Controle* controle = (Controle*)*itInstr;
-            controle->resolutionPorteeVariable(idContexte,pileVar, pileFonct,varMap, fonctMap);
+            controle->resolutionPorteeVariable(idContexte,pileVar, pileFonct,varMap,fonctMap);
         }
         else if(dynamic_cast<Return*>(*itInstr)){
-            cout <<"Return" <<endl;
             Return* ret = (Return*)*itInstr;
             ret->getExpression()->resolutionPorteeVariable(idContexte,pileVar,pileFonct, varMap,fonctMap);
         }

@@ -65,9 +65,7 @@ string ExpressionAppelFonction::typageExpression(string idContexte,map<string, D
 
 	if( fonction != fonctMap->end())
 	{
-	    cout << "if - expressionAppelFonction - typageExpression" <<endl;
 		this->setTypeRetourExpression((*fonction).second->getTypeRetour());
-		cout << this->getTypeRetour() <<endl;
 		return (*fonction).second->getTypeRetour();
 	}
 	return "erreur";

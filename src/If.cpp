@@ -23,9 +23,7 @@ BlocControle* If::getBloc() {
 
 void If::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,
                                   map<string, Declaration *> *varMap, map<string, Fonction*>* fonctMap) {
-    cout << "Resolution condition if " <<endl;
     this->getCondition()->resolutionPorteeVariable(idContexte,pileVar, pileFonct, varMap,fonctMap);
-    cout <<"Résolution bloc if " << endl;
     bloc->resolutionPorteeVariable(idContexte,pileVar,pileFonct,varMap, fonctMap);
 }
 

@@ -70,7 +70,6 @@ string ExpressionVariable::typageExpression(string idContexte, map<string, Decla
     if( variable != varMap->end())
     {
         this->setTypeRetourExpression((*variable).second->getType());
-        cout << "if - expressionVariable - typageExpression" <<endl;
         return (*variable).second->getType();
     }
     return "erreur";

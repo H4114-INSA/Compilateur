@@ -32,6 +32,5 @@ string ExpressionConstante::toString() {
 string ExpressionConstante::typageExpression(string idContexte, map<string, Declaration *> *varMap,
                                              map<string, Fonction *> *fonctMap) {
     this->setTypeRetourExpression(typeValeur);
-    cout << "Type valeur "<< typeValeur<<endl;
     return typeValeur;
 }

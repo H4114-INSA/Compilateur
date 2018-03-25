@@ -20,14 +20,10 @@ int test (string &nomFichier, int );
 string lectureFichier(const char * nomFichier);
 void dotExportGeneration (ExprParser &parser, tree::ParseTree* tree);
 
-//'\'' [a-zA-Z0-9]'\'' ;
+
 
 int main(int , const char ** argv) {
-    //ifstream fichier(argv[1], ios::in);
     string contenu;
-
-    int nbLigne =0;
-    int code =0;
 
     cout << "Début de l'analyse" <<endl << endl;
     cout << "Contenu du fichier à analyser :" << endl;
@@ -36,20 +32,6 @@ int main(int , const char ** argv) {
     ANTLRInputStream input(contenu);
     ExprLexer lexer(&input);
     CommonTokenStream tokens(&lexer);
-
-    /*tokens.fill();
-    string tokenString;
-    for (auto token : tokens.getTokens()) {
-        std::cout << token->toString() << std::endl;
-
-        tokenString+=token->toString();
-        tokenString+= "\n";
-        nbLigne++;
-    }
-
-    code = test(tokenString,nbLigne);*/
-
-
     ExprParser parser(&tokens);
 
     //Add error listener ------------------------
@@ -64,25 +46,19 @@ int main(int , const char ** argv) {
 
         dotExportGeneration(parser, tree);
 
-        // Code à utiliser une fois que notre visiteur sera implémenté
+        // Visiteur perso
         Visitor a ;
         Program* program = a.visit(tree);
 
-        cout<< endl << "Résolution de portée des variables" <<endl << endl;
+        cout<< endl << "Analyse de la portée des variable et dy typage en cours..." <<endl << endl;
         cout << "Compte rendu d'exécution :" <<endl;
         program->resolutionPorteeVariable();
-        cout << "Aucune erreur n'a été détectée" <<endl << endl;
+        cout << "Aucune erreur n'a été détectée." <<endl << endl;
         map<string,Declaration*> mapVariables = program->getVariables();
-        cout << "Nombre de variables : " << program->getVariables().size() << endl;
-        map<string,Declaration*>::iterator it;
-        for(it = mapVariables.begin(); it != mapVariables.end(); it++){
-            cout << it->second->toString() << endl;
-        }
-        cout <<endl;
 
     }catch (invalid_argument e)
     {
-        cout <<"Erreur pendant l'analyse du fichier"<<endl;
+        cout <<"Erreur pendant l'analyse du fichier."<<endl;
         cout << e.what() <<endl <<endl;
         return -2;
     }
@@ -90,32 +66,6 @@ int main(int , const char ** argv) {
     return 0;
 }
 
-int test (string &s, int nbLigne) {
-    //cout << "tokenString size : " << nbLigne <<endl;
-    ifstream stringTest(s, ios::in);
-    string line;
-    int nombreLigne;
-
-    string delim = "\n";
-    std::vector<std::string> ret;
-    size_t start = 0;
-    size_t end = 0;
-    size_t len = 0;
-    std::string token;
-    do{ end = s.find(delim,start);
-        len = end - start;
-        token = s.substr(start, len);
-        ret.emplace_back( token );
-        start += len + delim.length();
-        //std::cout << token << std::endl;
-    }while ( end != std::string::npos );
-
-    if(ret.at(ret.size()-2).at(0) == '['){
-        return 1;
-    }else {
-        return -1;
-    }
-}
 
 string lectureFichier(const char * nomFichier)
 {

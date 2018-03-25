@@ -31,6 +31,8 @@
 #include "While.h"
 #include "ExpressionElementTableau.h"
 
+
+
 using namespace std;
  
  
@@ -38,9 +40,11 @@ class  Visitor : public ExprVisitor {
 public:
  
     antlrcpp::Any visitProg(ExprParser::ProgContext *ctx) override {
+
+#ifdef DEBUG
         cout << "Passage dans visitprog" <<endl;
+#endif
         Program* prog = new Program();
-        // construire le programme ici
 
         for(auto i : ctx->declaration()){
             prog->ajouterDeclaration((Declaration*)visit(i));
@@ -56,7 +60,9 @@ public:
  
     //Expressions Binaires
     antlrcpp::Any visitMod(ExprParser::ModContext *ctx) override {
+#ifdef DEBUG
         cout <<"Passage dans visitMod" <<endl;
+#endif
         return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) visit(ctx->expr(0)),
@@ -66,7 +72,9 @@ public:
     }
  
      antlrcpp::Any visitMult(ExprParser::MultContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visit Mult"<< endl;
+#endif
         return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) visit(ctx->expr(0)),
@@ -76,7 +84,9 @@ public:
     }
  
      antlrcpp::Any visitDiv(ExprParser::DivContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitDiv" << endl;
+#endif
             return (Expression*) new
                                            ExpressionBinaire(
                                                (Expression*) visit(ctx->expr(0)),
@@ -86,7 +96,10 @@ public:
     }
  
      antlrcpp::Any visitNot(ExprParser::NotContext *ctx) override {
-        cout << "Passage dans visitNot" <<endl;
+#ifdef DEBUG
+         cout << "Passage dans visitNot" <<endl;
+#endif
+
         return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) visit(ctx->expr(0)),
@@ -96,7 +109,9 @@ public:
     }
  
      antlrcpp::Any visitAnd(ExprParser::AndContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitAnd" <<endl;
+#endif
         return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) visit(ctx->expr(0)),
@@ -106,7 +121,9 @@ public:
     }
  
      antlrcpp::Any visitXor(ExprParser::XorContext *ctx) override {
+#ifdef  DEBUG
         cout << "Passage dans visitXor" <<endl;
+#endif
         return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) visit(ctx->expr(0)),
@@ -116,7 +133,9 @@ public:
     }
  
      antlrcpp::Any visitRightShift(ExprParser::RightShiftContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitRigthShift"<<endl;
+#endif
         return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) visit(ctx->expr(0)),
@@ -126,7 +145,9 @@ public:
     }
  
      antlrcpp::Any visitLeftShift(ExprParser::LeftShiftContext *ctx) override {
+#ifdef  DEBUG
         cout << "Passage dans visitLeftShift" <<endl;
+#endif
         return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) visit(ctx->expr(0)),
@@ -136,7 +157,9 @@ public:
     }
  
      antlrcpp::Any visitAdd(ExprParser::AddContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitAdd" <<endl;
+#endif
             return (Expression*)
                     new ExpressionBinaire(
                                (Expression*) visit(ctx->expr(0)),
@@ -146,7 +169,9 @@ public:
     }
  
      antlrcpp::Any visitEgal(ExprParser::EgalContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitEgal" <<endl;
+#endif
         return (Expression*) new
                                ExpressionBinaire(
                                    (Expression*) visit(ctx->expr(0)),
@@ -156,7 +181,9 @@ public:
     }
  
      antlrcpp::Any visitOr(ExprParser::OrContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitOr" <<endl;
+#endif
         return (Expression*) new
                                ExpressionBinaire(
                                    (Expression*) visit(ctx->expr(0)),
@@ -166,7 +193,9 @@ public:
     }
  
      antlrcpp::Any visitSupEgal(ExprParser::SupEgalContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitSupEgal" <<endl;
+#endif
         return (Expression*) new
                                ExpressionBinaire(
                                    (Expression*) visit(ctx->expr(0)),
@@ -176,7 +205,9 @@ public:
     }
  
      antlrcpp::Any visitOu(ExprParser::OuContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitOu" <<endl;
+#endif
         return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) visit(ctx->expr(0)),
@@ -186,7 +217,9 @@ public:
     }
  
      antlrcpp::Any visitStrictSup(ExprParser::StrictSupContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitStrictSup" <<endl;
+#endif
             return (Expression*) new
                                            ExpressionBinaire(
                                                (Expression*) visit(ctx->expr(0)),
@@ -196,7 +229,9 @@ public:
         }
  
  antlrcpp::Any visitDiff(ExprParser::DiffContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitDiff" <<endl;
+#endif
     return (Expression*) new
                                    ExpressionBinaire(
                                        (Expression*) visit(ctx->expr(0)),
@@ -206,7 +241,9 @@ public:
 }
  
  antlrcpp::Any visitEt(ExprParser::EtContext *ctx) override { //&&
+#ifdef DEBUG
         cout << "Passage dans visitEt" <<endl;
+#endif
     return (Expression*) new
                                    ExpressionBinaire(
                                        (Expression*) visit(ctx->expr(0)),
@@ -216,7 +253,9 @@ public:
 }
  
  antlrcpp::Any visitInfEgal(ExprParser::InfEgalContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitInfEgal" <<endl;
+#endif
     return (Expression*) new
                                    ExpressionBinaire(
                                        (Expression*) visit(ctx->expr(0)),
@@ -226,7 +265,9 @@ public:
 }
  
  antlrcpp::Any visitMoins(ExprParser::MoinsContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitMoins" <<endl;
+#endif
         return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) visit(ctx->expr(0)),
@@ -236,7 +277,9 @@ public:
     }
  
      antlrcpp::Any visitStrictInf(ExprParser::StrictInfContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visit StrictInf" <<endl;
+#endif
         return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) visit(ctx->expr(0)),
@@ -246,7 +289,9 @@ public:
     }
  
      antlrcpp::Any visitComma(ExprParser::CommaContext *ctx) override {
+#ifdef DEBUG
         cout <<"Passage dans visitComma"<<endl;
+#endif
         return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) visit(ctx->expr(0)),
@@ -256,7 +301,9 @@ public:
     }
  
      antlrcpp::Any visitPlusEgal(ExprParser::PlusEgalContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitPlusEgal" <<endl;
+#endif
          return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) new ExpressionVariable(ctx->Nom()->getText()),
@@ -266,7 +313,9 @@ public:
      }
  
      antlrcpp::Any visitMoinsEgal(ExprParser::MoinsEgalContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitMoinsEgal" <<endl;
+#endif
          return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) new ExpressionVariable(ctx->Nom()->getText()),
@@ -276,7 +325,9 @@ public:
      }
  
      antlrcpp::Any visitMultEgal(ExprParser::MultEgalContext *ctx) override {
+#ifdef DEBUG
         cout <<"Passage dans visit MultEgal" <<endl;
+#endif
          return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) new ExpressionVariable(ctx->Nom()->getText()),
@@ -286,7 +337,9 @@ public:
      }
  
      antlrcpp::Any visitDivEgal(ExprParser::DivEgalContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitDivEgal"<<endl;
+#endif
          return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) new ExpressionVariable(ctx->Nom()->getText()),
@@ -296,7 +349,9 @@ public:
     }
  
      antlrcpp::Any visitModEgal(ExprParser::ModEgalContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitModEgal" <<endl;
+#endif
          return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) new ExpressionVariable(ctx->Nom()->getText()),
@@ -306,7 +361,9 @@ public:
     }
  
      antlrcpp::Any visitAndEgal(ExprParser::AndEgalContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitAndEgal" <<endl;
+#endif
          return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) new ExpressionVariable(ctx->Nom()->getText()),
@@ -316,7 +373,9 @@ public:
          }
  
       antlrcpp::Any visitOrEgal(ExprParser::OrEgalContext *ctx) override {
+#ifdef DEBUG
         cout <<"Passage dans visitOrEgal" <<endl;
+#endif
           return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) new ExpressionVariable(ctx->Nom()->getText()),
@@ -326,7 +385,9 @@ public:
      }
  
       antlrcpp::Any visitXorEgal(ExprParser::XorEgalContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitXorEgal" <<endl;
+#endif
           return (Expression*) new
                                        ExpressionBinaire(
                                            (Expression*) new ExpressionVariable(ctx->Nom()->getText()),
@@ -337,7 +398,9 @@ public:
  
     //Expressions unaires
      antlrcpp::Any visitNon(ExprParser::NonContext *ctx) override {
+#ifdef  DEBUG
         cout <<"Passage dans visitNon" <<endl;
+#endif
         return (Expression*) new
                                    ExpressionUnaire(
                                        (Expression*) visit(ctx->expr()),
@@ -346,7 +409,9 @@ public:
     }
  
      antlrcpp::Any visitNotExpr(ExprParser::NotExprContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitNotExpr" <<endl;
+#endif
         return (Expression*) new
                                    ExpressionUnaire(
                                        (Expression*) visit(ctx->expr()),
@@ -355,7 +420,9 @@ public:
     }
  
      antlrcpp::Any visitPostIncrement(ExprParser::PostIncrementContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitPostIncrement" <<endl;
+#endif
         return (Expression*) new
                                 ExpressionUnaire(
                                         (Expression*) new ExpressionVariable(ctx->Nom()->getText()),
@@ -364,7 +431,9 @@ public:
     }
  
      antlrcpp::Any visitPreIncrement(ExprParser::PreIncrementContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitPreIncrement" <<endl;
+#endif
          return (Expression*) new
                                 ExpressionUnaire(
                                         (Expression*) new ExpressionVariable(ctx->Nom()->getText()),
@@ -373,7 +442,9 @@ public:
     }
  
      antlrcpp::Any visitPostDecrement(ExprParser::PostDecrementContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitPostDecrement" <<endl;
+#endif
          return (Expression*) new
                                 ExpressionUnaire(
                                         (Expression*) new ExpressionVariable(ctx->Nom()->getText()),
@@ -382,7 +453,9 @@ public:
     }
  
      antlrcpp::Any visitPreDecrement(ExprParser::PreDecrementContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitPreDecrecment" <<endl;
+#endif
          return (Expression*) new
                                     ExpressionUnaire(
                                             (Expression*) new ExpressionVariable(ctx->Nom()->getText()),
@@ -391,7 +464,9 @@ public:
     }
      
      antlrcpp::Any visitOppose(ExprParser::OpposeContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitOppose" <<endl;
+#endif
              return (Expression*) new
                                            ExpressionUnaire(
                                                (Expression*) new ExpressionVariable(ctx->Nom()->getText()),
@@ -400,31 +475,39 @@ public:
      }
  
      antlrcpp::Any visitIntVal(ExprParser::IntValContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitIntVal" << endl;
-         cout << "valeur intval"<< ctx->IntVal()->getText() <<endl;
+#endif
         return (Expression*) new ExpressionConstante("int64_t",stoi(ctx->IntVal()->getText()));
     }
  
      antlrcpp::Any visitGetVarVal(ExprParser::GetVarValContext *ctx) override {
+#ifdef DEBUG
         cout <<"Passage GetVarVal" <<endl;
-        string nom = (ctx->Nom()->getText());
+#endif
         return (Expression*) new ExpressionVariable(ctx->Nom()->getText());
     }
 
      antlrcpp::Any visitAffectation(ExprParser::AffectationContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitAffectation" <<endl;
+#endif
         return (Expression*)visit(ctx->aff());
     }
  
  
      antlrcpp::Any visitPar(ExprParser::ParContext *ctx) override {
+#ifdef DEBUG
         cout<<"Passage dans visitPar" <<endl;
+#endif
         return (Expression*)(visit(ctx->expr()));
     }
  
  
      antlrcpp::Any visitCharVal(ExprParser::CharValContext *ctx) override {
+#ifdef DEBUG
         cout<< "Passage dans visitCharVal" <<endl;
+#endif
         if((int)ctx->CharVal()->getText()[1] == 92){ // 92 ascii de \ alors on créé un caractère spécial
             return (Expression *) new ExpressionConstante("char", (int) ctx->CharVal()->getText()[2],true);
         } else {
@@ -433,12 +516,16 @@ public:
     }
 
      antlrcpp::Any visitGetTabVal(ExprParser::GetTabValContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans GetTabVal" << endl;
+#endif
         return (Expression*) new ExpressionElementTableau(stoi(ctx->IntVal()->getText()),ctx->Nom()->getText());
      }
 
      antlrcpp::Any visitAffExpr(ExprParser::AffExprContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans AffExpr" <<endl;
+#endif
          return dynamic_cast<Expression*>(new ExpressionBinaire(
                  (Expression*)new ExpressionVariable(ctx->Nom()->getText()),
                  (Expression*) visit(ctx->expr()),
@@ -447,12 +534,13 @@ public:
       }
 
      antlrcpp::Any visitAppelFonction(ExprParser::AppelFonctionContext *ctx) override {
+#ifdef DEBUG
     	cout<<"Passage dans visitAppelFonction" <<endl;
+#endif
     	vector<Expression*> arguments;
     	for(size_t i=0; i<ctx->expr().size(); i++){
     	    arguments.push_back((Expression*)visit(ctx->expr(i)));
     	}
-
 
     	Expression* res;
     	return (Expression*) new ExpressionAppelFonction(ctx->Nom()->getText(), arguments);
@@ -460,33 +548,43 @@ public:
  
  
      antlrcpp::Any visitChar(ExprParser::CharContext *ctx) override {
+#ifdef DEBUG
         cout <<"visitChar" << endl;
+#endif
         return (string) ctx->Char()->getText();
-         //return (TypeVariable) TypeVariable ::char_t;
     }
  
      antlrcpp::Any visitInt32_t(ExprParser::Int32_tContext *ctx) override {
+#ifdef DEBUG
+        cout<< "visitInt32" <<endl;
+#endif
         return (string) ctx->Int32_t()->getText();
     }
  
      antlrcpp::Any visitInt64_t(ExprParser::Int64_tContext *ctx) override {
+#ifdef DEBUG
+        cout << "visitInt64" <<endl;
+#endif
         return (string) ctx->Int64_t()->getText();
     }
 
      antlrcpp::Any visitAffExprTableau(ExprParser::AffExprTableauContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitAffExprTableau" <<endl;
+#endif
         Expression* e =
                 new ExpressionBinaire(
                         (Expression*) new ExpressionElementTableau(stoi(ctx->IntVal()->getText()),ctx->Nom()->getText()),
                         (Expression*)visit(ctx->expr()),
                         SymboleBinaire::egal
                 );
-        cout<< e->toString() <<endl;
         return e;
     }
 
      antlrcpp::Any visitIf(ExprParser::IfContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitIf" <<endl;
+#endif
         IfElseifElse* structureIf = new IfElseifElse();
         vector<If*> successionIf;
 
@@ -497,8 +595,6 @@ public:
 
             // partie 2 de la condition permet de savoir si on a un else
             // si le nombre de bloc est plus grand que le nombre de condition c'est qu'on a un else
-            cout << "nombre de condition : " << ctx->expr().size() <<endl;
-            cout << "nombre de blocs : " << ctx->blocControl().size() <<endl;
             if(i ==0 && (ctx->blocControl().size() > ctx->expr().size())){
                 elseExpression = new ExpressionUnaire(expr,SymboleUnaire::non);
             }
@@ -526,13 +622,13 @@ public:
 
         structureIf->setSuccession(successionIf);
 
-        cout << structureIf->toString() << endl;
-
         return (Controle*)structureIf;
      }
  
      antlrcpp::Any visitWhile(ExprParser::WhileContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitWhile" << endl;
+#endif
          vector<Instruction*> bloc = visit(ctx->blocControl());
          While* resVisitWhile = new While(
                  (Expression*)visit(ctx->expr()),
@@ -542,7 +638,9 @@ public:
     }
  
      antlrcpp::Any visitBloc(ExprParser::BlocContext *ctx) override {
+#ifdef DEBUG
         cout <<"Passage dans visitBloc" <<endl;
+#endif
         //return (vector<Instruction*>)visitChildren(ctx);
          vector<Instruction*> instructions;
          for (size_t i = 0; i < ctx->instr().size(); ++i) {
@@ -552,14 +650,18 @@ public:
     }
  
      antlrcpp::Any visitInstruction(ExprParser::InstructionContext *ctx) override {
+#ifdef DEBUG
         cout<< "Passage dans visitInstruction" << endl;
+#endif
          vector<Instruction*> instructions;
          instructions.push_back((Instruction*)visit(ctx->instr()));
          return instructions;
     }
  
      antlrcpp::Any visitDecTableau(ExprParser::DecTableauContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitDecTableau" << endl;
+#endif
         Declaration* d =
             new Declaration(
                  visit(ctx->type()),
@@ -570,7 +672,9 @@ public:
     }
 
     antlrcpp::Any visitDecTableauParametre(ExprParser::DecTableauParametreContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitDecTableauParametre" << endl;
+#endif
         Declaration* d =
                 new Declaration(
                         visit(ctx->type()),
@@ -581,17 +685,17 @@ public:
     }
  
      antlrcpp::Any visitDecVariable(ExprParser::DecVariableContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitDecVariable" <<endl;
+#endif
         Declaration* d;
         if(ctx->expr() == nullptr){
-            cout << "expression nulle" <<endl;
             d= new Declaration(
                     visit(ctx->type()),
                     ctx->Nom()->getText(),
                     -1
             );
         } else {
-            cout << "expression non nulle" << endl;
             Expression* expr = (Expression*) visit(ctx->expr());
             d= new Declaration(
                     visit(ctx->type()),
@@ -600,8 +704,6 @@ public:
                     expr
             );
         }
-        cout << d->getType() << endl;
-        cout << d->getNom() <<endl;
         return d;
     }
  
@@ -618,12 +720,16 @@ public:
     }*/
  
      antlrcpp::Any visitInstrDecl(ExprParser::InstrDeclContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitInstrDecl"<<endl;
+#endif
         return dynamic_cast<Instruction*>((Declaration*)visit(ctx->declaration()));
     }
  
      antlrcpp::Any visitInstrPutchar(ExprParser::InstrPutcharContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitInstrPutchar" << endl;
+#endif
         Instruction* putchar;
         vector<Expression*> arguments;
 
@@ -645,7 +751,9 @@ public:
     }
  
      antlrcpp::Any visitInstrGetchar(ExprParser::InstrGetcharContext *ctx) override {
-        //return ctx->Getchar()->getText();
+#ifdef DEBUG
+        cout << "visitInstrGetChar" <<endl;
+#endif
          vector<Expression*> a;
         return (Instruction*) new ExpressionAppelFonction(ctx->Getchar()->getText(), a);
      }
@@ -655,22 +763,30 @@ public:
      }
  
      antlrcpp::Any visitReturn(ExprParser::ReturnContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitReturn" <<endl;
+#endif
         return (Instruction*) new Return((Expression*)visit(ctx->expr()));
     }
  
      antlrcpp::Any visitInstrExpr(ExprParser::InstrExprContext *ctx) override {
+#ifdef DEBUG
         cout << endl <<"Passage dans visitInstrExpr" <<endl;
+#endif
         return dynamic_cast<Instruction*>((Expression*)visit(ctx->expr()));
     }
  
      antlrcpp::Any visitControle(ExprParser::ControleContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitControle" <<endl;
+#endif
         return dynamic_cast<Instruction*>((Controle*)visit(ctx->control()));
      }
  
      antlrcpp::Any visitDefFonctionType(ExprParser::DefFonctionTypeContext *ctx) override {
+#ifdef DEBUG
         cout << "Passage dans visitDefFonctionType" <<endl;
+#endif
         Fonction* fonction = new Fonction();
 
         string typeRetour ;
@@ -678,7 +794,6 @@ public:
 
         fonction->setNom(ctx->Nom()->getText());
 
-        cout << "gestion des arguments" <<endl;
         // gestion des argments
         vector<Declaration*> arguments;
         if(ctx->declaration().size() != 0){
@@ -688,7 +803,6 @@ public:
             fonction->setArguments(arguments);
         }
 
-        cout << "gestion des instructions" << endl;
          // on créé les instructions de notre fonction
          vector<Instruction*> instructions;
          if(ctx->instr().size() != 0){
@@ -698,22 +812,20 @@ public:
              fonction->setInstructions(instructions);
          }
 
-         cout <<fonction->toString() <<endl;
-
         return fonction;
      }
  
      antlrcpp::Any visitDefFonctionVoid(ExprParser::DefFonctionVoidContext *ctx) override {
+#ifdef DEBUG
          cout << "Passage dans visitDefFonctionVoid" <<endl;
+#endif
          Fonction* fonction = new Fonction();
 
          string typeRetour ;
          fonction->setTypeRetour("void");
 
          fonction->setNom(ctx->Nom()->getText());
-         cout<<fonction->getNom() << endl;
 
-         cout << "gestion des arguments" <<endl;
          // gestion des argments
          vector<Declaration*> arguments;
          if(ctx->declaration().size() != 0){
@@ -723,7 +835,6 @@ public:
              fonction->setArguments(arguments);
          }
 
-         cout << "gestion des instructions" << endl;
          // on créé les instructions de notre fonction
          vector<Instruction*> instructions;
          if(ctx->instr().size() != 0){
@@ -733,11 +844,8 @@ public:
              fonction->setInstructions(instructions);
          }
 
-         cout <<fonction->toString() <<endl;
 
          return fonction;
      }
-
- 
  
 };

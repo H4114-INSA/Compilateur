@@ -40,20 +40,12 @@ void ExpressionElementTableau::resolutionPorteeVariable(string idContexte, vecto
 
         // on récupère le nom de le variable
         string nomVariablePile = (*it);
-        //int underscorePos = nomVariablePile.find_first_of('_');
-        //nomVariablePile = nomVariablePile.substr (underscorePos+1);
 
-
-        //if(nomVariablePile == this->nom){
         if(nomVariablePile == nomVariableContexte || nomVariablePile == ("global_" +this->nom)){
             trouve++;
             if(nomVariablePile == ("global_" +this->nom)){
                 cout << "Warning : la variable '" + this->nom + "' utilisée lors de l'appel à la fonction " + idContexte +
                         " est une variable globale." <<endl;
-            }
-            map<string, Declaration *>::iterator varDec = varMap->find(*it);
-            if(varDec != varMap->end()) {
-                //this->type = (varDec->second)->getType();
             }
         }
         it++;
@@ -71,7 +63,6 @@ string ExpressionElementTableau::typageExpression(string idContexte, map<string,
     map<string,Declaration*>::iterator variable =  varMap->find(idContexte+this->nom);
     if( variable != varMap->end())
     {
-        cout << "if - expressionelementtableau - typageExpression" <<endl;
         this->setTypeRetourExpression((*variable).second->getType());
         return (*variable).second->getType();
     }

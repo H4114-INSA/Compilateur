@@ -20,7 +20,6 @@ BlocControle* While::getBloc() {
 void While::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,
                                      map<string, Declaration *> *varMap,map<string,Fonction*>* fonctMap) {
     this->getCondition()->resolutionPorteeVariable(idContexte,pileVar, pileFonct, varMap, fonctMap);
-
     bloc->resolutionPorteeVariable(idContexte,pileVar,pileFonct,varMap,fonctMap);
 }
 

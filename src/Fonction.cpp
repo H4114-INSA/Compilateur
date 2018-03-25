@@ -51,13 +51,11 @@ void Fonction::resolutionPorteeVariable(vector<string> *pileVar, vector<string> 
         string idContexte = this->getNom()+"_";
 
         if(dynamic_cast<Declaration*>(*itInstr)){
-            cout <<"Declaration" <<endl;
             Declaration* dec = (Declaration*)*itInstr;
 
             // si la variable n'exite pas
             if(varMap->find(idContexte+dec->getNom()) == varMap->end()){
                 string nomArgument = idContexte + dec->getNom();
-
                 pileVar->push_back(nomArgument);
                 varMap->insert(std::pair<string, Declaration*>(nomArgument,dec));
             } else {
@@ -65,26 +63,17 @@ void Fonction::resolutionPorteeVariable(vector<string> *pileVar, vector<string> 
                 cerr << "Arrêt de l'exécution" <<endl;
                 exit(3);
             }
-
-
         } else if(dynamic_cast<Expression*>(*itInstr) || dynamic_cast<ExpressionUnaire*>(*itInstr) || dynamic_cast<ExpressionBinaire*>(*itInstr)
                 || dynamic_cast<ExpressionConstante*>(*itInstr) || dynamic_cast<ExpressionVariable*>(*itInstr) || dynamic_cast<ExpressionAppelFonction*>(*itInstr)){
-            cout <<"Expression" <<endl;
             Expression *e = (Expression*)*itInstr;
             e->resolutionPorteeVariable(idContexte,pileVar,pileFonct,varMap,fonctMap);
-
-            cout << "Test typage expression------------------------" <<endl;
             e->typageExpression(idContexte, varMap,fonctMap);
-            cout << e->getTypeRetour() << endl;
-            cout << "Fin test typage expression--------------------" <<endl;
-
         }
         else if(dynamic_cast<Controle*>(*itInstr)){
             Controle* controle = (Controle*)*itInstr;
             controle->resolutionPorteeVariable(idContexte,pileVar, pileFonct,varMap,fonctMap);
         }
         else if(dynamic_cast<Return*>(*itInstr)){
-            cout <<"Return" <<endl;
             Return* ret = (Return*)*itInstr;
             ret->getExpression()->resolutionPorteeVariable(idContexte,pileVar,pileFonct, varMap,fonctMap);
         }
