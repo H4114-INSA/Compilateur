@@ -11,6 +11,9 @@
 #include "dotexport.h"
 #include "Visitor.h"
 #include "MyParserErrorListener.h"
+#include "CFG.h"
+#include "IRInstr.h"
+#include "BasicBlock.h"
 
 using namespace std;
 
@@ -54,7 +57,34 @@ int main(int , const char ** argv) {
         cout << "Compte rendu d'exécution :" <<endl;
         program->resolutionPorteeVariable();
         cout << "Aucune erreur n'a été détectée." <<endl << endl;
-        map<string,Declaration*> mapVariables = program->getVariables();
+
+        // Génération de l'IR -------------------------------
+        cout << "génération de l'ir"  <<endl;
+        vector<CFG*> listeCFG;
+        map<string, Fonction*> mapFonction = program->getMapFonctions();
+        map<string,Fonction*>::iterator itFonction = mapFonction.begin();
+        cout << program->getMapFonctions().size() <<endl;
+
+        while(itFonction != mapFonction.end()){
+            listeCFG.push_back(new CFG((*itFonction).second)); // on créé un cfg par fonction
+            itFonction++;
+        }
+
+        cout << "Generation assembleur" <<endl;
+        string assembleur = "";
+        vector<CFG*>::iterator itCFG = listeCFG.begin();
+        while(itCFG != listeCFG.end()){
+            assembleur += (*itCFG)->gen_asm() + "\r\n";
+            itCFG++;
+        }
+
+        cout << assembleur <<endl;
+
+        ofstream myfile;
+        myfile.open ("./../output/main.s");
+        myfile << assembleur;
+        myfile.close();
+
 
     }catch (invalid_argument e)
     {
