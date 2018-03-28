@@ -33,7 +33,8 @@ class IRInstr {
 	typedef enum {
 		ldconst,
 		addq,
-		sub,
+		subq,
+        sub,
 		mul,
 		div,
 		rmem,

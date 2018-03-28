@@ -24,7 +24,7 @@ string IRInstr::gen_asm(){
 		case movq:
 			ass += params[0] + " " + params[1] + ", " + params[2] + "\r\n";
 			break;
-		case addq:
+		case subq:
 			ass += params[0] +" " + params[1] + ", " + params[2] + "\r\n";
 			break;
 		case sub:

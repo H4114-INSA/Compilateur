@@ -11,7 +11,7 @@ CFG::CFG(Fonction* ast_){
 	this->add_bb(bbPrologue);
 
 	//créer tous les autres blocs
-    //BasicBlock* bbBody = new BasicBloc(this,this->ast->getInstructions(),this->ast->getNom()+"_body");
+    //
     ///
 	BasicBlock* bbEpilogue;
 	if(bbPrologue->exit_true == nullptr){
@@ -31,12 +31,16 @@ string CFG::gen_asm(){
     string res = ".global " + ast->getNom() +"\r\n";
     res +=  ast->getNom() +":\r\n";
 
+    res += this->gen_asm_prologue();
+
 	// generation assembleur pour les BasicBlocs
 	vector<BasicBlock*>::iterator itBlock = bbs.begin();
 	while( itBlock	!= bbs.end()){
 		res += (*itBlock)->gen_asm();
 		itBlock++;
 	}
+
+	res += this->gen_asm_epilogue();
 
     return res;
 }
@@ -45,12 +49,32 @@ string CFG::gen_asm(){
 		
     }
 		
-	void CFG::gen_asm_prologue(ostream& o){
-		
+	string CFG::gen_asm_prologue(){
+		// The entry block is the one with the same label as the AST function name.
+
+		string ass="";
+
+		vector<string> pushq; pushq.push_back("pushq"); pushq.push_back("%rbp");
+		vector<string> movq ; movq.push_back("movq")  ; movq.push_back("%rsp"); movq.push_back("%rbp");
+		vector<string> subq ; subq.push_back("subq"); subq.push_back("$" + to_string(tailleAR)); subq.push_back("%rsp");
+
+		ass += pushq[0] + " " + pushq[1] + "\r\n";
+		ass += movq[0] + " " + movq[1] + ", " + movq[2] + "\r\n";
+		ass += subq[0] + " " + subq[1] + ", " + subq[2] + "\r\n";
+
+		return ass;
     }
 		
-	void CFG::gen_asm_epilogue(ostream& o){
-		
+	string CFG::gen_asm_epilogue(){
+		string ass = "";
+
+		vector<string> leave; leave.push_back("leave");
+		vector<string> ret;   ret.push_back("ret");
+
+		ass += leave[0] + "\r\n";
+		ass += ret[0] + "\r\n";
+
+		return ass;
     }
 		
 
@@ -86,7 +110,7 @@ int CFG::initTableVariable() {
 	vector<Instruction*>::iterator i = instr.begin();
 
 	// parcours des instructions pour trouver le nombre de déclarations
-	int nbDecInstr=mapVariable.size(); // pour prendre en compte les paramètres passés en arguments
+	int nbDecInstr=0; // pour prendre en compte les paramètres passés en arguments
 	int finDec =0;
 	while(i != instr.end() && finDec==0)
 	{
@@ -126,37 +150,15 @@ int CFG::initTableVariable() {
 BasicBlock * CFG::gen_prologue(string nomFonction) {
 
 	// calcul de la taille de l'AR et insertion des variables dans notre
-	int tailleAR = this->initTableVariable()+8;
+	BasicBlock* bbPrologue = new BasicBlock(this,nomFonction);
 
-	BasicBlock* bbPrologue = new BasicBlock(this,nomFonction); // The entry block is the one with the same label as the AST function name.
-	vector<vector<string>> IRprologue;
-	vector<string> pushq; pushq.push_back("pushq"); pushq.push_back("%rbp");
-	vector<string> movq ; movq.push_back("movq")  ; movq.push_back("%rsp"); movq.push_back("%rbp");
-	vector<string> addq ; addq.push_back("addq"); addq.push_back("$" + to_string(tailleAR)); addq.push_back("%rsp");
-
-	IRprologue.push_back(pushq);
-	IRprologue.push_back(movq);
-	IRprologue.push_back(addq);
-
-	bbPrologue->add_IRInstr(IRInstr::Operation::pushq,Type::Asm,IRprologue.at(0));
-	bbPrologue->add_IRInstr(IRInstr::Operation::movq,Type::Asm,IRprologue.at(1));
-	bbPrologue->add_IRInstr(IRInstr::Operation::addq,Type::Asm,IRprologue.at(2));
+	this->tailleAR = this->initTableVariable()+8;
 
 	return bbPrologue;
 }
 
 BasicBlock *CFG::gen_epilogue() {
 	BasicBlock* bbEpilogue = new BasicBlock(this, "epilogue");
-	vector<vector<string>>IREpilogue;
-
-	vector<string> leave; leave.push_back("leave");
-	vector<string> ret;   ret.push_back("ret");
-
-	IREpilogue.push_back(leave);
-	IREpilogue.push_back(ret);
-
-	bbEpilogue->add_IRInstr(IRInstr::Operation::leave, Type::Asm, IREpilogue.at(0));
-	bbEpilogue->add_IRInstr(IRInstr::Operation::ret,Type::Asm, IREpilogue.at(1));
 
 	bbEpilogue->exit_false = nullptr;
 

@@ -37,8 +37,8 @@ public:
     // x86 code generation: could be encapsulated in a processor class in a retargetable compiler
     string gen_asm();
     string IR_reg_to_asm(string reg); /**< helper method: inputs a IR reg or input variable, returns e.g. "-24(%rbp)" for the proper value of 24 */
-    void gen_asm_prologue(ostream& o);
-    void gen_asm_epilogue(ostream& o);
+    string gen_asm_prologue();
+    string gen_asm_epilogue();
 
     // symbol table methods
     void add_to_symbol_table(string name, Type t);
@@ -70,6 +70,7 @@ private:
     /* Permet d'avoir une table des variable ainsi que leurs index.
      * La valeur retournée est la taille de l'AR qu'il faut allouer */
     int initTableVariable();
+    int tailleAR;
 };
 
 
