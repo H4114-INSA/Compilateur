@@ -98,7 +98,7 @@ Putchar     : 'putchar' ;
 Getchar     : 'getchar' ;
 Nom         : [a-zA-Z]+[a-zA-Z_0-9]* ;
 IntVal      : [0-9]+ ;
-CharVal     : '\''('\\')*[a-zA-Z0-9]+'\'' ;
+CharVal     : '\''('\\')*[a-zA-Z0-9 ]+'\'' ;
 WS          : [ \t\n\r]+ -> skip ;
 ErrorChar   : . ;
 
