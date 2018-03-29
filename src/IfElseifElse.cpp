@@ -44,3 +44,8 @@ string IfElseifElse::toString() {
     }
     return res;
 }
+
+
+string IfElseifElse::buildIR(CFG *cfg) {
+
+}

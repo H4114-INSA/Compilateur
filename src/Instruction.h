@@ -9,12 +9,15 @@
 
 #include <string>
 
+class CFG;
+
 class Instruction {
 public:
     Instruction();
     ~Instruction();
 
     virtual std::string toString()=0;
+    virtual std::string buildIR(CFG *cfg)=0;
 
 private:
 

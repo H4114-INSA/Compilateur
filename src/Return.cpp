@@ -19,3 +19,7 @@ Expression* Return::getExpression() {
 string Return::toString() {
     return "Return ( " + expression->toString() + " )";
 }
+
+string Return::buildIR(CFG *cfg) {
+
+}

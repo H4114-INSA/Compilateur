@@ -79,3 +79,7 @@ string ExpressionBinaire::typageExpression(string idContexte, map<string, Declar
     }
     return "erreur";
 }
+
+string ExpressionBinaire::buildIR(CFG *cfg) {
+
+}

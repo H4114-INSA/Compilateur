@@ -1,3 +1,5 @@
+
+
 //
 // Created by thomas on 15/03/18.
 //
@@ -8,11 +10,14 @@
 
 
 #include "Instruction.h"
+#include "CFG.h"
 
 class Break : public Instruction {
 public:
     Break();
     ~Break();
+
+    string buildIR(CFG *cfg) override;
 
 private:
 

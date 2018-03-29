@@ -74,3 +74,7 @@ string ExpressionVariable::typageExpression(string idContexte, map<string, Decla
     }
     return "erreur";
 }
+
+string ExpressionVariable::buildIR(CFG *cfg) {
+
+}

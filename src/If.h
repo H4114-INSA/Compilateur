@@ -10,6 +10,7 @@
 #include "Expression.h"
 #include "BlocControle.h"
 #include "Controle.h"
+#include "CFG.h"
 
 class If : public Controle {
 public:
@@ -22,6 +23,9 @@ public:
     void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap, map<string, Fonction*>* fonctMap);
 
     string toString();
+
+    string buildIR(CFG *cfg) override;
+
 private:
     BlocControle* bloc;
 };

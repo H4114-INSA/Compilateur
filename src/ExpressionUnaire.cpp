@@ -41,3 +41,7 @@ string ExpressionUnaire::typageExpression(string idContexte, map<string, Declara
     this->setTypeRetourExpression(typeRetour);
     return typeRetour;
 }
+
+string ExpressionUnaire::buildIR(CFG *cfg) {
+
+}

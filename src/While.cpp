@@ -29,3 +29,7 @@ string While::toString() {
     res += bloc->toString();
     return res;
 }
+
+string While::buildIR(CFG *cfg) {
+
+}

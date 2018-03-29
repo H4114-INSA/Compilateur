@@ -10,6 +10,7 @@
 #include "Type.h"
 
 #include "Expression.h"
+#include "CFG.h"
 
 class ExpressionElementTableau : public Expression{
 
@@ -24,6 +25,9 @@ public:
     string toString();
 
     void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap, map<string,Fonction*>* fonctMap);
+
+    string buildIR(CFG *cfg) override;
+
     string typageExpression(string idContexte, map<string, Declaration *> *varMap, map<string, Fonction *> *fonctMap);
 
 private:

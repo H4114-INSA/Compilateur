@@ -1,3 +1,4 @@
+
 //
 // Created by thomas on 15/03/18.
 //
@@ -17,6 +18,8 @@ public:
     Expression* getExpression();
 
     string toString();
+
+    string buildIR(CFG *cfg) override;
 
 private:
     Expression* expression;

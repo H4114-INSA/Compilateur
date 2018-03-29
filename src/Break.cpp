@@ -7,3 +7,7 @@
 Break::Break() {}
 
 Break::~Break() {}
+
+string Break::buildIR(CFG *cfg) {
+
+}

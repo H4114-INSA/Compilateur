@@ -42,3 +42,7 @@ void Declaration::setNom(string nom) {
 int Declaration::getSize() {
     return this->tabSize;
 }
+
+string Declaration::buildIR(CFG *cfg) {
+
+}

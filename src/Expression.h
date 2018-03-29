@@ -17,6 +17,7 @@
 
 class Fonction;
 class Declaration;
+class CFG;
 
 using namespace std;
 
@@ -37,6 +38,8 @@ public :
     // idContexte : le nom de du contexte à vérifier
 
     virtual string typageExpression(string idContexte, map<string, Declaration *> *varMap, map<string, Fonction *> *fonctMap)=0;
+
+    virtual string buildIR(CFG *cfg) =0;
 
 private:
     TypeExpression typeExpression;

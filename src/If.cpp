@@ -33,3 +33,9 @@ string If::toString() {
     res += bloc->toString();
     return res;
 }
+
+string If::buildIR(CFG *cfg) {
+
+}
+
+

@@ -68,3 +68,7 @@ string ExpressionElementTableau::typageExpression(string idContexte, map<string,
     }
     return "erreur";
 }
+
+string ExpressionElementTableau::buildIR(CFG *cfg) {
+
+}

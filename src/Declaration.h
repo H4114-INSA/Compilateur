@@ -38,6 +38,8 @@ public:
 
     int getSize();
 
+    string buildIR(CFG *cfg) override;
+
 private:
     //TypeVariable type;
     string type;

@@ -1,3 +1,4 @@
+
 //
 // Created by thomas on 20/03/18.
 //
@@ -7,6 +8,7 @@
 
 #include "Controle.h"
 #include "If.h"
+#include "CFG.h"
 
 using namespace std;
 
@@ -22,6 +24,8 @@ public:
     void resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct, map<string, Declaration*> *varMap, map<string,Fonction*>* fonctMap);
 
     string toString();
+
+    string buildIR(CFG *cfg) override;
 
 private:
     // on modélise un if else if else par une succession de if

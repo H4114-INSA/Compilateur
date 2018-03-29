@@ -16,3 +16,7 @@ void Controle::setCondition(Expression *expr) {
 Expression* Controle::getCondition() {
     return this->conditionExecution;
 }
+
+string Controle::buildIR(CFG *cfg) {
+
+}
