@@ -509,7 +509,11 @@ public:
         cout<< "Passage dans visitCharVal" <<endl;
 #endif
         if((int)ctx->CharVal()->getText()[1] == 92){ // 92 ascii de \ alors on créé un caractère spécial
-            return (Expression *) new ExpressionConstante("char", (int) ctx->CharVal()->getText()[2],true);
+            if((int) ctx->CharVal()->getText()[2] == 110){
+                return (Expression *) new ExpressionConstante("char", 10,true);
+            }else {
+                return (Expression *) new ExpressionConstante("char", (int) ctx->CharVal()->getText()[2],true);
+            }
         } else {
             return (Expression *) new ExpressionConstante("char", (int) ctx->CharVal()->getText()[1]);
         }
@@ -734,8 +738,12 @@ public:
         vector<Expression*> arguments;
 
         if(ctx->CharVal() != nullptr){
-            if((int)ctx->CharVal()->getText()[1] == 92){ // caractère spécial
-                arguments.push_back(new ExpressionConstante("char",(int)ctx->CharVal()->getText()[2],true));
+            if((int)ctx->CharVal()->getText()[1] == 92){ // identification d'un caractère spécial
+                if((int) ctx->CharVal()->getText()[2] == 110){
+                    arguments.push_back(new ExpressionConstante("char", 10,true));
+                }else {
+                    arguments.push_back( new ExpressionConstante("char", (int) ctx->CharVal()->getText()[2],true));
+                }
             }else {
                 arguments.push_back(new ExpressionConstante("char",(int)ctx->CharVal()->getText()[1]));
             }
