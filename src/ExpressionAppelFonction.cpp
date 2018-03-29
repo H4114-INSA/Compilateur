@@ -70,3 +70,29 @@ string ExpressionAppelFonction::typageExpression(string idContexte,map<string, D
 	}
 	return "erreur";
 }
+
+string ExpressionAppelFonction::buildIR(CFG* cfg){
+    string res = "";
+	if(nomFonction=="putchar"){
+		Expression* argument = (*parametres.begin());
+		string nomVar = argument->buildIR(cfg);
+
+		Type t;
+		if(this->getTypeRetour() == "char"){ t = Type::Char;}
+		else if(this->getTypeRetour() == "int32_t") {t = Type::Int32_t;}
+		else if(this->getTypeRetour() == "int64_t") {t= Type::Int64_t;}
+		else if (this->getTypeRetour() == "void") {t= Type::Void;}
+
+		vector<string> paramArgument;
+		paramArgument.push_back("%rdi");
+		paramArgument.push_back(cfg->calcul_offset(nomVar)+"(%rbp)"); // offset with respect to rbp
+
+		cfg->current_bb->add_IRInstr(IRInstr::Operation::ecriture_argument_1,t,paramArgument);
+
+		vector<string> paramCall;
+		paramCall.push_back(""); // dest adress
+		paramCall.push_back("putchar"); // label
+		cfg->current_bb->add_IRInstr(IRInstr::Operation::call,t,paramCall);
+	}
+	return res;
+}

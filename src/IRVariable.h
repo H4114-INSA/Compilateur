@@ -2,6 +2,8 @@
 // Created by thomas on 27/03/18.
 //
 
+#pragma  once
+
 #ifndef COMPILATEUR_IRVARIABLE_H
 #define COMPILATEUR_IRVARIABLE_H
 

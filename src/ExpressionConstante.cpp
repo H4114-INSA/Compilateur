@@ -34,3 +34,22 @@ string ExpressionConstante::typageExpression(string idContexte, map<string, Decl
     this->setTypeRetourExpression(typeValeur);
     return typeValeur;
 }
+
+string ExpressionConstante::buildIR(CFG *cfg) {
+    Type t;
+    if(this->typeValeur == "char"){ t = Type::Char;}
+    else if(this->typeValeur == "int32_t") {t = Type::Int32_t;}
+    else if(this->typeValeur == "int64_t") {t= Type::Int64_t;}
+
+    string nomVar = cfg->create_new_tempvar(t);
+    IRVariable* var = cfg->getVariable(nomVar);
+
+    // ldconst nomVar valeur
+    vector<string> params;
+    params.push_back(cfg->calcul_offset(nomVar)+"(%rbp)");
+    params.push_back(to_string(this->valeur));
+
+    cfg->current_bb->add_IRInstr(IRInstr::Operation::ldconst,t,params);
+
+    return nomVar;
+}

@@ -11,6 +11,9 @@
 /**  The class for a basic block */
 
 #include "IRInstr.h"
+#include "Instruction.h"
+#include "Declaration.h"
+#include "ExpressionAppelFonction.h"
 
 /* A few important comments.
 	 IRInstr has no jump instructions:
@@ -27,13 +30,14 @@
 class BasicBlock {
 public:
     BasicBlock();
+    ~BasicBlock();
     BasicBlock(CFG* cfg, string entry_label);
-    BasicBlock(CFG* cfg, vector<Instruction*> instructions ,string entry_label);
 
 
     string gen_asm(); /**< x86 assembly code generation for this basic block (very simple) */
 
     void add_IRInstr(IRInstr::Operation op,Type t, vector<string> params);
+    void add_IRInstrFromList(vector<Instruction*> instructions);
 
     // No encapsulation whatsoever here. Feel free to do better.
     BasicBlock* exit_true;  /**< pointer to the next basic block, true branch. If nullptr, return from procedure */

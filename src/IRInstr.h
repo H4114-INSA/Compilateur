@@ -8,7 +8,6 @@
 #include <map>
 #include <iostream>
 #include <initializer_list>
-#include "Program.h"
 
 // Declarations from the parser -- replace with your own
 
@@ -16,11 +15,11 @@ class BasicBlock;
 class CFG;
 
 typedef enum {
-    Int64_t,
-    Int32_t,
-    Void,
-    Char,
-	Asm
+    Int64_t =0,
+    Int32_t =1,
+    Void =2,
+    Char =3,
+	Asm = 4
 } Type;
 	
 using namespace std;
@@ -32,6 +31,8 @@ class IRInstr {
 	/** The instructions themselves -- feel free to subclass instead */
 	typedef enum {
 		ldconst,
+		ecriture_argument_1,
+        copy,
 		addq,
 		subq,
         sub,
@@ -63,6 +64,8 @@ class IRInstr {
 	
 	/** Actual code generation */
 	string gen_asm(); /**< x86 assembly code generation for this IR instruction */
+
+    BasicBlock* getBasicBlock();
 	
  private:
 	BasicBlock* bb; /**< The BB this instruction belongs to, which provides a pointer to the CFG this instruction belong to */

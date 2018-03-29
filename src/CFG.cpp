@@ -5,13 +5,17 @@ CFG::CFG() {
 }
 
 CFG::CFG(Fonction* ast_){
+    this->current_bb= nullptr;
+	this->nbTemp=0;
+	this->nextBBnumber=0;
+	this->nextFreeSymbolIndex=0;
 	this->ast = ast_;
 
-	BasicBlock* bbPrologue = gen_prologue(this->ast->getNom());
+	BasicBlock* bbPrologue = gen_prologue(ast_->getNom());
 	this->add_bb(bbPrologue);
 
 	//créer tous les autres blocs
-    //
+
     ///
 	BasicBlock* bbEpilogue;
 	if(bbPrologue->exit_true == nullptr){
@@ -81,25 +85,16 @@ string CFG::gen_asm(){
 	// symbol table methods
 	void CFG::add_to_symbol_table(string name, Type t){
 		
-		}
+    }
 		
 	string CFG::create_new_tempvar(Type t){
-		
-		}
-		
-	int CFG::get_var_index(string name){
-		
-		}
-		
-	Type CFG::get_var_type(string name){
-		
-		}
-		
+		nbTemp++;
+		string nomVar = "!tmp"+ to_string(nbTemp);
+		mapVariable.insert(pair<string, IRVariable*>(nomVar,new IRVariable(nomVar,t,nextFreeSymbolIndex)));
+		nextFreeSymbolIndex++;
+		return nomVar;
+	}
 
-	// basic block management
-	string CFG::new_BB_name(){
-		
-		}
 
 int CFG::initTableVariable() {
 	// taille de  octets pour chaque paramètres
@@ -137,13 +132,27 @@ int CFG::initTableVariable() {
 		}
 		i++;
 	}
+	this->nextFreeSymbolIndex=(tailleAR/8) +1;
 
-	map<string, IRVariable*>::iterator j = mapVariable.begin();
-	while(j != mapVariable.end()){
-		cout << (*j).second->toString() <<endl;
-		j++;
+	if(instr.size() != nbDecInstr){
+	    nextBBnumber++;
+
+		vector<Instruction*> suiteInstructions ;
+		i--;
+		while(i != instr.end()){
+		    suiteInstructions.push_back(*i);
+		    i++;
+		}
+
+		BasicBlock* newBB = new BasicBlock(this, to_string(nextBBnumber));
+		this->current_bb = newBB;
+        this->bbs.push_back(newBB);
+		this->bbs.at(0)->exit_true=newBB;
+		this->current_bb=bbs.at(0)->exit_true;
+
+		bbs.at(0)->exit_true->add_IRInstrFromList(suiteInstructions);
 	}
-	//tailleAR= offset*nbDecInstr;
+
 	return tailleAR;
 }
 
@@ -165,3 +174,15 @@ BasicBlock *CFG::gen_epilogue() {
 	return bbEpilogue;
 }
 
+IRVariable *CFG::getVariable(string nomVar) {
+	return (*mapVariable.find(nomVar)).second;
+}
+
+string CFG::calcul_offset(string nomVar) {
+    return to_string(-8*getVariable(nomVar)->getIndex());
+}
+
+string CFG::new_BB_name() {
+	nextBBnumber++;
+	return to_string(nextBBnumber+1);
+}

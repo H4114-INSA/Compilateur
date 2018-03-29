@@ -27,8 +27,14 @@ string IRInstr::gen_asm(){
 		case subq:
 			ass += params[0] +" " + params[1] + ", " + params[2] + "\r\n";
 			break;
-		case sub:
-			//o<<"SUB "+params[1]+","+params[2]+" MOV "+params[0]+","+params[1]+"";
+		case ldconst:
+			ass += "movl $" + params[1] + ", "+ params[0] + "\r\n";
+			break;
+		case ecriture_argument_1 :
+			ass += "mov " +  params[1] +", " + params[0] + "\r\n";
+			break;
+		case call:
+			ass += "call "+params[1]+"\r\n";
 			break;
         case leave:
             ass +=  params[0]+"\r\n";
@@ -42,4 +48,8 @@ string IRInstr::gen_asm(){
 	}
 
 	return ass;
+}
+
+BasicBlock* IRInstr::getBasicBlock() {
+	return this->bb;
 }

@@ -5,6 +5,7 @@
 #include "Expression.h"
 #include "Declaration.h"
 #include "Fonction.h"
+#include "CFG.h"
 
 using namespace std;
 
@@ -23,6 +24,8 @@ public:
     string toString();
 
     string typageExpression(string idContexte, map<string, Declaration *> *varMap, map<string, Fonction *> *fonctMap);
+
+    string buildIR(CFG *cfg) override;
 private:
     vector<Expression*> parametres;
     string nomFonction;

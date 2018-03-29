@@ -37,29 +37,41 @@ public:
     // x86 code generation: could be encapsulated in a processor class in a retargetable compiler
     string gen_asm();
     string IR_reg_to_asm(string reg); /**< helper method: inputs a IR reg or input variable, returns e.g. "-24(%rbp)" for the proper value of 24 */
+
+    //
     string gen_asm_prologue();
     string gen_asm_epilogue();
 
-    // symbol table methods
+    //variableMap methods
     void add_to_symbol_table(string name, Type t);
     string create_new_tempvar(Type t);
-    int get_var_index(string name);
-    Type get_var_type(string name);
+    IRVariable * getVariable(string nomVar);
+
+    /* Permet de calculer l'offset d'une variable par rapport
+     * à rbp.
+     * La taille d'une case est fix par défaut à 8 peut importe le type de
+     * variable que l'on manipule
+     */
+    string calcul_offset(string nomVar);
 
     // basic block management
+    // méthode qui permet de nommer les BasicBlocks
     string new_BB_name();
+
+    // pointe vers le dernier bloc
     BasicBlock* current_bb;
 
+    // Génère le BB du prologue
     BasicBlock* gen_prologue(string nomFonction);
+
+    // Génère le BB de l'épilogue
     BasicBlock* gen_epilogue();
 
 
 
 protected:
-    // les 2 lignes qui suivent sont remplacées par mapVariable
-    //map <string, Type> mapVariableType; /**< part of the symbol table  */
-    //map <string, int> mapVariableIndex; /**< part of the symbol table  */
 
+    // attribut qui associe le nom d'une variable et son IR
     map <string, IRVariable*> mapVariable;
     int nextFreeSymbolIndex; /**< to allocate new symbols in the symbol table */
     int nextBBnumber; /**< just for naming */
@@ -71,6 +83,7 @@ private:
      * La valeur retournée est la taille de l'AR qu'il faut allouer */
     int initTableVariable();
     int tailleAR;
+    int nbTemp;
 };
 
 

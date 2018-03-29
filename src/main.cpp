@@ -63,7 +63,6 @@ int main(int , const char ** argv) {
         vector<CFG*> listeCFG;
         map<string, Fonction*> mapFonction = program->getMapFonctions();
         map<string,Fonction*>::iterator itFonction = mapFonction.begin();
-        cout << program->getMapFonctions().size() <<endl;
 
         while(itFonction != mapFonction.end()){
             listeCFG.push_back(new CFG((*itFonction).second)); // on créé un cfg par fonction
