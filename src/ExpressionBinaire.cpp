@@ -90,12 +90,34 @@ string ExpressionBinaire::buildIR(CFG *cfg) {
 
         string leftValue = this->expression1->buildIR(cfg);
         string rightValue = this->expression2->buildIR(cfg);
+        res= rightValue;
 
         vector<string> params;
         params.push_back(cfg->calcul_offset(rightValue));
         params.push_back(cfg->calcul_offset(leftValue));
 
         cfg->current_bb->add_IRInstr(IRInstr::Operation::copy,t,params);
+    } else {
+        Type t;
+        if(this->getTypeRetour()== "char"){ t = Type::Char;}
+        else if(this->getTypeRetour() == "int32_t") {t = Type::Int32_t;}
+        else if(this->getTypeRetour() == "int64_t") {t= Type::Int64_t;}
+
+        string leftValue = this->expression1->buildIR(cfg);
+        string rightValue = this->expression2->buildIR(cfg);
+
+        string nomTempAdd = cfg->create_new_tempvar(t);
+
+        vector<string> params;
+        params.push_back(cfg->calcul_offset(nomTempAdd));
+        params.push_back(cfg->calcul_offset(leftValue));
+        params.push_back(cfg->calcul_offset(rightValue));
+
+        if(this->symbole == SymboleBinaire::plus){
+            cfg->current_bb->add_IRInstr(IRInstr::Operation::operation_binaire_add,t,params);
+        }
+
+        res=nomTempAdd;
     }
     return res;
 }

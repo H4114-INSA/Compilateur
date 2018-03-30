@@ -33,6 +33,7 @@ class IRInstr {
 		ldconst,
 		ecriture_argument_1,
         copy,
+		operation_binaire_add,
 		addq,
 		subq,
         sub,

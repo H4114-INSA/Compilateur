@@ -37,6 +37,11 @@ string IRInstr::gen_asm(){
             ass += "movq " + params[0]+"(%rbp) , " + "%rax\r\n";
             ass += "movq %rax, " + params[1]+"(%rbp)\r\n";
             break;
+        case operation_binaire_add: // !tmp3 !tmp1 !tmp2 // add !tmp1 and !tmp2 and put it into !tmp3
+			ass += "movq " + params[1]+"(%rbp), %rax\r\n";
+			ass += "addq " + params[2]+"(%rbp), %rax\r\n";
+			ass += "movq %rax, " + params[0]+"(%rbp)\r\n";
+            break;
 		case call:
 			ass += "call "+params[1]+"\r\n";
 			break;
