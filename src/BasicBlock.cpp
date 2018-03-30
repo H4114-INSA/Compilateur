@@ -37,7 +37,7 @@ void BasicBlock::add_IRInstr(IRInstr::Operation op,Type t, vector<string> params
 void BasicBlock::add_IRInstrFromList(vector<Instruction *> instructions) {
     vector<Instruction*>::iterator itInstr = instructions.begin();
     while (itInstr != instructions.end()){
-        if(dynamic_cast<ExpressionAppelFonction*>((*itInstr))){
+        if(dynamic_cast<Expression*>((*itInstr))){
             Expression* e = (Expression*)*itInstr;
             e->buildIR(cfg);
         }

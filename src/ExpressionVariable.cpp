@@ -76,5 +76,5 @@ string ExpressionVariable::typageExpression(string idContexte, map<string, Decla
 }
 
 string ExpressionVariable::buildIR(CFG *cfg) {
-
+    return cfg->getVariable(this->nom)->getNom();
 }

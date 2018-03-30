@@ -33,6 +33,10 @@ string IRInstr::gen_asm(){
 		case ecriture_argument_1 :
 			ass += "mov " +  params[1] +", " + params[0] + "\r\n";
 			break;
+        case copy:
+            ass += "movq " + params[0]+"(%rbp) , " + "%rax\r\n";
+            ass += "movq %rax, " + params[1]+"(%rbp)\r\n";
+            break;
 		case call:
 			ass += "call "+params[1]+"\r\n";
 			break;
