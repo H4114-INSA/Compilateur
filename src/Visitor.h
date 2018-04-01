@@ -600,7 +600,8 @@ public:
             // partie 2 de la condition permet de savoir si on a un else
             // si le nombre de bloc est plus grand que le nombre de condition c'est qu'on a un else
             if(i ==0 && (ctx->blocControl().size() > ctx->expr().size())){
-                elseExpression = new ExpressionUnaire(expr,SymboleUnaire::non);
+                //elseExpression = new ExpressionUnaire(expr,SymboleUnaire::non);
+                elseExpression = nullptr;
             }
             //Cette partie sert possiblement à le if (elseif)* else mais n'est pas fonctionnelle en l'état
             /*else if (i!=0 && (ctx->blocControl().size() > ctx->expr().size())){

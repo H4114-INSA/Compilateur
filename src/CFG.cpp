@@ -14,24 +14,14 @@ CFG::CFG(Fonction* ast_){
 	BasicBlock* bbPrologue = gen_prologue(ast_->getNom());
 	this->add_bb(bbPrologue);
 
-	//créer tous les autres blocs
-
-    ///
-	BasicBlock* bbEpilogue;
-	if(bbPrologue->exit_true == nullptr){
-		bbEpilogue = gen_epilogue();
-        this->add_bb(bbEpilogue);
-    }
-
-
 }
 
 void CFG::add_bb(BasicBlock* bb_){
 	bbs.push_back(bb_);
-	nextBBnumber++;
 }
 	
 string CFG::gen_asm(){
+    cout<< "Nb bb : "<< bbs.size() <<endl;
     string res = ".global " + ast->getNom() +"\r\n";
     res +=  ast->getNom() +":\r\n";
 
@@ -39,7 +29,9 @@ string CFG::gen_asm(){
 
 	// generation assembleur pour les BasicBlocs
 	vector<BasicBlock*>::iterator itBlock = bbs.begin();
-	while( itBlock	!= bbs.end()){
+	//itBlock++;
+	while( itBlock	!= bbs.end()-1){
+	    res += "\r\n.L" + (*itBlock)->label + ":\r\n";
 		res += (*itBlock)->gen_asm();
 		itBlock++;
 	}
@@ -58,6 +50,7 @@ string CFG::gen_asm(){
 
 		string ass="";
 
+
 		vector<string> pushq; pushq.push_back("pushq"); pushq.push_back("%rbp");
 		vector<string> movq ; movq.push_back("movq")  ; movq.push_back("%rsp"); movq.push_back("%rbp");
 		vector<string> subq ; subq.push_back("subq"); subq.push_back("$" + to_string(tailleAR)); subq.push_back("%rsp");
@@ -70,11 +63,12 @@ string CFG::gen_asm(){
     }
 		
 	string CFG::gen_asm_epilogue(){
-		string ass = "";
+		string ass = "\r\n";
 
 		vector<string> leave; leave.push_back("leave");
 		vector<string> ret;   ret.push_back("ret");
 
+		ass += ".epilogue :\r\n";
 		ass += leave[0] + "\r\n";
 		ass += ret[0] + "\r\n";
 
@@ -147,10 +141,8 @@ int CFG::initTableVariable() {
 		BasicBlock* newBB = new BasicBlock(this, to_string(nextBBnumber));
 		this->current_bb = newBB;
         this->bbs.push_back(newBB);
-		this->bbs.at(0)->exit_true=newBB;
-		this->current_bb=bbs.at(0)->exit_true;
 
-		bbs.at(0)->exit_true->add_IRInstrFromList(suiteInstructions);
+		newBB->add_IRInstrFromList(suiteInstructions);
 	}
 
 	return tailleAR;
@@ -169,8 +161,6 @@ BasicBlock * CFG::gen_prologue(string nomFonction) {
 BasicBlock *CFG::gen_epilogue() {
 	BasicBlock* bbEpilogue = new BasicBlock(this, "epilogue");
 
-	bbEpilogue->exit_false = nullptr;
-
 	return bbEpilogue;
 }
 
@@ -183,6 +173,11 @@ string CFG::calcul_offset(string nomVar) {
 }
 
 string CFG::new_BB_name() {
+	string nameBB = to_string(nextBBnumber);
 	nextBBnumber++;
-	return to_string(nextBBnumber+1);
+	return nameBB;
+}
+
+vector<BasicBlock*> CFG::getAllBasicBlocks() {
+    return bbs;
 }

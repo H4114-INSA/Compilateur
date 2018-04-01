@@ -34,6 +34,7 @@ class IRInstr {
 		ecriture_argument_1,
         copy,
 		operation_binaire_add,
+		operation_binaire_strictless,
 		addq,
 		subq,
         sub,

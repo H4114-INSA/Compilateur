@@ -15,6 +15,7 @@
 #include "Declaration.h"
 #include "ExpressionAppelFonction.h"
 
+
 /* A few important comments.
 	 IRInstr has no jump instructions:
 	 assembly jumps are generated as follows in BasicBlock::gen_asm():
@@ -27,11 +28,24 @@
         otherwise it generates an unconditional jmp to the exit_true branch
 */
 
+class IfElseifElse;
+class If;
+
 class BasicBlock {
 public:
     BasicBlock();
     ~BasicBlock();
     BasicBlock(CFG* cfg, string entry_label);
+
+    // we use it when we want to create a BB given a certain list of IfElseifElse
+    // exemple : the true & false code of a conditional structure
+    BasicBlock(CFG* cfg, IfElseifElse* condStruct);
+
+    BasicBlock(CFG* cfg, If* ifStatement);
+
+    BasicBlock(CFG* cfg, Expression* expr);
+
+    BasicBlock(CFG* cfg);
 
 
     string gen_asm(); /**< x86 assembly code generation for this basic block (very simple) */
@@ -45,9 +59,10 @@ public:
     string label; /**< label of the BB, also will be the label in the generated code */
     CFG* cfg; /** < the CFG where this block belongs */
     vector<IRInstr*> instrs; /** < the instructions themselves. */
+    string condition;
 
-protected:
-
+private:
+    void generateIRFromList(vector<Instruction*> instructions);
 
 };
 #endif //COMPILATEUR_BASICBLOCK_H

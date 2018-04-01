@@ -31,7 +31,7 @@ string IRInstr::gen_asm(){
 			ass += "movl $" + params[1] + ", "+ params[0] + "\r\n";
 			break;
 		case ecriture_argument_1 :
-			ass += "mov " +  params[1] +", " + params[0] + "\r\n";
+			ass += "movq " +  params[1] +", " + params[0] + "\r\n";
 			break;
         case copy:
             ass += "movq " + params[0]+"(%rbp) , " + "%rax\r\n";
@@ -42,6 +42,11 @@ string IRInstr::gen_asm(){
 			ass += "addq " + params[2]+"(%rbp), %rax\r\n";
 			ass += "movq %rax, " + params[0]+"(%rbp)\r\n";
             break;
+		case operation_binaire_strictless:
+		    ass += "decq " + params[2]+"(%rbp) \r\n";
+            ass += "mov " + params[2]+"(%rbp), %eax\r\n";
+			ass += "cmp %eax, "+ params[1]+"(%rbp) \r\n";
+			break;
 		case call:
 			ass += "call "+params[1]+"\r\n";
 			break;

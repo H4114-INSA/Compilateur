@@ -34,6 +34,8 @@ public:
 
     void add_bb(BasicBlock* bb);
 
+    vector<BasicBlock*> getAllBasicBlocks();
+
     // x86 code generation: could be encapsulated in a processor class in a retargetable compiler
     string gen_asm();
     string IR_reg_to_asm(string reg); /**< helper method: inputs a IR reg or input variable, returns e.g. "-24(%rbp)" for the proper value of 24 */
