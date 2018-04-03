@@ -72,18 +72,29 @@ string IfElseifElse::buildIR(CFG *cfg) {
     cfg->add_bb(testBB);
     cfg->add_bb(thenBB);
 
-
-    if(this->getSuccession().size()-1 == 1){
-        if(this->getSuccession().at(1)->getCondition() == nullptr){ // cas du if else
-            elseBB = new BasicBlock(cfg);
-            cfg->current_bb = elseBB;
-            testBB->exit_false = elseBB;
-            elseBB->exit_true = afterBB;
-            elseBB->add_IRInstrFromList(this->getSuccession().at(1)->getBloc()->getListeInstruction());
-            cfg->add_bb(elseBB);
-        }
-    } else if(this->getSuccession().size() == 1){ // if seul
+    // traitement d'un if else
+    if(this->getSuccession().size()-1 == 1 && this->getSuccession().at(1)->getCondition() == nullptr){
+        elseBB = new BasicBlock(cfg);
+        cfg->current_bb = elseBB;
+        testBB->exit_false = elseBB;
+        elseBB->exit_true = afterBB;
+        elseBB->add_IRInstrFromList(this->getSuccession().at(1)->getBloc()->getListeInstruction());
+        cfg->add_bb(elseBB);
+    }
+    // traitement d'un if seul
+    else if(this->getSuccession().size() == 1){
         testBB->exit_false = afterBB;
+    }
+    // traitement d'un if .... else
+    else {
+        vector<If*> elsePart (this->successionIf.begin()+1, this->successionIf.end());
+        IfElseifElse* condStructElsePart = new IfElseifElse(elsePart);
+        elseBB = new BasicBlock(cfg);
+        testBB->exit_false = elseBB;
+        elseBB->exit_true = afterBB;
+        cfg->current_bb = elseBB;
+        cfg->add_bb(elseBB);
+        condStructElsePart->buildIR(cfg);
     }
 
 
