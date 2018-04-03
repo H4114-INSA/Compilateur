@@ -1,5 +1,6 @@
 #include "BasicBlock.h"
 #include "IfElseifElse.h"
+#include "While.h"
 
 
 BasicBlock::BasicBlock() {
@@ -95,6 +96,10 @@ void BasicBlock::generateIRFromList(vector<Instruction *> instructions) {
 		else if(dynamic_cast<IfElseifElse*>(*itInstr)){
 			IfElseifElse* structIf = (IfElseifElse*)*itInstr;
 			structIf->buildIR(cfg);
+		}
+		else if(dynamic_cast<While*>(*itInstr)){
+            While* aWhile = (While*)*itInstr;
+            aWhile->buildIR(cfg);
 		}
 		itInstr++;
 	}

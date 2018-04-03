@@ -31,5 +31,33 @@ string While::toString() {
 }
 
 string While::buildIR(CFG *cfg) {
+    string res = "";
 
+    // construction testBB
+    Expression* test = this->getCondition();
+    BasicBlock* testBB = new BasicBlock(cfg);
+    cfg->getAllBasicBlocks().at(cfg->getAllBasicBlocks().size()-1)->exit_false = testBB;
+    cfg->current_bb = testBB;
+
+    string nomVariableConditionTest = test->buildIR(cfg); // les instructions seront ajoutées à current_bloc
+    cfg->current_bb->condition = nomVariableConditionTest;
+    cfg->add_bb(testBB);
+
+    // construction thenBB
+    BasicBlock* thenBB = new BasicBlock(cfg);
+    cfg->current_bb = thenBB;
+    cfg->current_bb->add_IRInstrFromList(this->getBloc()->getListeInstruction());
+    cfg->add_bb(thenBB);
+
+    testBB->exit_true=thenBB;
+    thenBB->exit_false = testBB;
+
+    // contruction elseBB
+    BasicBlock* elseBB = new BasicBlock(cfg);
+    cfg->current_bb = elseBB;
+    cfg->add_bb(elseBB);
+
+    testBB->exit_false = elseBB;
+
+    return res;
 }
