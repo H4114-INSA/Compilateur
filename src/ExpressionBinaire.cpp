@@ -115,8 +115,17 @@ string ExpressionBinaire::buildIR(CFG *cfg) {
 
         if(this->symbole == SymboleBinaire::plus){
             cfg->current_bb->add_IRInstr(IRInstr::Operation::operation_binaire_add,t,params);
-        } else if(this->symbole == SymboleBinaire::strictinf){
-            cfg->current_bb->add_IRInstr(IRInstr::Operation::operation_binaire_strictless,t,params);
+        }else if(this->symbole == SymboleBinaire::moins){
+            cfg->current_bb->add_IRInstr(IRInstr::Operation::operation_binaire_sub,t,params);
+        }
+        else if(this->symbole == SymboleBinaire::mult) {
+            cfg->current_bb->add_IRInstr(IRInstr::Operation::operation_binaire_mult,t,params);
+        }
+        else if(this->symbole == SymboleBinaire::div) {
+            cfg->current_bb->add_IRInstr(IRInstr::Operation::operation_binaire_div,t,params);
+        }
+        else if(this->symbole == SymboleBinaire::strictinf){
+                cfg->current_bb->add_IRInstr(IRInstr::Operation::operation_binaire_strictless,t,params);
         }
 
         res=nomTempAdd;

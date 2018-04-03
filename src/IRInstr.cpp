@@ -42,6 +42,16 @@ string IRInstr::gen_asm(){
 			ass += "addq " + params[2]+"(%rbp), %rax\r\n";
 			ass += "movq %rax, " + params[0]+"(%rbp)\r\n";
             break;
+        case operation_binaire_sub:
+			ass += "movq " + params[1]+"(%rbp), %rax\r\n";
+			ass += "subq " + params[2]+"(%rbp), %rax\r\n";
+			ass += "movq %rax, " + params[0]+"(%rbp)\r\n";
+            break;
+        case operation_binaire_mult:
+            ass += "movq " + params[1]+"(%rbp), %rax\r\n";
+            ass += "mulq " + params[2]+"(%rbp), %rax\r\n";
+            ass += "movq %rax, " + params[0]+"(%rbp)\r\n";
+            break;
 		case operation_binaire_strictless:
 		    ass += "decq " + params[2]+"(%rbp) \r\n";
             ass += "mov " + params[2]+"(%rbp), %eax\r\n";
