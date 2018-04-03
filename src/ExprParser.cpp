@@ -1077,7 +1077,7 @@ ExprParser::ExprContext* ExprParser::expr(int precedence) {
       _la = _input->LA(1);
       if ((((_la & ~ 0x3fULL) == 0) &&
         ((1ULL << _la) & ((1ULL << ExprParser::T__1)
-        | (1ULL << ExprParser::T__7)
+        | (1ULL << ExprParser::T__6)
         | (1ULL << ExprParser::T__18)
         | (1ULL << ExprParser::T__22)
         | (1ULL << ExprParser::T__27)
@@ -1170,7 +1170,7 @@ ExprParser::ExprContext* ExprParser::expr(int precedence) {
         }
 
         case 4: {
-          auto newContext = _tracker.createInstance<AddContext>(_tracker.createInstance<ExprContext>(parentContext, parentState));
+          auto newContext = _tracker.createInstance<MoinsContext>(_tracker.createInstance<ExprContext>(parentContext, parentState));
           _localctx = newContext;
           pushNewRecursionContext(newContext, startState, RuleExpr);
           setState(72);
@@ -1184,7 +1184,7 @@ ExprParser::ExprContext* ExprParser::expr(int precedence) {
         }
 
         case 5: {
-          auto newContext = _tracker.createInstance<MoinsContext>(_tracker.createInstance<ExprContext>(parentContext, parentState));
+          auto newContext = _tracker.createInstance<AddContext>(_tracker.createInstance<ExprContext>(parentContext, parentState));
           _localctx = newContext;
           pushNewRecursionContext(newContext, startState, RuleExpr);
           setState(75);
@@ -2080,7 +2080,7 @@ ExprParser::AffContext* ExprParser::aff() {
       _localctx = dynamic_cast<AffContext *>(_tracker.createInstance<ExprParser::OpposeContext>(_localctx));
       enterOuterAlt(_localctx, 7);
       setState(150);
-      match(ExprParser::T__7);
+      match(ExprParser::T__6);
       setState(151);
       match(ExprParser::Nom);
       break;
@@ -2477,7 +2477,7 @@ ExprParser::BlocControlContext* ExprParser::blocControl() {
         _la = _input->LA(1);
         while ((((_la & ~ 0x3fULL) == 0) &&
           ((1ULL << _la) & ((1ULL << ExprParser::T__1)
-          | (1ULL << ExprParser::T__7)
+          | (1ULL << ExprParser::T__6)
           | (1ULL << ExprParser::T__18)
           | (1ULL << ExprParser::T__22)
           | (1ULL << ExprParser::T__27)
@@ -2506,7 +2506,7 @@ ExprParser::BlocControlContext* ExprParser::blocControl() {
       }
 
       case ExprParser::T__1:
-      case ExprParser::T__7:
+      case ExprParser::T__6:
       case ExprParser::T__18:
       case ExprParser::T__22:
       case ExprParser::T__27:
@@ -3016,7 +3016,7 @@ ExprParser::InstrContext* ExprParser::instr() {
       }
 
       case ExprParser::T__1:
-      case ExprParser::T__7:
+      case ExprParser::T__6:
       case ExprParser::T__18:
       case ExprParser::T__22:
       case ExprParser::T__27:
@@ -3216,7 +3216,7 @@ ExprParser::DefinitionFonctionContext* ExprParser::definitionFonction() {
         _la = _input->LA(1);
         while ((((_la & ~ 0x3fULL) == 0) &&
           ((1ULL << _la) & ((1ULL << ExprParser::T__1)
-          | (1ULL << ExprParser::T__7)
+          | (1ULL << ExprParser::T__6)
           | (1ULL << ExprParser::T__18)
           | (1ULL << ExprParser::T__22)
           | (1ULL << ExprParser::T__27)
@@ -3285,7 +3285,7 @@ ExprParser::DefinitionFonctionContext* ExprParser::definitionFonction() {
         _la = _input->LA(1);
         while ((((_la & ~ 0x3fULL) == 0) &&
           ((1ULL << _la) & ((1ULL << ExprParser::T__1)
-          | (1ULL << ExprParser::T__7)
+          | (1ULL << ExprParser::T__6)
           | (1ULL << ExprParser::T__18)
           | (1ULL << ExprParser::T__22)
           | (1ULL << ExprParser::T__27)
@@ -3380,7 +3380,7 @@ std::vector<std::string> ExprParser::_ruleNames = {
 };
 
 std::vector<std::string> ExprParser::_literalNames = {
-  "", "';'", "'('", "')'", "'%'", "'*'", "'/'", "'+'", "'-'", "'<<'", "'>>'", 
+  "", "';'", "'('", "')'", "'%'", "'*'", "'/'", "'-'", "'+'", "'<<'", "'>>'", 
   "'&&'", "'||'", "'<='", "'>='", "'>'", "'<'", "'=='", "'!='", "'!'", "'&'", 
   "'|'", "'^'", "'~'", "','", "'['", "']'", "'='", "'++'", "'--'", "'+='", 
   "'-='", "'*='", "'/='", "'%='", "'&='", "'|='", "'^='", "'{'", "'}'", 
@@ -3545,7 +3545,7 @@ ExprParser::Initializer::Initializer() {
     0xb3, 0x7, 0x1e, 0x2, 0x2, 0x92, 0x93, 0x7, 0x1e, 0x2, 0x2, 0x93, 0xb3, 
     0x7, 0x37, 0x2, 0x2, 0x94, 0x95, 0x7, 0x37, 0x2, 0x2, 0x95, 0xb3, 0x7, 
     0x1f, 0x2, 0x2, 0x96, 0x97, 0x7, 0x1f, 0x2, 0x2, 0x97, 0xb3, 0x7, 0x37, 
-    0x2, 0x2, 0x98, 0x99, 0x7, 0xa, 0x2, 0x2, 0x99, 0xb3, 0x7, 0x37, 0x2, 
+    0x2, 0x2, 0x98, 0x99, 0x7, 0x9, 0x2, 0x2, 0x99, 0xb3, 0x7, 0x37, 0x2, 
     0x2, 0x9a, 0x9b, 0x7, 0x37, 0x2, 0x2, 0x9b, 0x9c, 0x7, 0x20, 0x2, 0x2, 
     0x9c, 0xb3, 0x5, 0x4, 0x3, 0x2, 0x9d, 0x9e, 0x7, 0x37, 0x2, 0x2, 0x9e, 
     0x9f, 0x7, 0x21, 0x2, 0x2, 0x9f, 0xb3, 0x5, 0x4, 0x3, 0x2, 0xa0, 0xa1, 

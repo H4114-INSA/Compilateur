@@ -6,8 +6,8 @@ expr:
 |  expr '%' expr      # mod
 |  expr '*' expr      # mult
 |  expr '/' expr      # div
-|  expr '+' expr      # add
 |  expr '-' expr      # moins
+|  expr '+' expr      # add
 |  expr '<<' expr     # leftShift
 |  expr '>>' expr     # rightShift
 |  expr '&&' expr     # et
