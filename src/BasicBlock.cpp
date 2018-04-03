@@ -73,6 +73,13 @@ string BasicBlock::gen_asm(){
         }
     }
 
+    /*if(exit_false == nullptr && exit_true == nullptr){
+	    ass += "jmp .epilogue\r\n";
+	}*/
+    if(exit_false == nullptr && exit_true != nullptr){
+        ass += "jmp .L"+exit_true->label+" #passage dans exit_false null et exit_true != null \r\n";
+    }
+
 	return ass;
 }
 
