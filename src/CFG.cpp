@@ -168,7 +168,22 @@ IRVariable *CFG::getVariable(string nomVar) {
 }
 
 string CFG::calcul_offset(string nomVar) {
-    return to_string(-8*getVariable(nomVar)->getIndex());
+    int pos = nomVar.find_last_of(",");
+	if( pos >= nomVar.length()){
+		return to_string(-8*getVariable(nomVar)->getIndex());
+	} else {
+	    string nom = nomVar.substr(0,pos);
+	    string indice = nomVar.substr(pos+1);
+
+	    if(stoi(indice)>=this->getVariable(nom)->getTaille() || stoi(indice)<0){
+	        cerr << "Erreur : l'indice doit être compris entre 0 et taille tableau-1" << endl;
+	        exit(7);
+	    }
+
+	    int offsetAR = -8*getVariable(nom)->getIndex() - stoi(indice)*8;
+	    return to_string(offsetAR);
+	}
+
 }
 
 string CFG::new_BB_name() {

@@ -70,5 +70,5 @@ string ExpressionElementTableau::typageExpression(string idContexte, map<string,
 }
 
 string ExpressionElementTableau::buildIR(CFG *cfg) {
-
+    return this->nom + "," + to_string(this->indice);
 }
