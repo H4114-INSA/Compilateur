@@ -36,8 +36,8 @@ void ExpressionAppelFonction::resolutionPorteeVariable(string idContexte, vector
 		it++;
 	}
 
-	if(trouveFonction == 0 ) {
-		cerr << "Une fonction est apelée dans le contexte de la fonction " + idContexte+ " mais n'a jamais été définie : " << this->nomFonction << endl;
+	if(trouveFonction == 0 && nomFonction != "putchar") {
+		cerr << "Erreur : Une fonction est apelée dans le contexte de la fonction " + idContexte+ " mais n'a jamais été définie : " << this->nomFonction << endl;
 		cerr << "Arrêt de l'exécution" <<endl;
 		exit(4);
 	} else if(trouveFonction == 1 ) {
