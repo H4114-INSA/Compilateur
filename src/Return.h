@@ -8,6 +8,7 @@
 #define COMPILATEUR_RETURN_H
 
 #include "Expression.h"
+#include "CFG.h"
 
 class Return : public Instruction{
 public:

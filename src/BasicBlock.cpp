@@ -1,6 +1,7 @@
 #include "BasicBlock.h"
 #include "IfElseifElse.h"
 #include "While.h"
+#include "Return.h"
 
 
 BasicBlock::BasicBlock() {
@@ -61,7 +62,7 @@ string BasicBlock::gen_asm(){
 	}
 
     if(exit_false != nullptr) {
-        if (exit_true != nullptr && condition != "non_init") {
+        if (exit_true != nullptr && condition != "non_init") { // bloc condition
             string offset = cfg->calcul_offset(condition);
 
             ass += "jg .L" + exit_false->label + " \r\n";
@@ -73,9 +74,9 @@ string BasicBlock::gen_asm(){
         }
     }
 
-    /*if(exit_false == nullptr && exit_true == nullptr){
+    if(exit_false == nullptr && exit_true == nullptr){
 	    ass += "jmp .epilogue\r\n";
-	}*/
+	}
 
     if(exit_false == nullptr && exit_true != nullptr){
         ass += "jmp .L"+exit_true->label+"\r\n";
@@ -108,6 +109,10 @@ void BasicBlock::generateIRFromList(vector<Instruction *> instructions) {
 		else if(dynamic_cast<While*>(*itInstr)){
             While* aWhile = (While*)*itInstr;
             aWhile->buildIR(cfg);
+		}
+		else if(dynamic_cast<Return*>(*itInstr)){
+			Return* ret = (Return*)*itInstr;
+			ret->buildIR(cfg);
 		}
 		itInstr++;
 	}

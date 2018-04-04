@@ -61,12 +61,15 @@ string IRInstr::gen_asm(){
 		case call:
 			ass += "call "+params[1]+"\r\n";
 			break;
-        case leave:
+        /*case leave:
             ass +=  params[0]+"\r\n";
             break;
         case ret:
             ass +=  params[0]+"\r\n";
-            break;
+            break;*/
+		case ret:
+			ass += "movq " + params[0]+"(%rbp) , " + "%rax\r\n";
+			break;
 		default:
 			break;
 		

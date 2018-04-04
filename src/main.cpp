@@ -29,7 +29,7 @@ int main(int , const char ** argv) {
     string contenu;
 
     cout << "Début de l'analyse" <<endl << endl;
-    cout << "Contenu du fichier à analyser :" << endl;
+    cout << "Contenu du fichier à analyser :" << endl <<endl;
     contenu = lectureFichier(argv[1]);
 
     ANTLRInputStream input(contenu);
@@ -59,7 +59,7 @@ int main(int , const char ** argv) {
         cout << "Aucune erreur n'a été détectée." <<endl << endl;
 
         // Génération de l'IR -------------------------------
-        cout << "génération de l'ir"  <<endl;
+        cout << "génération de l'ir ..."  <<endl;
         vector<CFG*> listeCFG;
         map<string, Fonction*> mapFonction = program->getMapFonctions();
         map<string,Fonction*>::iterator itFonction = mapFonction.begin();
@@ -69,7 +69,7 @@ int main(int , const char ** argv) {
             itFonction++;
         }
 
-        cout << "Generation assembleur" <<endl;
+        cout << endl << "Generation du code assembleur..." <<endl << endl;
         string assembleur = "";
         vector<CFG*>::iterator itCFG = listeCFG.begin();
         while(itCFG != listeCFG.end()){
@@ -80,7 +80,12 @@ int main(int , const char ** argv) {
         cout << assembleur <<endl;
 
         ofstream myfile;
-        myfile.open ("./../output/main.s");
+        string fileName (argv[1]);
+        size_t last_pos = fileName.find_last_of("/\\");
+        fileName = fileName.substr(last_pos+1);
+        fileName.pop_back();
+        fileName.push_back('s');
+        myfile.open ("./../output/"+fileName);
         myfile << assembleur;
         myfile.close();
 
@@ -105,13 +110,14 @@ string lectureFichier(const char * nomFichier)
     {
         while(getline(fichier, ligne))
         {
-            contenuFichier += ligne;
+            contenuFichier += ligne +"\r\n";
         }
         cout << contenuFichier << endl <<endl;
         fichier.close();
     }
     else {
         cerr << "Impossible d'ouvrir le fichier !\r\n" << endl;
+        exit(-3);
     }
     return contenuFichier;
 }

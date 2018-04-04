@@ -21,7 +21,6 @@ void CFG::add_bb(BasicBlock* bb_){
 }
 	
 string CFG::gen_asm(){
-    cout<< "Nb bb : "<< bbs.size() <<endl;
     string res = ".global " + ast->getNom() +"\r\n";
     res +=  ast->getNom() +":\r\n";
 
