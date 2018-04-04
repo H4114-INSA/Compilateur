@@ -76,6 +76,7 @@ void Fonction::resolutionPorteeVariable(vector<string> *pileVar, vector<string> 
         else if(dynamic_cast<Return*>(*itInstr)){
             Return* ret = (Return*)*itInstr;
             ret->getExpression()->resolutionPorteeVariable(idContexte,pileVar,pileFonct, varMap,fonctMap);
+            ret->getExpression()->typageExpression(idContexte,varMap, fonctMap);
         }
         itInstr++;
     }

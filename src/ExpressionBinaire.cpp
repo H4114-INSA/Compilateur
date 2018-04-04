@@ -67,7 +67,7 @@ string ExpressionBinaire::typageExpression(string idContexte, map<string, Declar
         this->setTypeRetourExpression("int32_t");
         return "int32_t";
     }
-    else if((typeRetourExpression1 == "char" && (typeRetourExpression2 =="int32_t" ||typeRetourExpression2 == "int64_t" ))
+    /*else if((typeRetourExpression1 == "char" && (typeRetourExpression2 =="int32_t" ||typeRetourExpression2 == "int64_t" ))
                 || ((typeRetourExpression1=="int32_t" || typeRetourExpression1 == "int64_t") && typeRetourExpression2 == "char")
                 || (typeRetourExpression1 == "void" && (typeRetourExpression2 =="int32_t" ||typeRetourExpression2 == "int64_t" || typeRetourExpression2 =="char"))
                 || (typeRetourExpression2 == "void" && (typeRetourExpression1 =="int32_t" ||typeRetourExpression1 == "int64_t" || typeRetourExpression1 == "char"))){
@@ -76,7 +76,7 @@ string ExpressionBinaire::typageExpression(string idContexte, map<string, Declar
            << typeRetourExpression1 << ", type 2 : "<< typeRetourExpression2 << ")"<<endl;
         cerr << "Arrêt de l'exécution." <<endl;
         exit(6);
-    }
+    }*/
     return "erreur";
 }
 

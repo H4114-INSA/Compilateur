@@ -23,7 +23,10 @@ BlocControle* If::getBloc() {
 
 void If::resolutionPorteeVariable(string idContexte, vector<string> *pileVar, vector<string> *pileFonct,
                                   map<string, Declaration *> *varMap, map<string, Fonction*>* fonctMap) {
-    this->getCondition()->resolutionPorteeVariable(idContexte,pileVar, pileFonct, varMap,fonctMap);
+    //
+    if(this->getCondition() != nullptr){
+        this->getCondition()->resolutionPorteeVariable(idContexte,pileVar, pileFonct, varMap,fonctMap);
+    }
     bloc->resolutionPorteeVariable(idContexte,pileVar,pileFonct,varMap, fonctMap);
 }
 
