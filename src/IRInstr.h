@@ -31,6 +31,7 @@ class IRInstr {
 	/** The instructions themselves -- feel free to subclass instead */
 	typedef enum {
 		ldconst,
+		add,
 		ecriture_argument_1,
         copy,
 		operation_binaire_add,
@@ -38,7 +39,6 @@ class IRInstr {
 		operation_binaire_mult,
 		operation_binaire_div,
 		operation_binaire_strictless,
-		addq,
 		subq,
         sub,
 		mul,

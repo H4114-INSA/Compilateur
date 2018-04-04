@@ -28,8 +28,18 @@ string IRInstr::gen_asm(){
 			ass += params[0] +" " + params[1] + ", " + params[2] + "\r\n";
 			break;
 		case ldconst:
-			ass += "movl $" + params[1] + ", "+ params[0] + "\r\n";
+			ass += "movq $" + params[1] + ", "+ params[0] + "\r\n";
 			break;
+        case add:
+            ass += "movq %r" +params[1] +", %rax\r\n";
+            ass += "addq " + params[0] + "(%rbp), %rax\r\n";
+            ass += "movq %rax, "+ params[2]+"(%rbp)\r\n";
+            break;
+        case wmem:
+            ass += "movq " + params[0]+"(%rbp), %rax\r\n";
+            ass += "movq " +params[1]+"(%rbp), %r10\r\n";
+            ass += "movq %r10, (%rax)\r\n";
+            break;
 		case ecriture_argument_1 :
 			ass += "movq " +  params[1] +", " + params[0] + "\r\n";
 			break;

@@ -92,11 +92,25 @@ string ExpressionBinaire::buildIR(CFG *cfg) {
         string rightValue = this->expression2->buildIR(cfg);
         res= rightValue;
 
+        string tempVar = cfg->create_new_tempvar(t);
         vector<string> params;
-        params.push_back(cfg->calcul_offset(rightValue));
+        params.push_back(cfg->calcul_offset(tempVar)+"(%rbp)");
         params.push_back(cfg->calcul_offset(leftValue));
 
-        cfg->current_bb->add_IRInstr(IRInstr::Operation::copy,t,params);
+        cfg->current_bb->add_IRInstr(IRInstr::Operation::ldconst, t,params);
+
+        vector<string> params2;
+        params2.push_back(cfg->calcul_offset(tempVar));
+        params2.push_back("bp");
+        params2.push_back(cfg->calcul_offset(tempVar));
+
+        cfg->current_bb->add_IRInstr(IRInstr::Operation::add,t,params2);
+
+        vector<string> params3;
+        params3.push_back(cfg->calcul_offset(tempVar));
+        params3.push_back(cfg->calcul_offset(rightValue));
+
+        cfg->current_bb->add_IRInstr(IRInstr::Operation::wmem,t,params3);
     } else {
         Type t;
         if(this->getTypeRetour()== "char"){ t = Type::Char;}
