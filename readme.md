@@ -1,4 +1,4 @@
-#Plan du ReadMe
+# Plan du ReadMe
   
   1. Organisation du dossier
   2. Instructions pour compiler
@@ -6,21 +6,18 @@
   4. Ce qui n'est pas implémenté 
 
 ___________________________________________________________________________
-#Organisation des fichiers
+# Organisation des fichiers
 
-Compilateur
- |
-  ---output (contient les scripts et les fichiers générés)
- | 
-  ---src (contient le code source du projet)
- |
-  ---testBackEnd (contient les tests liés au back end)
- |
-  ---testFrontEnd
+## Compilateur
+
+  * output (contient les scripts et les fichiers générés)
+  * src (contient le code source du projet)
+  * testBackEnd (contient les tests liés au back end)
+  * testFrontEnd
 
 __________________________________________________________________________
 
-#Instructions pour compiler notre compilateur : (c'est assez récursif comme approche !)
+# Instructions pour compiler notre compilateur : (c'est assez récursif comme approche !)
 
  * modifier le makefile pour y ajouter vos propres chemins vers tous ce qu'il vous faut pour utiliser antlr4.7.1
 
@@ -52,13 +49,13 @@ Dans la console, l'utilisateur verra un compte rendu de l'exécution qui affiche
 
 _________________________________________________________________________________
 
-#Ce qui fonctionne
+# Ce qui fonctionne
 
  * implémentation de toutes les taches jusqu'à 5.10 (compilation des tableaux)
  
 _________________________________________________________________________________
 
-#Ce qui n'est pas implémenté
+# Ce qui n'est pas implémenté
 
  * déclaration + affectation (ex : int32_t a = 50 ;)
  * impossible d'affecter des nombres négatifs (ex : a = -2 ;)
